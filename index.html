@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./output_home.css">
+    <script defer src="./script_home.js"></script>
+</head>
+
+<body>
+    <h1 class="font-semibold text-3xl text-center my-3 text-zinc-700">Student Management System</h1>
+    <div class="px-7 py-3">
+        <div class="menu flex justify-between items-center">
+            <div class="flex items-center gap-5">
+                <div class="search-bar flex">
+                    <input
+                        class="search-input focus:outline-none border border-neutral-400 rounded-md px-2 py-1 rounded-r-none focus:shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.06),inset_0_4px_8px_0_rgba(0,0,0,0.04)] transition-all"
+                        type="text" placeholder="Search">
+                    <button
+                        class="flex justify-center items-center btn border border-l-0 rounded-md rounded-l-none px-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                            <path fill="#111111" fill-rule="evenodd"
+                                d="M14.385 15.446a6.751 6.751 0 1 1 1.06-1.06l5.156 5.155a.75.75 0 1 1-1.06 1.06l-5.156-5.155ZM6.46 13.884a5.25 5.25 0 1 1 7.43-.005l-.005.005l-.005.004a5.25 5.25 0 0 1-7.42-.004Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+
+                <button class="add-btn btn">
+                    <a class="flex items-center gap-1" href="/add.html" target="_blank">
+                        <span class="font-semibold">Add Student</span>
+                        <span>
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                        </span>
+                    </a>
+                </button>
+            </div>
+
+            <div class="options flex items-center gap-4 px-5">
+                <div class="flex items-center gap-2">
+                    <span class="text-neutral-500"><span class="current">1-10</span> of <span
+                            class="total">500</span></span>
+                    <button class="previous cursor-pointer hover:text-neutral-600 active:text-black transition-all">
+                        <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                            viewBox="0 0 24 24">
+                            <path fill="none" stroke-width="2" d="M17 2L7 12l10 10" />
+                        </svg>
+                    </button>
+                    <button class="next cursor-pointer hover:text-neutral-600 active:text-black transition-all">
+                        <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                            viewBox="0 0 24 24">
+                            <path fill="none" stroke-width="2" d="m7 2l10 10L7 22" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="h-6 w-0.5 bg-neutral-300"></div>
+
+                <div class="flex filter items-center gap-3.5">
+                    <div>
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                            viewBox="0 0 512 512">
+                            <path
+                                d="M238.627 496H192V253.828l-168-200V16h456v37.612l-160 200v161.015ZM224 464h1.373L288 401.373V242.388L443.51 48H60.9L224 242.172Z" />
+                        </svg>
+                    </div>
+                    <div class="flex gap-2">
+                        <label class="" for="class">Class</label>
+                        <select class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
+                            name="class" id="class">
+                            <option value="all">All</option>
+                            <option value="1">Class 1</option>
+                            <option value="2">Class 2</option>
+                            <option value="3">Class 3</option>
+                            <option value="4">Class 4</option>
+                            <option value="5">Class 5</option>
+                            <option value="6">Class 6</option>
+                            <option value="7">Class 7</option>
+                            <option value="8">Class 8</option>
+                            <option value="9">Class 9</option>
+                            <option value="10">Class 10</option>
+                            <option value="11">Class 11</option>
+                            <option value="12">Class 12</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-2">
+                        <label class="" for="gender">Gender</label>
+                        <select class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
+                            name="gender" id="gender">
+                            <option value="all">All</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-2">
+                        <label class="" for="fee">Fee Status</label>
+                        <select class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
+                            name="fee" id="fee">
+                            <option value="all">All</option>
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="h-6 w-0.5 bg-neutral-300"></div>
+
+                <div class="flex items-center gap-3.5">
+                    <button class="sort-order cursor-pointer hover:text-neutral-600 active:text-black transition-all">
+                        <svg class="asce fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                            viewBox="0 0 56 56">
+                            <path fill-rule="evenodd"
+                                d="M15.2 10c.513 0 .981.194 1.336.512l.178.174l7.071 7.071a2 2 0 0 1-2.828 2.829l-3.758-3.758V44a2 2 0 1 1-4 0V16.8l-3.785 3.786a2 2 0 0 1-2.828-2.829l7.07-7.07l.122-.113l.128-.1c.349-.296.8-.474 1.293-.474M47 40a2 2 0 1 1 0 4H23a2 2 0 1 1 0-4zm-8-8a2 2 0 1 1 0 4H23a2 2 0 1 1 0-4zm-8-8a2 2 0 1 1 0 4h-8a2 2 0 1 1 0-4z" />
+                        </svg>
+                        <svg class="hidden desc fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                            viewBox="0 0 56 56">
+                            <path fill-rule="evenodd"
+                                d="M15.172 10a2 2 0 0 1 2 2v27.2l3.785-3.786a2 2 0 0 1 2.828 2.829l-7.07 7.07l-.122.113l-.128.1a1.997 1.997 0 0 1-2.63-.038l-.178-.174l-7.071-7.071a2 2 0 0 1 2.828-2.829l3.758 3.758V12a2 2 0 0 1 2-2M31 28a2 2 0 1 1 0 4h-8a2 2 0 1 1 0-4zm8-8a2 2 0 1 1 0 4H23a2 2 0 1 1 0-4zm8-8a2 2 0 1 1 0 4H23a2 2 0 1 1 0-4z" />
+                        </svg>
+                    </button>
+                    <label for="sort">Sort By</label>
+                    <select class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md" name="sort"
+                        id="sort">
+                        <option value="admission-number">Admission No.</option>
+                        <option value="name">Name</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-3 text-neutral-500">
+
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-zinc-100">
+                    <tr>
+                        <th>Application No</th>
+                        <th>Student Name</th>
+                        <th>Class</th>
+                        <th>Division</th>
+                        <th>Roll No</th>
+                        <th>Gender</th>
+                        <th>Mobile</th>
+                        <th>Fee Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-200">
+                    <template class="row-temp">
+                        <tr>
+                            <td class="application-no"></td>
+                            <td class="name"></td>
+                            <td class="class"></td>
+                            <td class="division"></td>
+                            <td class="roll-no"></td>
+                            <td class="gender"></td>
+                            <td class="mobile"></td>
+                            <td class="fee-status"></td>
+                            <td class="action flex items-center gap-2">
+                                <button
+                                    class="edit-btn w-6 h-6 cursor-pointer active:scale-93 flex items-center justify-center rounded-md transition-ease text-neutral-600 hover:text-neutral-700 hover:bg-neutral-200 transform-gpu will-change-transform">
+                                    <svg class="fill-current edit-svg block" xmlns="http://www.w3.org/2000/svg"
+                                        width="20" height="20" viewBox="0 0 24 24">
+                                        <path
+                                            d="m7 17.013l4.413-.015l9.632-9.54c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.756-.756-2.075-.752-2.825-.003L7 12.583v4.43zM18.045 4.458l1.589 1.583l-1.597 1.582l-1.586-1.585l1.594-1.58zM9 13.417l6.03-5.973l1.586 1.586l-6.029 5.971L9 15.006v-1.589z" />
+                                        <path
+                                            d="M5 21h14c1.103 0 2-.897 2-2v-8.668l-2 2V19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2z" />
+                                    </svg>
+                                </button>
+
+                                <button
+                                    class="del-btn w-6 h-6 cursor-pointer active:scale-93 flex items-center justify-center rounded-md transition-ease text-red-400 hover:text-red-500 hover:bg-red-500/10 transform-gpu will-change-transform">
+                                    <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg"
+                                        width="20" height="20" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6Zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853ZM2 6h20m-12 5v5m4-5v5" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+
+</html>

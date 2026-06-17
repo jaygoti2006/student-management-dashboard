@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./output_add.css">
+</head>
+
+<body>
+    <div class="mb-8">
+        <div class="progress relative mx-auto mt-5">
+            <div class="badge badge-current left-[calc((100%)/6)] absolute flex justify-center items-center">
+                1
+            </div>
+            <div class="badge left-[calc((200%)/6)] absolute flex justify-center items-center badge-upcoming">
+                2
+            </div>
+            <div class="badge left-[calc((300%)/6)] absolute flex justify-center items-center badge-upcoming">
+                3
+            </div>
+            <div class="badge left-[calc((400%)/6)] absolute flex justify-center items-center badge-upcoming">
+                4
+            </div>
+            <div class="badge left-[calc((500%)/6)] absolute flex justify-center items-center badge-upcoming">
+                5
+            </div>
+            <div class="badge left-[calc(100%)] absolute flex justify-center items-center badge-upcoming">
+                6
+            </div>
+            <div class="progress-fill w-[calc((100%)/6)] absolute">
+            </div>
+        </div>
+    </div>
+
+    <div class="w-[50%] mx-auto shadow-md bg-neutral-50 p-10 mb-8 rounded-lg">
+        <div class="sec1">
+            <form action="">
+                <div class="flex gap-5 mb-5">
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 first-name"><span>First Name*</span><input
+                                placeholder="Enter First Name" required="" type="text" /></label>
+
+                    </div>
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 middle-name"><span>Middle Name</span><input
+                                placeholder="Enter Middle Name" type="text" /></label>
+
+                    </div>
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 last-name"><span>Last Name*</span><input
+                                placeholder="Enter Last Name" required="" type="text" /></label>
+
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <label class="flex flex-col gap-1">
+                        <span>Email*</span>
+                        <input class="email" id="email" placeholder="Enter Email" required="" type="email" />
+                    </label>
+                </div>
+                <div class="flex gap-5 mb-5">
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 mobile"><span>Mobile*</span><input inputmode="numeric"
+                                pattern="[0-9]*" placeholder="Enter Mobile" required="" type="text" /></label>
+
+                    </div>
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 alt-mobile"><span>Alternate Mobile</span><input
+                                inputmode="numeric" pattern="[0-9]*" placeholder="Enter Alternate Mobile"
+                                type="text" /></label>
+
+                    </div>
+                </div>
+                <div class="flex gap-5 mb-5">
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 gender"><span>Gender*</span><select class="cursor-pointer"
+                                required="">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select></label>
+
+                    </div>
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 dob"><span>Date of Birth*</span><input class="cursor-pointer"
+                                required="" type="date" /></label>
+
+                    </div>
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 blood-group"><span>Blood Group</span><select
+                                class="cursor-pointer">
+                                <option value="none">None</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select></label>
+
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <label class="block mb-1">Profile Photo</label>
+                    <input
+                        class="cursor-pointer profile-pic file:bg-neutral-200 file:rounded-l-md file:py-1 file:px-3 file:cursor-pointer file:border-r file:border-r-neutral-400"
+                        type="file" />
+                </div>
+            </form>
+            <div class="flex justify-end">
+                <button class="btn flex items-center gap-1" type="button">
+                    <span>next</span>
+                    <span>
+                        <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="m7 2l10 10L7 22" fill="none" stroke-width="2"></path>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="sec2 hidden">
+            <form action="">
+                <div class="mb-8">
+                    <h4 class="font-semibold text-zinc-700 mb-5">Current Address*</h4>
+                    <div class="mb-5">
+                        <label class="flex flex-col gap-1">
+                            <span>Address*</span>
+                            <input class="address" placeholder="Enter Address" type="text" />
+                        </label>
+                    </div>
+                    <div class="flex gap-5 mb-5">
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 curr-country"><span>Country*</span><select
+                                    class="cursor-pointer country" required="">
+                                    <option value="">Select a Country</option>
+                                </select></label>
+
+                        </div>
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 curr-state"><span>State*</span><select
+                                    class="cursor-pointer state" required="">
+                                    <option value="">Select a State</option>
+                                </select></label>
+
+                        </div>
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 curr-city"><span>City*</span><select
+                                    class="cursor-pointer city" required="">
+                                    <option value="">Select a City</option>
+                                </select></label>
+
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <label class="block mb-1">Pin code*</label>
+                        <input class="pincode" id="curr-pincode" placeholder="Enter Pin code" type="text" />
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <h4 class="font-semibold text-zinc-700 mb-5">Permanent Address</h4>
+                    <button class="btn mb-5" type="button">Same as Above</button>
+                    <div class="mb-5">
+                        <label class="flex flex-col gap-1">
+                            <span>Address*</span>
+                            <input class="address" placeholder="Enter Address" type="text" />
+                        </label>
+                    </div>
+                    <div class="flex gap-5 mb-5">
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 perm-country"><span>Country</span><select
+                                    class="cursor-pointer country" required="">
+                                    <option value="">Select a Country</option>
+                                </select></label>
+
+                        </div>
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 perm-state"><span>State</span><select
+                                    class="cursor-pointer state" required="">
+                                    <option value="">Select a State</option>
+                                </select></label>
+
+                        </div>
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 perm-city"><span>City</span><select
+                                    class="cursor-pointer city" required="">
+                                    <option value="">Select a City</option>
+                                </select></label>
+
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <label class="block mb-1">Pin code</label>
+                        <input class="pincode" placeholder="Enter Pin code" type="text" />
+                    </div>
+                </div>
+            </form>
+            <div class="flex justify-between">
+                <button class="btn flex items-center gap-1" type="button">
+                    <span>
+                        <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 2L7 12l10 10" fill="none" stroke-width="2"></path>
+                        </svg>
+                    </span>
+                    <span>previous</span>
+                </button>
+                <button class="btn flex items-center gap-1" type="button">
+                    <span>next</span>
+                    <span>
+                        <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="m7 2l10 10L7 22" fill="none" stroke-width="2"></path>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="sec3 hidden">
+            <form action="">
+                <div class="flex gap-5 mb-5">
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 admission-number"><span>Admission Number*</span><input
+                                placeholder="Enter Admission Number" required="" type="text" /></label>
+
+                    </div>
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 admission-date"><span>Admission Date*</span><input
+                                class="cursor-pointer" required="" type="date" /></label>
+
+                    </div>
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 academic-year"><span>Academic Year*</span><select
+                                class="cursor-pointer" required="">
+                                <option value="">Select Academic Year</option>
+                                <option value="2025-26">2025-26</option>
+                                <option value="2026-27">2026-27</option>
+                                <option value="2027-28">2027-28</option>
+                            </select></label>
+
+                    </div>
+                </div>
+                <div class="flex gap-5 mb-8">
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 class-field"><span>Class*</span><select class="cursor-pointer"
+                                required="">
+                                <option value="">Select Class</option>
+                                <option value="1">Class 1</option>
+                                <option value="2">Class 2</option>
+                                <option value="3">Class 3</option>
+                                <option value="4">Class 4</option>
+                                <option value="5">Class 5</option>
+                                <option value="6">Class 6</option>
+                                <option value="7">Class 7</option>
+                                <option value="8">Class 8</option>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                                <option value="11">Class 11</option>
+                                <option value="12">Class 12</option>
+                            </select></label>
+
+                    </div>
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 division"><span>Division*</span><select class="cursor-pointer"
+                                required="">
+                                <option value="">Select Division</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select></label>
+
+                    </div>
+                    <div class="flex-1">
+                        <label class="flex flex-col gap-1 roll-number"><span>Roll Number*</span><input
+                                inputmode="numeric" pattern="[0-9]*" placeholder="Enter Roll Number" required=""
+                                type="text" /></label>
+
+                    </div>
+                </div>
+            </form>
+            <div class="flex justify-between">
+                <button class="btn flex items-center gap-1" type="button">
+                    <span>
+                        <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 2L7 12l10 10" fill="none" stroke-width="2"></path>
+                        </svg>
+                    </span>
+                    <span>previous</span>
+                </button>
+                <button class="btn flex items-center gap-1" type="button">
+                    <span>next</span>
+                    <span>
+                        <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="m7 2l10 10L7 22" fill="none" stroke-width="2"></path>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="sec4 hidden">
+            <h4 class="font-semibold text-xl text-center text-zinc-700">Add Parent Information</h4>
+            <div class="flex justify-end mb-5">
+                <button class="btn px-1 py-1 text-zinc-700 add-parent-btn">
+                    <svg class="fill-current" height="24" viewbox="0 0 16 16" width="24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <template id="parent-form-template">
+                <form action="" class="py-4">
+                    <div class="flex justify-end">
+                        <button
+                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-parent-btn"
+                            type="button">
+                            <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="22"
+                                height="22" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6Zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853ZM2 6h20m-12 5v5m4-5v5">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex gap-5 mb-5">
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 relation"><span>Relation*</span><select
+                                    class="cursor-pointer" required="">
+                                    <option value="">Select Relation</option>
+                                    <option value="father">Father</option>
+                                    <option value="mother">Mother</option>
+                                    <option value="guardian">Guardian</option>
+                                </select></label>
+
+                        </div>
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 name"><span>Name*</span><input placeholder="Enter Name"
+                                    required="" type="text" /></label>
+
+                        </div>
+                    </div>
+                    <div class="flex gap-5 mb-5">
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 mobile"><span>Mobile*</span><input inputmode="numeric"
+                                    pattern="[0-9]*" placeholder="Enter Mobile" required="" type="text" /></label>
+
+                        </div>
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 email"><span>Email</span><input placeholder="Enter Email"
+                                    type="email" /></label>
+
+                        </div>
+                    </div>
+                    <div class="flex gap-5 mb-8">
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 occupation"><span>Occupation</span><input
+                                    placeholder="Enter Occupation" type="text" /></label>
+
+                        </div>
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 annual-income"><span>Annual Income(in Rs)</span><input
+                                    inputmode="numeric" placeholder="Enter Annual Income" type="text" /></label>
+
+                        </div>
+                    </div>
+                    <hr class="text-neutral-500" />
+                </form>
+            </template>
+            <div class="flex justify-between">
+                <button class="btn flex items-center gap-1" type="button">
+                    <span>
+                        <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 2L7 12l10 10" fill="none" stroke-width="2"></path>
+                        </svg>
+                    </span>
+                    <span>previous</span>
+                </button>
+                <button class="btn flex items-center gap-1" type="button">
+                    <span>next</span>
+                    <span>
+                        <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="m7 2l10 10L7 22" fill="none" stroke-width="2"></path>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="sec5 hidden">
+            <h4 class="font-semibold text-xl text-center text-zinc-700">
+                Add Course Information
+            </h4>
+
+            <div class="flex justify-end mb-5">
+                <button class="btn px-1 py-1 text-zinc-700 add-course-btn" type="button">
+                    <svg class="fill-current" width="24" height="24" viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <template id="course-form-template">
+                <form action="" class="py-4">
+                    <div class="flex justify-end">
+                        <button
+                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-course-btn"
+                            type="button">
+                            <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="22"
+                                height="22" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6Zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853ZM2 6h20m-12 5v5m4-5v5">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex gap-5 mb-5">
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 course-name">
+                                <span>Course Name*</span>
+                                <input type="text" placeholder="Enter Course Name" required>
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 faculty-name">
+                                <span>Faculty Name*</span>
+                                <input type="text" placeholder="Enter Faculty Name" required>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-5 mb-8">
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 course-fees">
+                                <span>Course Fees (₹)*</span>
+                                <input type="text" inputmode="numeric" placeholder="Enter Course Fees" required>
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 duration">
+                                <span>Duration*</span>
+                                <select class="cursor-pointer" required>
+                                    <option value="">Select Duration</option>
+                                    <option value="1-month">1 Month</option>
+                                    <option value="3-months">3 Months</option>
+                                    <option value="6-months">6 Months</option>
+                                    <option value="1-year">1 Year</option>
+                                    <option value="2-years">2 Years</option>
+                                    <option value="3-years">3 Years</option>
+                                    <option value="4-years">4 Years</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+
+                    <hr class="text-neutral-500">
+                </form>
+            </template>
+
+            <div class="flex justify-between">
+                <button class="btn flex items-center gap-1" type="button">
+                    <span>
+                        <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                            viewBox="0 0 24 24">
+                            <path fill="none" stroke-width="2" d="M17 2L7 12l10 10"></path>
+                        </svg>
+                    </span>
+                    <span>previous</span>
+                </button>
+
+                <button class="btn flex items-center gap-1" type="button">
+                    <span>next</span>
+                    <span>
+                        <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                            viewBox="0 0 24 24">
+                            <path fill="none" stroke-width="2" d="m7 2l10 10L7 22"></path>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="sec6 hidden">
+            <h4 class="font-semibold text-xl text-center text-zinc-700">
+                Add Documents
+            </h4>
+
+            <div class="flex justify-end mb-5">
+                <button class="btn px-1 py-1 text-zinc-700 add-document-btn" type="button">
+                    <svg class="fill-current" width="24" height="24" viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <template id="document-form-template">
+                <form action="" class="py-4">
+                    <div class="flex justify-end">
+                        <button
+                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-document-btn"
+                            type="button">
+                            <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="22"
+                                height="22" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6Zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853ZM2 6h20m-12 5v5m4-5v5">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="flex gap-5 mb-5">
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 document-type">
+                                <span>Document Type*</span>
+                                <select class="cursor-pointer" required>
+                                    <option value="">Select Document Type</option>
+                                    <option value="aadhar-card">Aadhar Card</option>
+                                    <option value="birth-certificate">Birth Certificate</option>
+                                    <option value="leaving-certificate">Leaving Certificate</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label class="flex flex-col gap-1 document-number">
+                                <span>Document Number*</span>
+                                <input type="text" placeholder="Enter Document Number" required>
+                            </label>
+                        </div>
+                    </div>
+
+                    <hr class="text-neutral-500">
+                </form>
+            </template>
+
+            <div class="flex justify-between">
+                <button class="btn flex items-center gap-1" type="button">
+                    <span>
+                        <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                            viewBox="0 0 24 24">
+                            <path fill="none" stroke-width="2" d="M17 2L7 12l10 10"></path>
+                        </svg>
+                    </span>
+                    <span>previous</span>
+                </button>
+
+                <button class="btn flex items-center gap-1" type="submit">
+                    <span>submit</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
