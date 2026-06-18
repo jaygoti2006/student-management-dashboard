@@ -9,7 +9,7 @@
     }
 
     .progress-fill {
-        @apply inset-0 rounded-full bg-blue-600 transition-all;
+        @apply inset-0 rounded-full bg-blue-600 transition-all duration-300 w-[calc((100%)/6)];
     }
 
     .badge {

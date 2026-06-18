@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./output_add.css">
+    <script defer src="script_add.js"></script>
 </head>
 
 <body>
@@ -34,60 +35,148 @@
         </div>
     </div>
 
-    <div class="w-[50%] mx-auto shadow-md bg-neutral-50 p-10 mb-8 rounded-lg">
-        <div class="sec1">
+    <div class="w-[50%] mx-auto shadow-md bg-neutral-50 p-10 mb-8 rounded-lg section-container">
+        <div class="sec1 sec">
             <form action="">
                 <div class="flex gap-5 mb-5">
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 first-name"><span>First Name*</span><input
-                                placeholder="Enter First Name" required="" type="text" /></label>
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1 first-name"><span>First Name<span
+                                    class="text-red-600">*</span></span><input placeholder="Enter First Name"
+                                type="text" class="required" />
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
 
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
+                        </label>
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 middle-name"><span>Middle Name</span><input
-                                placeholder="Enter Middle Name" type="text" /></label>
+                                placeholder="Enter Middle Name" type="text" />
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
+                        </label>
 
                     </div>
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 last-name"><span>Last Name*</span><input
-                                placeholder="Enter Last Name" required="" type="text" /></label>
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1 last-name"><span>Last Name<span
+                                    class="text-red-600">*</span></span><input placeholder="Enter Last Name"
+                                class="required" type="text" />
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+                        </label>
 
                     </div>
                 </div>
                 <div class="mb-5">
                     <label class="flex flex-col gap-1">
-                        <span>Email*</span>
-                        <input class="email" id="email" placeholder="Enter Email" required="" type="email" />
+                        <span>Email<span class="text-red-600">*</span></span>
+                        <input class="email required" placeholder="Enter Email" type="email" />
+                        <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                viewBox="0 0 2048 2048">
+                                <path
+                                    d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                            </svg>
+                            <p class="error-message"></p>
+                        </div>
+
                     </label>
                 </div>
                 <div class="flex gap-5 mb-5">
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 mobile"><span>Mobile*</span><input inputmode="numeric"
-                                pattern="[0-9]*" placeholder="Enter Mobile" required="" type="text" /></label>
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1"><span>Mobile<span class="text-red-600">*</span></span><input
+                                inputmode="numeric" pattern="[0-9]*" placeholder="Enter Mobile" class="required mobile"
+                                type="text" />
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+                        </label>
 
                     </div>
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 alt-mobile"><span>Alternate Mobile</span><input
-                                inputmode="numeric" pattern="[0-9]*" placeholder="Enter Alternate Mobile"
-                                type="text" /></label>
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1"><span>Alternate Mobile</span><input inputmode="numeric"
+                                pattern="[0-9]*" placeholder="Enter Alternate Mobile" type="text" class="mobile" />
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+                        </label>
 
                     </div>
                 </div>
                 <div class="flex gap-5 mb-5">
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 gender"><span>Gender*</span><select class="cursor-pointer"
-                                required="">
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1 gender"><span>Gender<span
+                                    class="text-red-600">*</span></span><select class="cursor-pointer required">
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
-                            </select></label>
+                            </select>
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+                        </label>
 
                     </div>
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 dob"><span>Date of Birth*</span><input class="cursor-pointer"
-                                required="" type="date" /></label>
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1 dob"><span>Date of Birth<span
+                                    class="text-red-600">*</span></span><input class="cursor-pointer required"
+                                type="date" />
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+                        </label>
 
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 blood-group"><span>Blood Group</span><select
                                 class="cursor-pointer">
                                 <option value="none">None</option>
@@ -99,7 +188,16 @@
                                 <option value="B-">B-</option>
                                 <option value="O+">O+</option>
                                 <option value="O-">O-</option>
-                            </select></label>
+                            </select>
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+                        </label>
 
                     </div>
                 </div>
@@ -107,11 +205,19 @@
                     <label class="block mb-1">Profile Photo</label>
                     <input
                         class="cursor-pointer profile-pic file:bg-neutral-200 file:rounded-l-md file:py-1 file:px-3 file:cursor-pointer file:border-r file:border-r-neutral-400"
-                        type="file" />
+                        type="file" accept="image/*"/>
+                    <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                            viewBox="0 0 2048 2048">
+                            <path
+                                d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                        </svg>
+                        <p class="error-message"></p>
+                    </div>
                 </div>
             </form>
             <div class="flex justify-end">
-                <button class="btn flex items-center gap-1" type="button">
+                <button class="btn flex items-center gap-1 next" type="button">
                     <span>next</span>
                     <span>
                         <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
@@ -123,84 +229,182 @@
             </div>
         </div>
 
-        <div class="sec2 hidden">
+        <div class="sec2 sec hidden">
             <form action="">
-                <div class="mb-8">
-                    <h4 class="font-semibold text-zinc-700 mb-5">Current Address*</h4>
+                <div class="mb-8 curr">
+                    <h4 class="font-semibold text-zinc-700 mb-5">Current Address<span class="text-red-600">*</span></h4>
                     <div class="mb-5">
                         <label class="flex flex-col gap-1">
-                            <span>Address*</span>
-                            <input class="address" placeholder="Enter Address" type="text" />
+                            <span>Address<span class="text-red-600">*</span></span>
+                            <input class="address required" placeholder="Enter Address" type="text" />
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
                         </label>
                     </div>
                     <div class="flex gap-5 mb-5">
-                        <div class="flex-1">
-                            <label class="flex flex-col gap-1 curr-country"><span>Country*</span><select
-                                    class="cursor-pointer country" required="">
+                        <div class="flex-1 shrink min-w-0">
+                            <label class="flex flex-col gap-1"><span>Country<span
+                                        class="text-red-600">*</span></span><select
+                                    class="cursor-pointer country required">
                                     <option value="">Select a Country</option>
-                                </select></label>
+                                </select>
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
-                        <div class="flex-1">
-                            <label class="flex flex-col gap-1 curr-state"><span>State*</span><select
-                                    class="cursor-pointer state" required="">
+                        <div class="flex-1 shrink min-w-0">
+                            <label class="flex flex-col gap-1"><span>State<span
+                                        class="text-red-600">*</span></span><select
+                                    class="cursor-pointer state required">
                                     <option value="">Select a State</option>
-                                </select></label>
+                                </select>
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
-                        <div class="flex-1">
-                            <label class="flex flex-col gap-1 curr-city"><span>City*</span><select
-                                    class="cursor-pointer city" required="">
+                        <div class="flex-1 shrink min-w-0">
+                            <label class="flex flex-col gap-1"><span>City<span
+                                        class="text-red-600">*</span></span><select
+                                    class="cursor-pointer city required">
                                     <option value="">Select a City</option>
-                                </select></label>
+                                </select>
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-1">Pin code*</label>
-                        <input class="pincode" id="curr-pincode" placeholder="Enter Pin code" type="text" />
+                        <label class="block mb-1">Pin code<span class="text-red-600">*</span>
+                        </label>
+                        <input class="pincode mb-1 required" placeholder="Enter Pin code" type="text" />
+                        <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                viewBox="0 0 2048 2048">
+                                <path
+                                    d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                            </svg>
+                            <p class="error-message"></p>
+                        </div>
                     </div>
                 </div>
-                <div class="mb-5">
+                <div class="mb-5 perm">
                     <h4 class="font-semibold text-zinc-700 mb-5">Permanent Address</h4>
-                    <button class="btn mb-5" type="button">Same as Above</button>
+                    <button class="btn mb-5 same-address-btn" type="button">Same as Above</button>
                     <div class="mb-5">
                         <label class="flex flex-col gap-1">
-                            <span>Address*</span>
+                            <span>Address</span>
                             <input class="address" placeholder="Enter Address" type="text" />
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
                         </label>
                     </div>
                     <div class="flex gap-5 mb-5">
-                        <div class="flex-1">
-                            <label class="flex flex-col gap-1 perm-country"><span>Country</span><select
-                                    class="cursor-pointer country" required="">
+                        <div class="flex-1 shrink min-w-0 shrink min-w-0">
+                            <label class="flex flex-col gap-1"><span>Country</span><select
+                                    class="cursor-pointer country">
                                     <option value="">Select a Country</option>
-                                </select></label>
+                                </select>
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
-                        <div class="flex-1">
-                            <label class="flex flex-col gap-1 perm-state"><span>State</span><select
-                                    class="cursor-pointer state" required="">
+                        <div class="flex-1 shrink min-w-0 shrink min-w-0">
+                            <label class="flex flex-col gap-1"><span>State</span><select class="cursor-pointer state">
                                     <option value="">Select a State</option>
-                                </select></label>
+                                </select>
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
-                        <div class="flex-1">
-                            <label class="flex flex-col gap-1 perm-city"><span>City</span><select
-                                    class="cursor-pointer city" required="">
+                        <div class="flex-1 shrink min-w-0 shrink min-w-0">
+                            <label class="flex flex-col gap-1"><span>City</span><select class="cursor-pointer city">
                                     <option value="">Select a City</option>
-                                </select></label>
+                                </select>
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-1">Pin code</label>
-                        <input class="pincode" placeholder="Enter Pin code" type="text" />
+                        <input class="pincode mb-1" placeholder="Enter Pin code" type="text" />
+                        <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                viewBox="0 0 2048 2048">
+                                <path
+                                    d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                            </svg>
+                            <p class="error-message"></p>
+                        </div>
                     </div>
                 </div>
             </form>
             <div class="flex justify-between">
-                <button class="btn flex items-center gap-1" type="button">
+                <button class="btn flex items-center gap-1 previous" type="button">
                     <span>
                         <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
                             xmlns="http://www.w3.org/2000/svg">
@@ -209,7 +413,7 @@
                     </span>
                     <span>previous</span>
                 </button>
-                <button class="btn flex items-center gap-1" type="button">
+                <button class="btn flex items-center gap-1 next" type="button">
                     <span>next</span>
                     <span>
                         <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
@@ -221,34 +425,69 @@
             </div>
         </div>
 
-        <div class="sec3 hidden">
+        <div class="sec3 sec hidden">
             <form action="">
                 <div class="flex gap-5 mb-5">
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 admission-number"><span>Admission Number*</span><input
-                                placeholder="Enter Admission Number" required="" type="text" /></label>
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1 admission-number"><span>Admission Number<span
+                                    class="text-red-600">*</span></span><input placeholder="Enter Admission Number"
+                                type="text" class="required" />
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
+                        </label>
 
                     </div>
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 admission-date"><span>Admission Date*</span><input
-                                class="cursor-pointer" required="" type="date" /></label>
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1 admission-date"><span>Admission Date<span
+                                    class="text-red-600">*</span></span><input class="cursor-pointer required"
+                                type="date" />
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
+                        </label>
 
                     </div>
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 academic-year"><span>Academic Year*</span><select
-                                class="cursor-pointer" required="">
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1 academic-year"><span>Academic Year<span
+                                    class="text-red-600">*</span></span><select class="cursor-pointer required">
                                 <option value="">Select Academic Year</option>
                                 <option value="2025-26">2025-26</option>
                                 <option value="2026-27">2026-27</option>
                                 <option value="2027-28">2027-28</option>
-                            </select></label>
+                            </select>
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
+                        </label>
 
                     </div>
                 </div>
                 <div class="flex gap-5 mb-8">
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 class-field"><span>Class*</span><select class="cursor-pointer"
-                                required="">
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1 class-field"><span>Class<span
+                                    class="text-red-600">*</span></span><select class="cursor-pointer required">
                                 <option value="">Select Class</option>
                                 <option value="1">Class 1</option>
                                 <option value="2">Class 2</option>
@@ -262,30 +501,63 @@
                                 <option value="10">Class 10</option>
                                 <option value="11">Class 11</option>
                                 <option value="12">Class 12</option>
-                            </select></label>
+                            </select>
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
+                        </label>
 
                     </div>
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 division"><span>Division*</span><select class="cursor-pointer"
-                                required="">
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1 division"><span>Division<span
+                                    class="text-red-600">*</span></span><select class="cursor-pointer required">
                                 <option value="">Select Division</option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
                                 <option value="C">C</option>
                                 <option value="D">D</option>
-                            </select></label>
+                            </select>
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
+                        </label>
 
                     </div>
-                    <div class="flex-1">
-                        <label class="flex flex-col gap-1 roll-number"><span>Roll Number*</span><input
-                                inputmode="numeric" pattern="[0-9]*" placeholder="Enter Roll Number" required=""
-                                type="text" /></label>
+                    <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1 roll-number"><span>Roll Number<span
+                                    class="text-red-600">*</span></span><input inputmode="numeric" pattern="[0-9]*"
+                                placeholder="Enter Roll Number" class="required" type="text" />
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
+                        </label>
 
                     </div>
                 </div>
             </form>
             <div class="flex justify-between">
-                <button class="btn flex items-center gap-1" type="button">
+                <button class="btn flex items-center gap-1 previous" type="button">
                     <span>
                         <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
                             xmlns="http://www.w3.org/2000/svg">
@@ -294,7 +566,7 @@
                     </span>
                     <span>previous</span>
                 </button>
-                <button class="btn flex items-center gap-1" type="button">
+                <button class="btn flex items-center gap-1 next" type="button">
                     <span>next</span>
                     <span>
                         <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
@@ -306,10 +578,10 @@
             </div>
         </div>
 
-        <div class="sec4 hidden">
+        <div class="sec4 sec hidden">
             <h4 class="font-semibold text-xl text-center text-zinc-700">Add Parent Information</h4>
             <div class="flex justify-end mb-5">
-                <button class="btn px-1 py-1 text-zinc-700 add-parent-btn">
+                <button class="btn px-1 py-1 text-zinc-700 add-btn">
                     <svg class="fill-current" height="24" viewbox="0 0 16 16" width="24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -318,11 +590,11 @@
                     </svg>
                 </button>
             </div>
-            <template id="parent-form-template">
+            <template class="form-template">
                 <form action="" class="py-4">
                     <div class="flex justify-end">
                         <button
-                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-parent-btn"
+                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-btn"
                             type="button">
                             <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="22"
                                 height="22" viewBox="0 0 24 24">
@@ -333,51 +605,124 @@
                         </button>
                     </div>
                     <div class="flex gap-5 mb-5">
-                        <div class="flex-1">
-                            <label class="flex flex-col gap-1 relation"><span>Relation*</span><select
-                                    class="cursor-pointer" required="">
+                        <div class="flex-1 shrink min-w-0">
+                            <label class="flex flex-col gap-1 relation"><span>Relation<span
+                                        class="text-red-600">*</span></span><select class="cursor-pointer primary required">
                                     <option value="">Select Relation</option>
                                     <option value="father">Father</option>
                                     <option value="mother">Mother</option>
                                     <option value="guardian">Guardian</option>
-                                </select></label>
+                                </select>
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
-                        <div class="flex-1">
-                            <label class="flex flex-col gap-1 name"><span>Name*</span><input placeholder="Enter Name"
-                                    required="" type="text" /></label>
+                        <div class="flex-1 shrink min-w-0">
+                            <label class="flex flex-col gap-1 name"><span>Name<span
+                                        class="text-red-600">*</span></span><input placeholder="Enter Name"
+                                    class="required" type="text" />
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
                     </div>
                     <div class="flex gap-5 mb-5">
-                        <div class="flex-1">
-                            <label class="flex flex-col gap-1 mobile"><span>Mobile*</span><input inputmode="numeric"
-                                    pattern="[0-9]*" placeholder="Enter Mobile" required="" type="text" /></label>
+                        <div class="flex-1 shrink min-w-0">
+                            <label class="flex flex-col gap-1"><span>Mobile<span
+                                        class="text-red-600">*</span></span><input inputmode="numeric" pattern="[0-9]*"
+                                    placeholder="Enter Mobile" class="mobile required" type="text"/>
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
-                        <div class="flex-1">
-                            <label class="flex flex-col gap-1 email"><span>Email</span><input placeholder="Enter Email"
-                                    type="email" /></label>
+                        <div class="flex-1 shrink min-w-0">
+                            <label class="flex flex-col gap-1"><span>Email</span><input class="email" placeholder="Enter Email"
+                                    type="email" />
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
                     </div>
                     <div class="flex gap-5 mb-8">
-                        <div class="flex-1">
+                        <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 occupation"><span>Occupation</span><input
-                                    placeholder="Enter Occupation" type="text" /></label>
+                                    placeholder="Enter Occupation" type="text" />
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
-                        <div class="flex-1">
+                        <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 annual-income"><span>Annual Income(in Rs)</span><input
-                                    inputmode="numeric" placeholder="Enter Annual Income" type="text" /></label>
+                                    inputmode="numeric" placeholder="Enter Annual Income" type="text" class="income"/>
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
+                            </label>
 
                         </div>
                     </div>
                     <hr class="text-neutral-500" />
                 </form>
             </template>
+
+            <div class="form-container">
+
+            </div>
+
             <div class="flex justify-between">
-                <button class="btn flex items-center gap-1" type="button">
+                <button class="btn flex items-center gap-1 previous" type="button">
                     <span>
                         <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
                             xmlns="http://www.w3.org/2000/svg">
@@ -386,7 +731,7 @@
                     </span>
                     <span>previous</span>
                 </button>
-                <button class="btn flex items-center gap-1" type="button">
+                <button class="btn flex items-center gap-1 next" type="button">
                     <span>next</span>
                     <span>
                         <svg class="stroke-current" height="15" viewbox="0 0 24 24" width="15"
@@ -398,13 +743,13 @@
             </div>
         </div>
 
-        <div class="sec5 hidden">
+        <div class="sec5 sec hidden">
             <h4 class="font-semibold text-xl text-center text-zinc-700">
                 Add Course Information
             </h4>
 
             <div class="flex justify-end mb-5">
-                <button class="btn px-1 py-1 text-zinc-700 add-course-btn" type="button">
+                <button class="btn px-1 py-1 text-zinc-700 add-btn" type="button">
                     <svg class="fill-current" width="24" height="24" viewBox="0 0 16 16"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -414,11 +759,11 @@
                 </button>
             </div>
 
-            <template id="course-form-template">
+            <template class="form-template">
                 <form action="" class="py-4">
                     <div class="flex justify-end">
                         <button
-                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-course-btn"
+                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-btn"
                             type="button">
                             <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="22"
                                 height="22" viewBox="0 0 24 24">
@@ -429,33 +774,66 @@
                         </button>
                     </div>
                     <div class="flex gap-5 mb-5">
-                        <div class="flex-1">
+                        <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 course-name">
-                                <span>Course Name*</span>
-                                <input type="text" placeholder="Enter Course Name" required>
+                                <span>Course Name<span class="text-red-600">*</span></span>
+                                <input type="text" placeholder="Enter Course Name" class="primary required">
+
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
                             </label>
                         </div>
 
-                        <div class="flex-1">
+                        <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 faculty-name">
-                                <span>Faculty Name*</span>
-                                <input type="text" placeholder="Enter Faculty Name" required>
+                                <span>Faculty Name<span class="text-red-600">*</span></span>
+                                <input type="text" placeholder="Enter Faculty Name" class="required">
+
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
                             </label>
                         </div>
                     </div>
 
                     <div class="flex gap-5 mb-8">
-                        <div class="flex-1">
+                        <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 course-fees">
-                                <span>Course Fees (₹)*</span>
-                                <input type="text" inputmode="numeric" placeholder="Enter Course Fees" required>
+                                <span>Course Fees (₹)<span class="text-red-600">*</span></span>
+                                <input type="text" inputmode="numeric" placeholder="Enter Course Fees" class="required fees">
+
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
                             </label>
                         </div>
 
-                        <div class="flex-1">
+                        <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 duration">
-                                <span>Duration*</span>
-                                <select class="cursor-pointer" required>
+                                <span>Duration<span class="text-red-600">*</span></span>
+                                <select class="cursor-pointer required">
                                     <option value="">Select Duration</option>
                                     <option value="1-month">1 Month</option>
                                     <option value="3-months">3 Months</option>
@@ -465,6 +843,17 @@
                                     <option value="3-years">3 Years</option>
                                     <option value="4-years">4 Years</option>
                                 </select>
+
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
                             </label>
                         </div>
                     </div>
@@ -473,8 +862,12 @@
                 </form>
             </template>
 
+            <div class="form-container">
+
+            </div>
+
             <div class="flex justify-between">
-                <button class="btn flex items-center gap-1" type="button">
+                <button class="btn flex items-center gap-1 previous" type="button">
                     <span>
                         <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                             viewBox="0 0 24 24">
@@ -484,7 +877,7 @@
                     <span>previous</span>
                 </button>
 
-                <button class="btn flex items-center gap-1" type="button">
+                <button class="btn flex items-center gap-1 next" type="button">
                     <span>next</span>
                     <span>
                         <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
@@ -496,13 +889,13 @@
             </div>
         </div>
 
-        <div class="sec6 hidden">
+        <div class="sec6 sec hidden">
             <h4 class="font-semibold text-xl text-center text-zinc-700">
                 Add Documents
             </h4>
 
             <div class="flex justify-end mb-5">
-                <button class="btn px-1 py-1 text-zinc-700 add-document-btn" type="button">
+                <button class="btn px-1 py-1 text-zinc-700 add-btn" type="button">
                     <svg class="fill-current" width="24" height="24" viewBox="0 0 16 16"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -512,11 +905,11 @@
                 </button>
             </div>
 
-            <template id="document-form-template">
+            <template class="form-template">
                 <form action="" class="py-4">
                     <div class="flex justify-end">
                         <button
-                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-document-btn"
+                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-btn"
                             type="button">
                             <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="22"
                                 height="22" viewBox="0 0 24 24">
@@ -528,22 +921,44 @@
                     </div>
 
                     <div class="flex gap-5 mb-5">
-                        <div class="flex-1">
+                        <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 document-type">
-                                <span>Document Type*</span>
-                                <select class="cursor-pointer" required>
+                                <span>Document Type<span class="text-red-600">*</span></span>
+                                <select class="cursor-pointer required primary">
                                     <option value="">Select Document Type</option>
                                     <option value="aadhar-card">Aadhar Card</option>
                                     <option value="birth-certificate">Birth Certificate</option>
                                     <option value="leaving-certificate">Leaving Certificate</option>
                                 </select>
+
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
                             </label>
                         </div>
 
-                        <div class="flex-1">
+                        <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 document-number">
-                                <span>Document Number*</span>
-                                <input type="text" placeholder="Enter Document Number" required>
+                                <span>Document Number<span class="text-red-600">*</span></span>
+                                <input class="doc-number" type="text" placeholder="Enter Document Number" class="required">
+
+
+                                <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                        viewBox="0 0 2048 2048">
+                                        <path
+                                            d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                    </svg>
+                                    <p class="error-message"></p>
+                                </div>
+
                             </label>
                         </div>
                     </div>
@@ -552,8 +967,12 @@
                 </form>
             </template>
 
+            <div class="form-container">
+
+            </div>
+
             <div class="flex justify-between">
-                <button class="btn flex items-center gap-1" type="button">
+                <button class="btn flex items-center gap-1 previous" type="button">
                     <span>
                         <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                             viewBox="0 0 24 24">
@@ -563,7 +982,7 @@
                     <span>previous</span>
                 </button>
 
-                <button class="btn flex items-center gap-1" type="submit">
+                <button class="btn flex items-center gap-1 submit" type="submit">
                     <span>submit</span>
                 </button>
             </div>
