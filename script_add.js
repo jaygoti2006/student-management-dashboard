@@ -10,6 +10,7 @@ const progress = document.querySelector(".progress");
 const progressFill = document.querySelector(".progress-fill");
 const badges = [];
 const sections = [];
+const sectionFields = [];
 progress.querySelectorAll(".badge").forEach((el) => { badges.push(el); });
 sectionContainer.querySelectorAll(".sec").forEach((el) => { sections.push(el) });
 
@@ -25,6 +26,9 @@ sections.forEach((el) => {
     if (el.querySelector(".form-template")) {
         formTemps.push(el.querySelector(".form-template").content.firstElementChild.cloneNode(true));
     } else formTemps.push(null);
+    const t = [];
+    el.querySelectorAll("input,select").forEach((el1) => t.push(el1));
+    sectionFields.push(t);
 });
 
 
@@ -150,7 +154,7 @@ function validate(el) {
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("email")) {
-        if (!/^.+\@.+\..+$/.test(el.value)) {
+        if (!/^.+\@.+\..+$/.test(el.value) && el.value !== "") {
             el.closest("div").querySelector(".error").classList.remove("hidden");
             el.closest("div").querySelector(".error-message").textContent = "Email not valid!";
             return false;
@@ -158,7 +162,7 @@ function validate(el) {
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("mobile")) {
-        if (!/^\d{10}$/.test(el.value) && el.value!=="") {
+        if (!/^\d{10}$/.test(el.value) && el.value !== "") {
             el.closest("div").querySelector(".error").classList.remove("hidden");
             el.closest("div").querySelector(".error-message").textContent = "Mobile not valid!";
             return false;
@@ -166,7 +170,7 @@ function validate(el) {
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("pincode")) {
-        if (!/^\d{6}$/.test(el.value)) {
+        if (!/^\d{6}$/.test(el.value) && el.value !== "") {
             el.closest("div").querySelector(".error").classList.remove("hidden");
             el.closest("div").querySelector(".error-message").textContent = "Pincode not valid!";
             return false;
@@ -174,7 +178,7 @@ function validate(el) {
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("income")) {
-        if (!/^\d.$/.test(el.value)) {
+        if (!/^\d.$/.test(el.value) && el.value !== "") {
             el.closest("div").querySelector(".error").classList.remove("hidden");
             el.closest("div").querySelector(".error-message").textContent = "Income not valid!";
             return false;
@@ -182,7 +186,7 @@ function validate(el) {
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("fees")) {
-        if (!/^\d.$/.test(el.value)) {
+        if (!/^\d.$/.test(el.value) && el.value !== "") {
             el.closest("div").querySelector(".error").classList.remove("hidden");
             el.closest("div").querySelector(".error-message").textContent = "Fees not valid!";
             return false;
@@ -190,7 +194,7 @@ function validate(el) {
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("doc-number")) {
-        if (!/^\d.$/.test(el.value)) {
+        if (!/^\d.$/.test(el.value) && el.value !== "") {
             el.closest("div").querySelector(".error").classList.remove("hidden");
             el.closest("div").querySelector(".error-message").textContent = "Document Number not valid!";
             return false;
@@ -202,32 +206,135 @@ function validate(el) {
 
 function validateAll() {
     let ok = true;
-    if (sections[curr.page - 1].querySelector(".form-container")) {
+    if (curr.page === 4 || curr.page === 5 || curr.page === 6) {
         const t = new Map();
         sections[curr.page - 1].querySelectorAll(".primary").forEach((el) => {
-            const s=el.value.toLowerCase();
-            if (t.has(s)) t.set(s,t.get(s)+1);
-            else t.set(s,1);
+            const s = el.value.toLowerCase();
+            if (t.has(s)) t.set(s, t.get(s) + 1);
+            else t.set(s, 1);
         });
-        for (let [ key, value ] of t) if (key != "guardian" && value > 1) ok = false;
+        for (let [key, value] of t) if (key != "guardian" && value > 1) ok = false;
         if (!ok) {
             sections[curr.page - 1].querySelectorAll(".primary").forEach((el) => {
                 el.closest("div").querySelector(".error").classList.remove("hidden");
                 el.closest("div").querySelector(".error-message").textContent = "Repeated entries!";
             });
         }
-        console.log(t);
-
+    } else if (curr.page === 2) {
+        let ok1 = false;
+        permAddress.forEach((el) => {
+            if (el.value.trim() !== "") ok1 = true;
+        });
+        if (ok1) {
+            let ok2 = true;
+            permAddress.forEach((el) => {
+                if (el.value.trim() === "") {
+                    ok2 = false;
+                    el.closest("div").querySelector(".error").classList.remove("hidden");
+                    el.closest("div").querySelector(".error-message").textContent = "Feild can't be empty!";
+                }
+            });
+            if (!ok2) ok = false;
+        }
     }
-    sections[curr.page - 1].querySelectorAll("input").forEach((el) => {
-        if(!validate(el)) ok=false;
-    });
-    sections[curr.page - 1].querySelectorAll("select").forEach((el) => {
-        if(!validate(el)) ok=false;
+    sections[curr.page - 1].querySelectorAll("input,select").forEach((el) => {
+        if (!validate(el)) ok = false;
     });
 
     return ok;
 }
+
+function createStudent() {
+    const personalInfo = {}, address = {
+        currentAddress: {},
+        permanentAddress: {}
+    }, academicInfo = {}, parents = [], courses = [], documents = [];
+    const student = {};
+    sectionFields[0].forEach((el) => personalInfo[el.name] = el.value);
+    currAddress.forEach((el) => address.currentAddress[el.name] = el.value);
+    permAddress.forEach((el) => address.permanentAddress[el.name] = el.value);
+    sectionFields[2].forEach((el) => academicInfo[el.name] = el.value);
+    [...sections[3].querySelector(".form-container").children].forEach((el) => {
+        const t = {};
+        el.querySelectorAll("input,select").forEach((el1) => t[el1.name] = el1.value);
+        parents.push(t);
+    });
+    [...sections[4].querySelector(".form-container").children].forEach((el) => {
+        const t = {};
+        el.querySelectorAll("input,select").forEach((el1) => t[el1.name] = el1.value);
+        courses.push(t);
+    });
+    [...sections[5].querySelector(".form-container").children].forEach((el) => {
+        const t = {};
+        el.querySelectorAll("input,select").forEach((el1) => t[el1.name] = el1.value);
+        documents.push(t);
+    });
+
+    student.personalInfo = personalInfo;
+    student.academicInfo = academicInfo;
+    student.address = address;
+    student.parents = parents;
+    student.courses = courses;
+    student.documents = documents;
+
+    return student;
+}
+
+function addRecordLocal(addno) {
+    const student = createStudent();
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function (e) {
+        student.personalInfo.profilePhoto = reader.result;
+        localStorage.setItem("addno" + addno, JSON.stringify(student));
+    });
+
+    reader.readAsDataURL(sections[0].querySelector("input[name='profilePhoto']").files[0]);
+}
+
+function addRecordSession() {
+    sessionStorage.setItem("student", JSON.stringify(createStudent()));
+}
+
+function loadFromSession() {
+    if (sessionStorage.getItem("student") !== null) {
+        const student = JSON.parse(sessionStorage.getItem("student"));
+        for (let el of sectionFields[0]) {
+            el.value = student.personalInfo[el.getAttribute("name")];
+        }
+        for (let el of currAddress) {
+            el.value = student.address.currentAddress[el.getAttribute("name")];
+        }
+        for (let el of permAddress) {
+            el.value = student.address.permanentAddress[el.getAttribute("name")];
+        }
+        for (let el of sectionFields[2]) {
+            el.value = student.academicInfo[el.getAttribute("name")];
+        }
+        for (let el of student.parents) {
+            const t = formTemps[3].cloneNode(true);
+            t.querySelectorAll("input,select").forEach((el1) => {
+                el1.value = el[el1.getAttribute("name")];
+            });
+            sections[3].querySelector(".form-container").append(t);
+        }
+        for (let el of student.courses) {
+            const t = formTemps[4].cloneNode(true);
+            t.querySelectorAll("input,select").forEach((el1) => {
+                el1.value = el[el1.getAttribute("name")];
+            });
+            sections[4].querySelector(".form-container").append(t);
+        }
+        for (let el of student.documents) {
+            const t = formTemps[5].cloneNode(true);
+            t.querySelectorAll("input,select").forEach((el1) => {
+                el1.value = el[el1.getAttribute("name")];
+            });
+            sections[5].querySelector(".form-container").append(t);
+        }
+    }
+}
+loadFromSession();
 
 
 
@@ -279,7 +386,11 @@ sectionContainer.addEventListener("click", function (e) {
     else if (e.target.closest(".del-btn")) e.target.closest("form").remove();
     else if (e.target.closest(".submit")) {
         if (validateAll()) {
-
+            if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null) addRecord(document.querySelector(".admission-number").value);
         }
     }
+});
+
+window.addEventListener("beforeunload", function (e) {
+    addRecordSession();
 });
