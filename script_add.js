@@ -31,6 +31,7 @@ sections.forEach((el) => {
     sectionFields.push(t);
 });
 
+const session = (sessionStorage.getItem("student") === null) ? null : JSON.parse(sessionStorage.getItem("student"));
 
 
 function createOption(value, content) {
@@ -60,15 +61,6 @@ async function getCountries() {
         return Promise.reject("error during fetch");
     }
 }
-getCountries().then((data) => {
-    sections[1].querySelectorAll(".country").forEach((el) => {
-        data.forEach((c) => {
-            const t = createOption(c.name, c.name);
-            t.setAttribute("data-ciso2", c.iso2);
-            el.append(t);
-        });
-    });
-});
 
 async function getStates(ciso2) {
     try {
@@ -112,7 +104,7 @@ async function getCities(ciso2, siso2) {
     }
 }
 
-function updateCities(el, s, ciso2, siso2) {
+function updateCities(el, s, ciso2, siso2, flag) {
     el.querySelectorAll("option[value]:not([value=''])").forEach((child) => { child.remove() });
     if (s === "") {
         el.value = "";
@@ -124,10 +116,14 @@ function updateCities(el, s, ciso2, siso2) {
             const t = createOption(city.name, city.name);
             el.append(t);
         });
+        if (session !== null && flag) {
+            if (el.closest(".curr")) currAddress[3].value = session.address.currentAddress.city;
+            else permAddress[3].value = session.address.permanentAddress.city;
+        }
     });
 }
 
-function updateStates(el, c, ciso2) {
+function updateStates(el, c, ciso2, flag) {
     el.querySelectorAll("option[value]:not([value=''])").forEach((child) => { child.remove() });
     if (el.closest(".curr")) updateCities(currAddress[3], "", null, null);
     else updateCities(permAddress[3], "", null, null);
@@ -143,8 +139,34 @@ function updateStates(el, c, ciso2) {
             t.setAttribute("data-siso2", state.iso2);
             el.append(t);
         });
+        if (session !== null && flag) {
+            if (el.closest(".curr")) {
+                currAddress[2].value = session.address.currentAddress.state;
+                updateCities(currAddress[3], currAddress[2].value, currAddress[2].selectedOptions[0].getAttribute("data-ciso2"), currAddress[2].selectedOptions[0].getAttribute("data-siso2"), true);
+            } else {
+                permAddress[2].value = session.address.permanentAddress.state;
+                updateCities(permAddress[3], permAddress[2].value, permAddress[2].selectedOptions[0].getAttribute("data-ciso2"), permAddress[2].selectedOptions[0].getAttribute("data-siso2"), true);
+            }
+        }
     });
 }
+
+getCountries().then((data) => {
+    sections[1].querySelectorAll(".country").forEach((el) => {
+        data.forEach((c) => {
+            const t = createOption(c.name, c.name);
+            t.setAttribute("data-ciso2", c.iso2);
+            el.append(t);
+        });
+    });
+    if (session !== null) {
+        currAddress[1].value = session.address.currentAddress.country;
+        updateStates(currAddress[2], currAddress[1].value, currAddress[1].selectedOptions[0].getAttribute("data-ciso2"), true);
+
+        permAddress[1].value = session.address.permanentAddress.country;
+        updateStates(permAddress[2], permAddress[1].value, permAddress[1].selectedOptions[0].getAttribute("data-ciso2"), true);
+    }
+});
 
 function validate(el) {
     if (el.classList.contains("required") && el.value.trim() === "") {
@@ -178,7 +200,7 @@ function validate(el) {
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("income")) {
-        if (!/^\d.$/.test(el.value) && el.value !== "") {
+        if (!/^\d*$/.test(el.value) && el.value !== "") {
             el.closest("div").querySelector(".error").classList.remove("hidden");
             el.closest("div").querySelector(".error-message").textContent = "Income not valid!";
             return false;
@@ -186,7 +208,7 @@ function validate(el) {
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("fees")) {
-        if (!/^\d.$/.test(el.value) && el.value !== "") {
+        if (!/^\d*$/.test(el.value) && el.value !== "") {
             el.closest("div").querySelector(".error").classList.remove("hidden");
             el.closest("div").querySelector(".error-message").textContent = "Fees not valid!";
             return false;
@@ -194,7 +216,7 @@ function validate(el) {
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("doc-number")) {
-        if (!/^\d.$/.test(el.value) && el.value !== "") {
+        if (!/^\d*$/.test(el.value) && el.value !== "") {
             el.closest("div").querySelector(".error").classList.remove("hidden");
             el.closest("div").querySelector(".error-message").textContent = "Document Number not valid!";
             return false;
@@ -282,14 +304,21 @@ function createStudent() {
 
 function addRecordLocal(addno) {
     const student = createStudent();
-    const reader = new FileReader();
+    if (sections[0].querySelector("input[name='profilePhoto']").files[0]) {
+        const reader = new FileReader();
 
-    reader.addEventListener("load", function (e) {
-        student.personalInfo.profilePhoto = reader.result;
+        reader.addEventListener("load", function (e) {
+            student.personalInfo.profilePhoto = reader.result;
+            localStorage.setItem("addno" + addno, JSON.stringify(student));
+            alert("added successfully");
+        });
+
+        reader.readAsDataURL(sections[0].querySelector("input[name='profilePhoto']").files[0]);
+    }
+    else {
         localStorage.setItem("addno" + addno, JSON.stringify(student));
-    });
-
-    reader.readAsDataURL(sections[0].querySelector("input[name='profilePhoto']").files[0]);
+        alert("added successfully");
+    }
 }
 
 function addRecordSession() {
@@ -297,35 +326,34 @@ function addRecordSession() {
 }
 
 function loadFromSession() {
-    if (sessionStorage.getItem("student") !== null) {
-        const student = JSON.parse(sessionStorage.getItem("student"));
+    if (session !== null) {
         for (let el of sectionFields[0]) {
-            el.value = student.personalInfo[el.getAttribute("name")];
+            if (el.getAttribute("type") !== "file") el.value = session.personalInfo[el.getAttribute("name")];
         }
         for (let el of currAddress) {
-            el.value = student.address.currentAddress[el.getAttribute("name")];
+            if (el.tagName !== "SELECT") el.value = session.address.currentAddress[el.getAttribute("name")];
         }
         for (let el of permAddress) {
-            el.value = student.address.permanentAddress[el.getAttribute("name")];
+            if (el.tagName !== "SELECT") el.value = session.address.permanentAddress[el.getAttribute("name")];
         }
         for (let el of sectionFields[2]) {
-            el.value = student.academicInfo[el.getAttribute("name")];
+            el.value = session.academicInfo[el.getAttribute("name")];
         }
-        for (let el of student.parents) {
+        for (let el of session.parents) {
             const t = formTemps[3].cloneNode(true);
             t.querySelectorAll("input,select").forEach((el1) => {
                 el1.value = el[el1.getAttribute("name")];
             });
             sections[3].querySelector(".form-container").append(t);
         }
-        for (let el of student.courses) {
+        for (let el of session.courses) {
             const t = formTemps[4].cloneNode(true);
             t.querySelectorAll("input,select").forEach((el1) => {
                 el1.value = el[el1.getAttribute("name")];
             });
             sections[4].querySelector(".form-container").append(t);
         }
-        for (let el of student.documents) {
+        for (let el of session.documents) {
             const t = formTemps[5].cloneNode(true);
             t.querySelectorAll("input,select").forEach((el1) => {
                 el1.value = el[el1.getAttribute("name")];
@@ -342,12 +370,12 @@ sectionContainer.addEventListener("input", function (e) {
     e.target.closest("div").querySelector(".error").classList.add("hidden");
     if (e.target.closest(".country")) {
         const t = e.target.closest(".country");
-        if (e.target.closest(".curr")) updateStates(currAddress[2], t.value, t.selectedOptions[0].getAttribute("data-ciso2"));
-        else updateStates(permAddress[2], t.value, t.selectedOptions[0].getAttribute("data-ciso2"));
+        if (e.target.closest(".curr")) updateStates(currAddress[2], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), false);
+        else updateStates(permAddress[2], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), false);
     } else if (e.target.closest(".state")) {
         const t = e.target.closest(".state");
-        if (e.target.closest(".curr")) updateCities(currAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"));
-        else updateCities(permAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"));
+        if (e.target.closest(".curr")) updateCities(currAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"), false);
+        else updateCities(permAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"), false);
     }
 });
 
@@ -386,7 +414,8 @@ sectionContainer.addEventListener("click", function (e) {
     else if (e.target.closest(".del-btn")) e.target.closest("form").remove();
     else if (e.target.closest(".submit")) {
         if (validateAll()) {
-            if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null) addRecord(document.querySelector(".admission-number").value);
+            if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null) addRecordLocal(document.querySelector(".admission-number").value);
+            else alert("admission number already exist");
         }
     }
 });
