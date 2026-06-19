@@ -365,6 +365,14 @@ sectionContainer.addEventListener("input", function (e) {
         const t = e.target.closest(".state");
         if (e.target.closest(".curr")) updateCities(currAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"), false);
         else updateCities(permAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"), false);
+    } else if(e.target.closest(".profile-photo")) {
+        const file=e.target.closest(".profile-photo").files[0];
+        if(file.size > 10*1024) {
+            e.target.closest(".profile-photo").value="";
+            const t=e.target.closest(".profile-photo").closest("div");
+            t.querySelector(".error").classList.remove("hidden");
+            t.querySelector(".error-message").textContent = "File size should be less than 10KB!";
+        }
     }
 });
 

@@ -25,7 +25,7 @@ for (const key of keys) {
     students.push(
         {
             admissionNo: t.academicInfo.admissionNo,
-            name: t.personalInfo.firstName + " " + t.personalInfo.middleName + " " + t.personalInfo.lastName,
+            name: t.personalInfo.firstName + " " + t.personalInfo.middleName + ((t.personalInfo.middleName)?" ":"") + t.personalInfo.lastName,
             class: t.academicInfo.class,
             division: t.academicInfo.division,
             rollNumber: t.academicInfo.rollNumber,
@@ -69,6 +69,7 @@ function updateData() {
 
     if (curr.order === 1) data.reverse();
 
+    total.textContent=data.length;
     curr.page = 1;
 }
 updateData();
@@ -86,7 +87,7 @@ function loadData() {
     for (let i = (curr.page - 1) * curr.entries; i < Math.min(curr.page * curr.entries, data.length); i++) {
         rowContainer.append(createRow(data[i]));
     }
-    currMin.textContent=(curr.page-1)*curr.entries+1;
+    currMin.textContent=Math.min((curr.page-1)*curr.entries+1, data.length);
     currMax.textContent=Math.min(curr.page * curr.entries, data.length);
 }
 loadData();
