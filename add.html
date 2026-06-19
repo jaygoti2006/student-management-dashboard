@@ -538,6 +538,25 @@
 
                     </div>
                     <div class="flex-1 shrink min-w-0">
+                        <label class="flex flex-col gap-1"><span>Fee Status<span
+                                    class="text-red-600">*</span></span><select name="feeStatus" class="cursor-pointer required">
+                                <option value="pending">Pending</option>
+                                <option value="completed">Completed</option>
+                            </select>
+
+                            <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
+                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                    viewBox="0 0 2048 2048">
+                                    <path
+                                        d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
+                                </svg>
+                                <p class="error-message"></p>
+                            </div>
+
+                        </label>
+
+                    </div>
+                    <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 roll-number"><span>Roll Number<span
                                     class="text-red-600">*</span></span><input name="rollNumber" inputmode="numeric" pattern="[0-9]*"
                                 placeholder="Enter Roll Number" class="required" type="text" />

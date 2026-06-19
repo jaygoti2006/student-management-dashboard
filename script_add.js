@@ -199,26 +199,15 @@ function validate(el) {
         }
     }
 
-    if (el.tagName === "INPUT" && el.classList.contains("income")) {
+    if (el.tagName === "INPUT" && (el.classList.contains("income") || el.classList.contains("fees") || el.classList.contains("doc-number") || el.classList.contains("admission-number"))) {
         if (!/^\d*$/.test(el.value) && el.value !== "") {
             el.closest("div").querySelector(".error").classList.remove("hidden");
-            el.closest("div").querySelector(".error-message").textContent = "Income not valid!";
-            return false;
-        }
-    }
-
-    if (el.tagName === "INPUT" && el.classList.contains("fees")) {
-        if (!/^\d*$/.test(el.value) && el.value !== "") {
-            el.closest("div").querySelector(".error").classList.remove("hidden");
-            el.closest("div").querySelector(".error-message").textContent = "Fees not valid!";
-            return false;
-        }
-    }
-
-    if (el.tagName === "INPUT" && el.classList.contains("doc-number")) {
-        if (!/^\d*$/.test(el.value) && el.value !== "") {
-            el.closest("div").querySelector(".error").classList.remove("hidden");
-            el.closest("div").querySelector(".error-message").textContent = "Document Number not valid!";
+            let message;
+            if(el.classList.contains("income")) message="Income not valid!";
+            else if(el.classList.contains("fees")) message="Fees not valid!";
+            else if(el.classList.contains("doc-number")) message="Document Number not valid!";
+            else message="Admission No not valid!";
+            el.closest("div").querySelector(".error-message").textContent = message;
             return false;
         }
     }

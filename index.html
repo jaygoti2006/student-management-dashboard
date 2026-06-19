@@ -19,7 +19,7 @@
                         class="search-input focus:outline-none border border-neutral-400 rounded-md px-2 py-1 rounded-r-none focus:shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.06),inset_0_4px_8px_0_rgba(0,0,0,0.04)] transition-all"
                         type="text" placeholder="Search">
                     <button
-                        class="flex justify-center items-center btn border border-l-0 rounded-md rounded-l-none px-3">
+                        class="search-btn flex justify-center items-center btn border border-l-0 rounded-md rounded-l-none px-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                             <path fill="#111111" fill-rule="evenodd"
                                 d="M14.385 15.446a6.751 6.751 0 1 1 1.06-1.06l5.156 5.155a.75.75 0 1 1-1.06 1.06l-5.156-5.155ZM6.46 13.884a5.25 5.25 0 1 1 7.43-.005l-.005.005l-.005.004a5.25 5.25 0 0 1-7.42-.004Z"
@@ -43,8 +43,8 @@
 
             <div class="options flex items-center gap-4 px-5">
                 <div class="flex items-center gap-2">
-                    <span class="text-neutral-500"><span class="current">1-10</span> of <span
-                            class="total">500</span></span>
+                    <span class="text-neutral-500"><span class="current-min">1</span>-<span class="current-max"></span> of <span
+                            class="total"></span></span>
                     <button class="previous cursor-pointer hover:text-neutral-600 active:text-black transition-all">
                         <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                             viewBox="0 0 24 24">
@@ -71,7 +71,7 @@
                     </div>
                     <div class="flex gap-2">
                         <label class="" for="class">Class</label>
-                        <select class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
+                        <select data-name="class" class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
                             name="class" id="class">
                             <option value="all">All</option>
                             <option value="1">Class 1</option>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="flex gap-2">
                         <label class="" for="gender">Gender</label>
-                        <select class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
+                        <select data-name="gender" class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
                             name="gender" id="gender">
                             <option value="all">All</option>
                             <option value="male">Male</option>
@@ -98,9 +98,9 @@
                         </select>
                     </div>
                     <div class="flex gap-2">
-                        <label class="" for="fee">Fee Status</label>
-                        <select class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
-                            name="fee" id="fee">
+                        <label class="" for="feeStatus">Fee Status</label>
+                        <select data-name="feeStatus" class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
+                            name="fee" id="feeStatus">
                             <option value="all">All</option>
                             <option value="pending">Pending</option>
                             <option value="completed">Completed</option>
@@ -111,7 +111,7 @@
                 <div class="h-6 w-0.5 bg-neutral-300"></div>
 
                 <div class="flex items-center gap-3.5">
-                    <button class="sort-order cursor-pointer hover:text-neutral-600 active:text-black transition-all">
+                    <button class="sort-toggle cursor-pointer hover:text-neutral-600 active:text-black transition-all">
                         <svg class="asce fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
                             viewBox="0 0 56 56">
                             <path fill-rule="evenodd"
@@ -124,10 +124,10 @@
                         </svg>
                     </button>
                     <label for="sort">Sort By</label>
-                    <select class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md" name="sort"
+                    <select data-name="sortBy" class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md" name="sort"
                         id="sort">
-                        <option value="admission-number">Admission No.</option>
-                        <option value="name">Name</option>
+                        <option value="admission-number">Admission No</option>
+                        <option value="name">Student Name</option>
                     </select>
                 </div>
             </div>
@@ -139,7 +139,7 @@
             <table class="w-full">
                 <thead class="bg-zinc-100">
                     <tr>
-                        <th>Application No</th>
+                        <th>Admission No</th>
                         <th>Student Name</th>
                         <th>Class</th>
                         <th>Division</th>
@@ -152,15 +152,15 @@
                 </thead>
                 <tbody class="divide-y divide-zinc-200">
                     <template class="row-temp">
-                        <tr>
-                            <td class="application-no"></td>
-                            <td class="name"></td>
-                            <td class="class"></td>
-                            <td class="division"></td>
-                            <td class="roll-no"></td>
-                            <td class="gender"></td>
-                            <td class="mobile"></td>
-                            <td class="fee-status"></td>
+                        <tr class="record">
+                            <td data-name="admissionNo"></td>
+                            <td data-name="name"></td>
+                            <td data-name="class"></td>
+                            <td data-name="division"></td>
+                            <td data-name="rollNumber"></td>
+                            <td data-name="gender"></td>
+                            <td data-name="mobile"></td>
+                            <td data-name="feeStatus"></td>
                             <td class="action flex items-center gap-2">
                                 <button
                                     class="edit-btn w-6 h-6 cursor-pointer active:scale-93 flex items-center justify-center rounded-md transition-ease text-neutral-600 hover:text-neutral-700 hover:bg-neutral-200 transform-gpu will-change-transform">
