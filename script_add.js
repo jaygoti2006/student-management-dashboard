@@ -5,6 +5,12 @@ const curr = {
     page: 1
 };
 
+const date = new Date();
+document.querySelector("input[name='admissionDate']").setAttribute("max", date.toISOString().split('T')[0]);
+
+date.setFullYear(date.getFullYear() - 5);
+document.querySelector("input[name='dateOfBirth']").setAttribute("max", date.toISOString().split('T')[0]);
+
 const sectionContainer = document.querySelector(".section-container");
 const progress = document.querySelector(".progress");
 const progressFill = document.querySelector(".progress-fill");
@@ -31,7 +37,10 @@ sections.forEach((el) => {
     sectionFields.push(t);
 });
 
+const errorContainerTemp = document.querySelector("#error-template").content.firstElementChild.cloneNode(true);
+
 const session = (sessionStorage.getItem("student") === null) ? null : JSON.parse(sessionStorage.getItem("student"));
+
 
 
 function createOption(value, content) {
@@ -168,48 +177,58 @@ getCountries().then((data) => {
     }
 });
 
+function showError(el, message) {
+    if (el.closest("div").querySelector(".error")) {
+        el.closest("div").querySelector(".error-message").textContent = message;
+    } else {
+        const t = errorContainerTemp.cloneNode(true);
+        t.querySelector(".error-message").textContent = message;
+        el.closest("div").append(t);
+    }
+}
+
 function validate(el) {
     if (el.classList.contains("required") && el.value.trim() === "") {
-        el.closest("div").querySelector(".error").classList.remove("hidden");
-        el.closest("div").querySelector(".error-message").textContent = "Field can't be empty!";
+        showError(el, "Field can't be empty!");
         return false;
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("email")) {
         if (!/^.+\@.+\..+$/.test(el.value) && el.value !== "") {
-            el.closest("div").querySelector(".error").classList.remove("hidden");
-            el.closest("div").querySelector(".error-message").textContent = "Email not valid!";
+            showError(el, "Email not valid!");
             return false;
         }
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("mobile")) {
         if (!/^\d{10}$/.test(el.value) && el.value !== "") {
-            el.closest("div").querySelector(".error").classList.remove("hidden");
-            el.closest("div").querySelector(".error-message").textContent = "Mobile not valid!";
+            showError(el, "Mobile not valid!");
             return false;
         }
     }
 
     if (el.tagName === "INPUT" && el.classList.contains("pincode")) {
         if (!/^\d{6}$/.test(el.value) && el.value !== "") {
-            el.closest("div").querySelector(".error").classList.remove("hidden");
-            el.closest("div").querySelector(".error-message").textContent = "Pincode not valid!";
+            showError(el, "Pincode not valid!");
             return false;
         }
     }
 
     if (el.tagName === "INPUT" && (el.classList.contains("income") || el.classList.contains("fees") || el.classList.contains("doc-number") || el.classList.contains("admission-number"))) {
         if (!/^\d*$/.test(el.value) && el.value !== "") {
-            el.closest("div").querySelector(".error").classList.remove("hidden");
             let message;
-            if(el.classList.contains("income")) message="Income not valid!";
-            else if(el.classList.contains("fees")) message="Fees not valid!";
-            else if(el.classList.contains("doc-number")) message="Document Number not valid!";
-            else message="Admission No not valid!";
-            el.closest("div").querySelector(".error-message").textContent = message;
+            if (el.classList.contains("income")) message = "Income not valid!";
+            else if (el.classList.contains("fees")) message = "Fees not valid!";
+            else if (el.classList.contains("doc-number")) message = "Document Number not valid!";
+            else message = "Admission No not valid!";
+            showError(el, message);
             return false;
         }
+    }
+
+    if (el.tagName === "INPUT" && el.getAttribute("name") === "admissionDate" && !el.checkValidity()) {
+        showError(el, "Enter valid date that agrees with DOB!");
+        return false;
     }
 
     return true;
@@ -227,8 +246,7 @@ function validateAll() {
         for (let [key, value] of t) if (key != "guardian" && value > 1) ok = false;
         if (!ok) {
             sections[curr.page - 1].querySelectorAll(".primary").forEach((el) => {
-                el.closest("div").querySelector(".error").classList.remove("hidden");
-                el.closest("div").querySelector(".error-message").textContent = "Repeated entries!";
+                showError(el, "Repeated entries!");
             });
         }
     } else if (curr.page === 2) {
@@ -241,8 +259,7 @@ function validateAll() {
             permAddress.forEach((el) => {
                 if (el.value.trim() === "") {
                     ok2 = false;
-                    el.closest("div").querySelector(".error").classList.remove("hidden");
-                    el.closest("div").querySelector(".error-message").textContent = "Feild can't be empty!";
+                    showError(el, "Feild can't be empty!");
                 }
             });
             if (!ok2) ok = false;
@@ -280,6 +297,8 @@ function createStudent() {
         el.querySelectorAll("input,select").forEach((el1) => t[el1.name] = el1.value);
         documents.push(t);
     });
+    student["admittedToAnother"] = 0;
+    if (sections[5].querySelector("[name='admittedToAnother']").checked) student["admittedToAnother"] = 1;
 
     student.personalInfo = personalInfo;
     student.academicInfo = academicInfo;
@@ -314,11 +333,25 @@ function addRecordSession() {
     sessionStorage.setItem("student", JSON.stringify(createStudent()));
 }
 
+function updateFromDOB() {
+    const d = document.querySelector("[name='dateOfBirth']");
+    if (d.checkValidity() && d.value !== "") {
+        const t = (new Date()).getFullYear() - (new Date(d.value)).getFullYear() - 4;
+        sections[2].querySelector("[name='class']").querySelectorAll("option[value]:not([value=''])").forEach((child) => { child.remove() });
+        const date = new Date(d.value);
+        date.setFullYear(date.getFullYear() + 5);
+
+        sections[2].querySelector("[name='admissionDate']").setAttribute("min", date.toISOString().split('T')[0]);
+        for (let i = 1; i <= Math.min(12,t); i++) sections[2].querySelector("[name='class']").append(createOption(String(i), "Class " + i));
+    }
+}
+
 function loadFromSession() {
     if (session !== null) {
         for (let el of sectionFields[0]) {
             if (el.getAttribute("type") !== "file") el.value = session.personalInfo[el.getAttribute("name")];
         }
+        updateFromDOB();
         for (let el of currAddress) {
             if (el.tagName !== "SELECT") el.value = session.address.currentAddress[el.getAttribute("name")];
         }
@@ -328,26 +361,54 @@ function loadFromSession() {
         for (let el of sectionFields[2]) {
             el.value = session.academicInfo[el.getAttribute("name")];
         }
-        for (let el of session.parents) {
-            const t = formTemps[3].cloneNode(true);
-            t.querySelectorAll("input,select").forEach((el1) => {
-                el1.value = el[el1.getAttribute("name")];
-            });
-            sections[3].querySelector(".form-container").append(t);
-        }
-        for (let el of session.courses) {
-            const t = formTemps[4].cloneNode(true);
-            t.querySelectorAll("input,select").forEach((el1) => {
-                el1.value = el[el1.getAttribute("name")];
-            });
-            sections[4].querySelector(".form-container").append(t);
-        }
-        for (let el of session.documents) {
-            const t = formTemps[5].cloneNode(true);
-            t.querySelectorAll("input,select").forEach((el1) => {
-                el1.value = el[el1.getAttribute("name")];
-            });
-            sections[5].querySelector(".form-container").append(t);
+        session.parents.forEach((el, idx) => {
+            if (idx !== 0) {
+                const t = formTemps[3].cloneNode(true);
+                t.querySelectorAll("input,select").forEach((el1) => {
+                    el1.value = el[el1.getAttribute("name")];
+                });
+
+                sections[3].querySelector(".form-container").append(t);
+            } else {
+                sections[3].querySelector(".form-container").firstElementChild.querySelectorAll("input,select").forEach((el1) => {
+                    el1.value = el[el1.getAttribute("name")];
+                });
+            }
+        });
+        session.courses.forEach((el, idx) => {
+            if (idx !== 0) {
+                const t = formTemps[4].cloneNode(true);
+                t.querySelectorAll("input,select").forEach((el1) => {
+                    el1.value = el[el1.getAttribute("name")];
+                });
+                sections[4].querySelector(".form-container").append(t);
+            } else {
+                sections[4].querySelector(".form-container").firstElementChild.querySelectorAll("input,select").forEach((el1) => {
+                    el1.value = el[el1.getAttribute("name")];
+                });
+            }
+        });
+        session.documents.forEach((el, idx) => {
+            if (idx !== 0) {
+                const t = formTemps[5].cloneNode(true);
+                if(el.documentName==="leaving-certificate") {
+                    t.setAttribute("data-lc","yes");
+                    t.querySelector("[name='documentName']").replaceChildren();
+                    t.querySelector("[name='documentName']").append(createOption("leaving-certificate","Leaving Certificate"));
+                }
+                t.querySelectorAll("input,select").forEach((el1) => {
+                    el1.value = el[el1.getAttribute("name")];
+                });
+                sections[5].querySelector(".form-container").append(t);
+            } else {
+                sections[5].querySelector(".form-container").firstElementChild.querySelectorAll("input,select").forEach((el1) => {
+                    el1.value = el[el1.getAttribute("name")];
+                });
+            }
+        });
+        if(session.admittedToAnother) {
+            sections[5].querySelector("[name='admittedToAnother']").setAttribute("checked","");
+            sections[5].querySelector("[data-lc]").querySelector(".del-btn").remove();
         }
     }
 }
@@ -356,7 +417,7 @@ loadFromSession();
 
 
 sectionContainer.addEventListener("input", function (e) {
-    e.target.closest("div").querySelector(".error").classList.add("hidden");
+    if (e.target.closest("div").querySelector(".error")) e.target.closest("div").querySelector(".error").remove();
     if (e.target.closest(".country")) {
         const t = e.target.closest(".country");
         if (e.target.closest(".curr")) updateStates(currAddress[2], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), false);
@@ -365,15 +426,15 @@ sectionContainer.addEventListener("input", function (e) {
         const t = e.target.closest(".state");
         if (e.target.closest(".curr")) updateCities(currAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"), false);
         else updateCities(permAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"), false);
-    } else if(e.target.closest(".profile-photo")) {
-        const file=e.target.closest(".profile-photo").files[0];
-        if(file.size > 10*1024) {
-            e.target.closest(".profile-photo").value="";
-            const t=e.target.closest(".profile-photo").closest("div");
+    } else if (e.target.closest(".profile-photo")) {
+        const file = e.target.closest(".profile-photo").files[0];
+        if (file.size > 10 * 1024) {
+            e.target.closest(".profile-photo").value = "";
+            const t = e.target.closest(".profile-photo").closest("div");
             t.querySelector(".error").classList.remove("hidden");
             t.querySelector(".error-message").textContent = "File size should be less than 10KB!";
         }
-    }
+    } else if (e.target.closest("[name='dateOfBirth']")) updateFromDOB();
 });
 
 sectionContainer.addEventListener("click", function (e) {
@@ -409,7 +470,16 @@ sectionContainer.addEventListener("click", function (e) {
         }
     } else if (e.target.closest(".add-btn")) sections[curr.page - 1].querySelector(".form-container").append(formTemps[curr.page - 1].cloneNode(true));
     else if (e.target.closest(".del-btn")) e.target.closest("form").remove();
-    else if (e.target.closest(".submit")) {
+    else if (e.target.closest("[name='admittedToAnother']")) {
+        if (e.target.closest("[name='admittedToAnother']").checked) {
+            const t = formTemps[5].cloneNode(true);
+            t.querySelector(".del-btn").remove();
+            t.querySelector("[name='documentName']").replaceChildren();
+            t.querySelector("[name='documentName']").append(createOption("leaving-certificate", "Leaving Certificate"));
+            t.setAttribute("data-lc","yes");
+            sections[5].querySelector(".form-container").append(t);
+        }else sections[5].querySelector("[data-lc]").remove();
+    } else if (e.target.closest(".submit")) {
         if (validateAll()) {
             if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null) addRecordLocal(document.querySelector(".admission-number").value);
             else alert("admission number already exist");

@@ -42,6 +42,7 @@
     input[type="text"], input[type="email"], select, input[type="date"]{
         @apply focus:outline-none px-2 py-1 transition-all border border-neutral-400 rounded-md focus:ring-2 focus:ring-neutral-300 bg-neutral-100;
     }
+    
     input[type="file"]{
         @apply focus:outline-none transition-all border border-neutral-400 rounded-md focus:ring-2 focus:ring-neutral-300 bg-neutral-100;
     }

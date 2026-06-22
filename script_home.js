@@ -18,7 +18,7 @@ const curr = {
     page: 1
 }
 
-const keys = Object.keys(localStorage);
+const keys = Object.keys(localStorage).filter((el)=>el.startsWith("addno"));
 const students = [];
 for (const key of keys) {
     const t = JSON.parse(localStorage[key]);
@@ -43,7 +43,7 @@ document.querySelector(".current-max").textContent = Math.min(keys.length, curr.
 const data = [];
 
 function valid(s) {
-    if (curr.search.trim() !== "" && !s.name.toLowerCase().startsWith(curr.search.trim().toLowerCase()) && !s.mobile.startsWith(curr.search.trim())) return false;
+    if (curr.search.trim() !== "" && !s.admissionNo.includes(curr.search.trim().toLowerCase()) && !s.name.toLowerCase().includes(curr.search.trim().toLowerCase()) && !s.mobile.includes(curr.search.trim())) return false;
     if (curr.gender !== "all" && s.gender !== curr.gender) return false;
     if (curr.class !== "all" && s.class !== curr.class) return false;
     if (curr.feeStatus !== "all" && s.feeStatus !== curr.feeStatus) return false;
@@ -121,7 +121,7 @@ menu.addEventListener("click", function (e) {
         curr.page--;
         loadData();
     }else if(e.target.closest(".next")){
-        if((curr.page-1)*curr.entries<data.length) {
+        if(curr.page*curr.entries<data.length) {
             curr.page++;
             loadData();
         }
@@ -160,4 +160,10 @@ rowContainer.addEventListener("click",function(e){
         }
         total.textContent=data.length;
     }
+});
+
+searchInput.addEventListener("input",function(e){
+    curr.search=searchInput.value;
+    updateData();
+    loadData();
 });
