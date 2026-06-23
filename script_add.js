@@ -359,15 +359,11 @@ function addRecordLocal(addno) {
         reader.addEventListener("load", function (e) {
             student.personalInfo.profilePhoto = reader.result;
             localStorage.setItem("addno" + addno, JSON.stringify(student));
-            alert("added successfully");
         });
 
         reader.readAsDataURL(sections[0].querySelector("input[name='profilePhoto']").files[0]);
     }
-    else {
-        localStorage.setItem("addno" + addno, JSON.stringify(student));
-        alert("added successfully");
-    }
+    else localStorage.setItem("addno" + addno, JSON.stringify(student));
 }
 
 function addRecordSession() {
@@ -530,7 +526,10 @@ sectionContainer.addEventListener("click", function (e) {
         } else sections[5].querySelector("[data-lc]").remove();
     } else if (e.target.closest(".submit")) {
         if (validateAll()) {
-            if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null) addRecordLocal(document.querySelector(".admission-number").value);
+            if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null) {
+                addRecordLocal(document.querySelector(".admission-number").value);
+                window.open("/index.html","_self");
+            }
             else alert("admission number already exist");
         }
     }
