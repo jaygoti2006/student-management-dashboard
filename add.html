@@ -52,14 +52,14 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1"><span>First Name<span
                                     class="text-red-600">*</span></span><input name="firstName"
-                                placeholder="Enter First Name" type="text" class="required" />
+                                placeholder="Enter First Name" type="text" data-validation-type="required name"/>
 
 
                         </label>
                     </div>
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1"><span>Middle Name</span><input name="middleName"
-                                placeholder="Enter Middle Name" type="text" />
+                                placeholder="Enter Middle Name" type="text" data-validation-type="name"/>
 
 
 
@@ -69,7 +69,7 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1"><span>Last Name<span
                                     class="text-red-600">*</span></span><input name="lastName"
-                                placeholder="Enter Last Name" class="required" type="text" />
+                                placeholder="Enter Last Name" data-validation-type="required name" type="text" />
 
 
                         </label>
@@ -79,7 +79,7 @@
                 <div class="mb-5">
                     <label class="flex flex-col gap-1">
                         <span>Email<span class="text-red-600">*</span></span>
-                        <input name="email" class="email required" placeholder="Enter Email" type="email" />
+                        <input name="email" placeholder="Enter Email" type="email" data-validation-type="required email"/>
                         <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
                             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
                                 viewBox="0 0 2048 2048">
@@ -94,7 +94,7 @@
                 <div class="flex gap-5 mb-5">
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1"><span>Mobile<span class="text-red-600">*</span></span><input
-                                inputmode="numeric" pattern="[0-9]*" placeholder="Enter Mobile" class="required mobile"
+                                inputmode="numeric" pattern="[0-9]*" placeholder="Enter Mobile" data-validation-type="required mobile"
                                 type="text" name="mobile" maxlength="10"/>
 
                         </label>
@@ -102,7 +102,7 @@
                     </div>
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1"><span>Alternate Mobile</span><input inputmode="numeric"
-                                pattern="[0-9]*" placeholder="Enter Alternate Mobile" type="text" class="mobile"
+                                pattern="[0-9]*" placeholder="Enter Alternate Mobile" type="text" data-validation-type="mobile"
                                 name="alternateMobile" maxlength="10"/>
 
                         </label>
@@ -113,7 +113,7 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 gender"><span>Gender<span
                                     class="text-red-600">*</span></span><select name="gender"
-                                class="cursor-pointer required">
+                                class="cursor-pointer" data-validation-type="required">
                                 <option value="">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -125,7 +125,7 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 dob"><span>Date of Birth<span
                                     class="text-red-600">*</span></span><input name="dateOfBirth"
-                                class="cursor-pointer required" type="date"/>
+                                class="cursor-pointer" type="date" data-validation-type="required date"/>
 
                         </label>
 
@@ -175,7 +175,7 @@
                     <div class="mb-5">
                         <label class="flex flex-col gap-1">
                             <span>Address<span class="text-red-600">*</span></span>
-                            <input name="address" class="address required" placeholder="Enter Address" type="text" />
+                            <input name="address" class="address" placeholder="Enter Address" type="text" data-validation-type="required"/>
 
 
 
@@ -185,7 +185,7 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1"><span>Country<span
                                         class="text-red-600">*</span></span><select name="country"
-                                    class="cursor-pointer country required">
+                                    class="cursor-pointer country"  data-validation-type="required">
                                     <option value="">Select a Country</option>
                                 </select>
 
@@ -195,7 +195,7 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1"><span>State<span
                                         class="text-red-600">*</span></span><select name="state"
-                                    class="cursor-pointer state required">
+                                    class="cursor-pointer state" data-validation-type="required">
                                     <option value="">Select a State</option>
                                 </select>
 
@@ -205,7 +205,7 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1"><span>City<span
                                         class="text-red-600">*</span></span><select name="city"
-                                    class="cursor-pointer city required">
+                                    class="cursor-pointer city"  data-validation-type="required">
                                     <option value="">Select a City</option>
                                 </select>
 
@@ -216,7 +216,7 @@
                     <div class="mb-5">
                         <label class="block mb-1 text-zinc-700 text-[14px]">Pin code<span class="text-red-600">*</span>
                         </label>
-                        <input name="pincode" class="pincode mb-1 required" placeholder="Enter Pin code" type="text" maxlength="6"/>
+                        <input name="pincode" class="mb-1 pincode" placeholder="Enter Pin code" type="text" maxlength="6"  data-validation-type="required pincode"/>
                         <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
                             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
                                 viewBox="0 0 2048 2048">
@@ -270,7 +270,7 @@
                     </div>
                     <div class="mb-5">
                         <label class="block mb-1 text-zinc-700 text-[14px]">Pin code</label>
-                        <input name="pincode" class="pincode mb-1" placeholder="Enter Pin code" type="text" maxlength="6"/>
+                        <input name="pincode" class="mb-1 pincode" placeholder="Enter Pin code" type="text" maxlength="6"  data-validation-type="pincode"/>
                         <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
                             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
                                 viewBox="0 0 2048 2048">
@@ -310,7 +310,7 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1"><span>Admission Number<span
                                     class="text-red-600">*</span></span><input name="admissionNo"
-                                placeholder="Enter Admission Number" type="text" class="required admission-number" />
+                                placeholder="Enter Admission Number" type="text" class="admission-number"  data-validation-type="required number"/>
 
 
 
@@ -320,7 +320,7 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 admission-date"><span>Admission Date<span
                                     class="text-red-600">*</span></span><input name="admissionDate"
-                                class="cursor-pointer required" type="date" />
+                                class="cursor-pointer" type="date"  data-validation-type="required date"/>
 
 
 
@@ -330,7 +330,7 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 academic-year"><span>Academic Year<span
                                     class="text-red-600">*</span></span><select name="academicYear"
-                                class="cursor-pointer required">
+                                class="cursor-pointer"  data-validation-type="required">
                                 <option value="">Select Academic Year</option>
                                 <option value="2026-27">2026-27</option>
                             </select>
@@ -345,7 +345,7 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 class-field"><span>Class<span
                                     class="text-red-600">*</span></span><select name="class"
-                                class="cursor-pointer required">
+                                class="cursor-pointer" data-validation-type="required">
                                 <option value="">Select Class</option>
                             </select>
 
@@ -357,7 +357,7 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 division"><span>Division<span
                                     class="text-red-600">*</span></span><select name="division"
-                                class="cursor-pointer required">
+                                class="cursor-pointer"  data-validation-type="required">
                                 <option value="">Select Division</option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
@@ -373,7 +373,8 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1"><span>Fee Status<span
                                     class="text-red-600">*</span></span><select name="feeStatus"
-                                class="cursor-pointer required">
+                                class="cursor-pointer"  data-validation-type="required">
+                                <option value="">Select Fee Status</option>
                                 <option value="pending">Pending</option>
                                 <option value="completed">Completed</option>
                             </select>
@@ -384,9 +385,9 @@
 
                     </div>
                     <div class="flex-1 shrink min-w-0">
-                        <label class="flex flex-col gap-1 roll-number"><span>Roll Number<span
-                                    class="text-red-600">*</span></span><input name="rollNumber" inputmode="numeric"
-                                pattern="[0-9]*" placeholder="Enter Roll Number" class="required" type="text" />
+                        <label class="flex flex-col gap-1"><span>Roll Number<span
+                                    class="text-red-600">*</span></span><input name="rollNumber" class="roll-number" inputmode="numeric"
+                                pattern="[0-9]*" placeholder="Enter Roll Number" type="text" data-validation-type="required number"/>
 
 
 
@@ -437,7 +438,7 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 relation"><span>Relation<span
                                         class="text-red-600">*</span></span><select name="relation"
-                                    class="cursor-pointer primary required">
+                                    class="cursor-pointer primary"  data-validation-type="required">
                                     <option value="">Select Relation</option>
                                     <option value="father">Father</option>
                                     <option value="mother">Mother</option>
@@ -449,9 +450,9 @@
 
                         </div>
                         <div class="flex-1 shrink min-w-0">
-                            <label class="flex flex-col gap-1 name"><span>Name<span
+                            <label class="flex flex-col gap-1"><span>Name<span
                                         class="text-red-600">*</span></span><input name="name" placeholder="Enter Name"
-                                    class="required" type="text" />
+                                    data-validation-type="required name" type="text" />
 
 
                             </label>
@@ -462,17 +463,13 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1"><span>Mobile<span
                                         class="text-red-600">*</span></span><input name="mobile" inputmode="numeric"
-                                    pattern="[0-9]*" placeholder="Enter Mobile" class="mobile required" type="text" maxlength="10"/>
-
-
+                                    pattern="[0-9]*" placeholder="Enter Mobile"  data-validation-type="required mobile" type="text" maxlength="10"/>
                             </label>
 
                         </div>
                         <div class="flex-1 shrink min-w-0">
-                            <label class="flex flex-col gap-1"><span>Email</span><input name="email" class="email"
+                            <label class="flex flex-col gap-1"><span>Email</span><input name="email" data-validation-type="email"
                                     placeholder="Enter Email" type="email" />
-
-
                             </label>
 
                         </div>
@@ -481,19 +478,14 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 occupation"><span>Occupation</span><input
                                     name="occupation" placeholder="Enter Occupation" type="text" />
-
-
                             </label>
 
                         </div>
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 annual-income"><span>Annual Income(in Rs)</span><input
                                     name="annualIncome" inputmode="numeric" placeholder="Enter Annual Income"
-                                    type="text" class="income" />
-
-
+                                    type="text" class="income"  data-validation-type="number" />
                             </label>
-
                         </div>
                     </div>
                     <hr class="text-neutral-500" />
@@ -506,7 +498,7 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 relation"><span>Relation<span
                                         class="text-red-600">*</span></span><select name="relation"
-                                    class="cursor-pointer primary required">
+                                    class="cursor-pointer primary"  data-validation-type="required">
                                     <option value="">Select Relation</option>
                                     <option value="father">Father</option>
                                     <option value="mother">Mother</option>
@@ -518,9 +510,9 @@
 
                         </div>
                         <div class="flex-1 shrink min-w-0">
-                            <label class="flex flex-col gap-1 name"><span>Name<span
+                            <label class="flex flex-col gap-1"><span>Name<span
                                         class="text-red-600">*</span></span><input name="name" placeholder="Enter Name"
-                                    class="required" type="text" />
+                                     data-validation-type="required name" type="text" />
 
 
                             </label>
@@ -531,15 +523,15 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1"><span>Mobile<span
                                         class="text-red-600">*</span></span><input name="mobile" inputmode="numeric"
-                                    pattern="[0-9]*" placeholder="Enter Mobile" class="mobile required" type="text" maxlength="10"/>
+                                    pattern="[0-9]*" placeholder="Enter Mobile" data-validation-type="required mobile" type="text" maxlength="10"/>
 
 
                             </label>
 
                         </div>
                         <div class="flex-1 shrink min-w-0">
-                            <label class="flex flex-col gap-1"><span>Email</span><input name="email" class="email"
-                                    placeholder="Enter Email" type="email" />
+                            <label class="flex flex-col gap-1"><span>Email</span><input name="email"
+                                    placeholder="Enter Email" type="email" data-validation-type="email"/>
 
 
                             </label>
@@ -558,7 +550,7 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 annual-income"><span>Annual Income(in Rs)</span><input
                                     name="annualIncome" inputmode="numeric" placeholder="Enter Annual Income"
-                                    type="text" class="income" />
+                                    type="text" class="income"  data-validation-type="number" />
 
 
                             </label>
@@ -626,7 +618,7 @@
                             <label class="flex flex-col gap-1 course-name">
                                 <span>Course Name<span class="text-red-600">*</span></span>
                                 <input name="courseName" type="text" placeholder="Enter Course Name"
-                                    class="primary required">
+                                    class="primary"  data-validation-type="required">
 
 
 
@@ -634,9 +626,9 @@
                         </div>
 
                         <div class="flex-1 shrink min-w-0">
-                            <label class="flex flex-col gap-1 faculty-name">
+                            <label class="flex flex-col gap-1">
                                 <span>Faculty Name<span class="text-red-600">*</span></span>
-                                <input name="faculty" type="text" placeholder="Enter Faculty Name" class="required">
+                                <input name="faculty" type="text" placeholder="Enter Faculty Name"  data-validation-type="required name">
 
 
 
@@ -649,17 +641,14 @@
                             <label class="flex flex-col gap-1 course-fees">
                                 <span>Course Fees (₹)<span class="text-red-600">*</span></span>
                                 <input name="fees" type="text" inputmode="numeric" placeholder="Enter Course Fees"
-                                    class="required fees">
-
-
-
+                                    class="fees" data-validation-type="required number">
                             </label>
                         </div>
 
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 duration">
                                 <span>Duration<span class="text-red-600">*</span></span>
-                                <select name="duration" class="cursor-pointer required">
+                                <select name="duration" class="cursor-pointer"  data-validation-type="required">
                                     <option value="">Select Duration</option>
                                     <option value="1-month">1 Month</option>
                                     <option value="3-months">3 Months</option>
@@ -669,9 +658,6 @@
                                     <option value="3-years">3 Years</option>
                                     <option value="4-years">4 Years</option>
                                 </select>
-
-
-
                             </label>
                         </div>
                     </div>
@@ -687,7 +673,7 @@
                             <label class="flex flex-col gap-1 course-name">
                                 <span>Course Name<span class="text-red-600">*</span></span>
                                 <input name="courseName" type="text" placeholder="Enter Course Name"
-                                    class="primary required">
+                                    class="primary"  data-validation-type="required">
 
 
 
@@ -697,10 +683,7 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 faculty-name">
                                 <span>Faculty Name<span class="text-red-600">*</span></span>
-                                <input name="faculty" type="text" placeholder="Enter Faculty Name" class="required">
-
-
-
+                                <input name="faculty" type="text" placeholder="Enter Faculty Name"  data-validation-type="required name">
                             </label>
                         </div>
                     </div>
@@ -710,17 +693,14 @@
                             <label class="flex flex-col gap-1 course-fees">
                                 <span>Course Fees (₹)<span class="text-red-600">*</span></span>
                                 <input name="fees" type="text" inputmode="numeric" placeholder="Enter Course Fees"
-                                    class="required fees">
-
-
-
+                                    class="fees"  data-validation-type="required number">
                             </label>
                         </div>
 
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 duration">
                                 <span>Duration<span class="text-red-600">*</span></span>
-                                <select name="duration" class="cursor-pointer required">
+                                <select name="duration" class="cursor-pointer"  data-validation-type="required">
                                     <option value="">Select Duration</option>
                                     <option value="1-month">1 Month</option>
                                     <option value="3-months">3 Months</option>
@@ -730,9 +710,6 @@
                                     <option value="3-years">3 Years</option>
                                     <option value="4-years">4 Years</option>
                                 </select>
-
-
-
                             </label>
                         </div>
                     </div>
@@ -799,7 +776,7 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 document-type">
                                 <span>Document Type<span class="text-red-600">*</span></span>
-                                <select name="documentName" class="cursor-pointer required primary">
+                                <select name="documentName" class="cursor-pointer primary" data-validation-type="required">
                                     <option value="">Select Document Type</option>
                                     <option value="birth-certificate">Birth Certificate</option>
                                 </select>
@@ -812,8 +789,8 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 document-number">
                                 <span>Document Number<span class="text-red-600">*</span></span>
-                                <input name="documentNumber" class="doc-number required" type="text"
-                                    placeholder="Enter Document Number" class="required">
+                                <input name="documentNumber" class="doc-number" type="text"
+                                    placeholder="Enter Document Number"  data-validation-type="required number">
 
 
 
@@ -831,7 +808,7 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 document-type">
                                 <span>Document Type<span class="text-red-600">*</span></span>
-                                <select name="documentName" class="cursor-pointer required primary">
+                                <select name="documentName" class="cursor-pointer primary"  data-validation-type="required">
                                     <option value="aadhar-card">Aadhar Card</option>
                                 </select>
 
@@ -843,8 +820,8 @@
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 document-number">
                                 <span>Document Number<span class="text-red-600">*</span></span>
-                                <input name="documentNumber" class="doc-number required" type="text"
-                                    placeholder="Enter Document Number" class="required">
+                                <input name="documentNumber" class="doc-number" type="text"
+                                    placeholder="Enter Document Number"  data-validation-type="required number">
 
 
 

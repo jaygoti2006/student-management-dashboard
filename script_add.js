@@ -187,50 +187,74 @@ function showError(el, message) {
     }
 }
 
-function validate(el) {
-    if (el.classList.contains("required") && el.value.trim() === "") {
-        showError(el, "Field can't be empty!");
-        return false;
-    }
-
-    if (el.tagName === "INPUT" && el.classList.contains("email")) {
+const validators = {
+    required: (el) => {
+        if (el.value.trim() === "") {
+            showError(el, "Field can't be empty!");
+            return false;
+        }
+        return true;
+    },
+    name: (el) => {
+        if (!/^[A-Za-z ]*$/.test(el.value)) {
+            showError(el, "Invalid Name!");
+            return false;
+        }
+        return true;
+    },
+    email: (el) => {
         if (!/^.+\@.+\..+$/.test(el.value) && el.value !== "") {
-            showError(el, "Email not valid!");
+            showError(el, "Invalid Email!");
             return false;
         }
-    }
-
-    if (el.tagName === "INPUT" && el.classList.contains("mobile")) {
+        return true;
+    },
+    mobile: (el) => {
         if (!/^\d{10}$/.test(el.value) && el.value !== "") {
-            showError(el, "Mobile not valid!");
+            showError(el, "Invalid Mobile!");
             return false;
         }
-    }
-
-    if (el.tagName === "INPUT" && el.classList.contains("pincode")) {
+        return true;
+    },
+    pincode: (el) => {
         if (!/^\d{6}$/.test(el.value) && el.value !== "") {
-            showError(el, "Pincode not valid!");
+            showError(el, "Invalid Pincode!");
             return false;
         }
-    }
-
-    if (el.tagName === "INPUT" && (el.classList.contains("income") || el.classList.contains("fees") || el.classList.contains("doc-number") || el.classList.contains("admission-number"))) {
+        return true;
+    },
+    number: (el) => {
         if (!/^\d*$/.test(el.value) && el.value !== "") {
             let message;
-            if (el.classList.contains("income")) message = "Income not valid!";
-            else if (el.classList.contains("fees")) message = "Fees not valid!";
-            else if (el.classList.contains("doc-number")) message = "Document Number not valid!";
-            else message = "Admission No not valid!";
+            if (el.classList.contains("income")) message = "Invalid Income!";
+            else if (el.classList.contains("fees")) message = "Invalid Fees!";
+            else if (el.classList.contains("doc-number")) message = "Invalid Document Number!";
+            else if (el.classList.contains("roll-number")) message = "Invalid Roll Number!";
+            else message = "Invalid Admission No!";
             showError(el, message);
             return false;
         }
+        return true;
+    },
+    date: (el) => {
+        if (!el.checkValidity()) {
+            let message;
+            if (el.name === "admissionDate") message = "Enter valid date that agrees with DOB!";
+            else if (el.name === "dateOfBirth") message = "Invalid DOB!";
+            showError(el, message);
+            return false;
+        }
+        return true;
     }
+};
 
-    if (el.tagName === "INPUT" && el.getAttribute("name") === "admissionDate" && !el.checkValidity()) {
-        showError(el, "Enter valid date that agrees with DOB!");
-        return false;
+function validate(el) {
+    if (el.getAttribute("data-validation-type")) {
+        const types = el.getAttribute("data-validation-type").split(" ");
+        for (const type of types) {
+            if (!validators[type](el)) return false;
+        }
     }
-
     return true;
 }
 
@@ -342,7 +366,7 @@ function updateFromDOB() {
         date.setFullYear(date.getFullYear() + 5);
 
         sections[2].querySelector("[name='admissionDate']").setAttribute("min", date.toISOString().split('T')[0]);
-        for (let i = 1; i <= Math.min(12,t); i++) sections[2].querySelector("[name='class']").append(createOption(String(i), "Class " + i));
+        for (let i = 1; i <= Math.min(12, t); i++) sections[2].querySelector("[name='class']").append(createOption(String(i), "Class " + i));
     }
 }
 
@@ -391,10 +415,10 @@ function loadFromSession() {
         session.documents.forEach((el, idx) => {
             if (idx !== 0) {
                 const t = formTemps[5].cloneNode(true);
-                if(el.documentName==="leaving-certificate") {
-                    t.setAttribute("data-lc","yes");
+                if (el.documentName === "leaving-certificate") {
+                    t.setAttribute("data-lc", "yes");
                     t.querySelector("[name='documentName']").replaceChildren();
-                    t.querySelector("[name='documentName']").append(createOption("leaving-certificate","Leaving Certificate"));
+                    t.querySelector("[name='documentName']").append(createOption("leaving-certificate", "Leaving Certificate"));
                 }
                 t.querySelectorAll("input,select").forEach((el1) => {
                     el1.value = el[el1.getAttribute("name")];
@@ -406,8 +430,8 @@ function loadFromSession() {
                 });
             }
         });
-        if(session.admittedToAnother) {
-            sections[5].querySelector("[name='admittedToAnother']").setAttribute("checked","");
+        if (session.admittedToAnother) {
+            sections[5].querySelector("[name='admittedToAnother']").setAttribute("checked", "");
             sections[5].querySelector("[data-lc]").querySelector(".del-btn").remove();
         }
     }
@@ -415,6 +439,10 @@ function loadFromSession() {
 loadFromSession();
 
 
+
+sectionContainer.addEventListener("focusout", function (e) {
+    validate(e.target);
+});
 
 sectionContainer.addEventListener("input", function (e) {
     if (e.target.closest("div").querySelector(".error")) e.target.closest("div").querySelector(".error").remove();
@@ -476,13 +504,22 @@ sectionContainer.addEventListener("click", function (e) {
             t.querySelector(".del-btn").remove();
             t.querySelector("[name='documentName']").replaceChildren();
             t.querySelector("[name='documentName']").append(createOption("leaving-certificate", "Leaving Certificate"));
-            t.setAttribute("data-lc","yes");
+            t.setAttribute("data-lc", "yes");
             sections[5].querySelector(".form-container").append(t);
-        }else sections[5].querySelector("[data-lc]").remove();
+        } else sections[5].querySelector("[data-lc]").remove();
     } else if (e.target.closest(".submit")) {
         if (validateAll()) {
             if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null) addRecordLocal(document.querySelector(".admission-number").value);
             else alert("admission number already exist");
+        }
+    }
+});
+
+sectionContainer.addEventListener("keydown", function (e) {
+    if (!("0".charCodeAt(0) <= e.key.charCodeAt(0) && e.key.charCodeAt(0) <= "9".charCodeAt(0)) && e.key!="Backspace") {
+        if (e.target.getAttribute("data-validation-type")) {
+            const types = e.target.getAttribute("data-validation-type").split(" ");
+            if (types.includes("number") || types.includes("mobile")) e.preventDefault();
         }
     }
 });
