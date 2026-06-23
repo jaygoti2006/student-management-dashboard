@@ -262,6 +262,13 @@ const validators = {
             return false;
         }
         return true;
+    },
+    admissionNumber: (el) => {
+        if(localStorage.getItem("addno" + el.value)) {
+            showError(el,"Admission Number already exists!");
+            return false;
+        }
+        return true;
     }
 };
 
@@ -476,6 +483,10 @@ sectionContainer.addEventListener("input", function (e) {
             t.querySelector(".error-message").textContent = "File size should be less than 10KB!";
         }
     } else if (e.target.closest("[name='dateOfBirth']")) updateFromDOB();
+    else if(e.target.closest(".admission-number")) {
+        const t=e.target.closest(".admission-number");
+        if(localStorage.getItem("addno" + t.value)) showError(t,"Admission Number already exists!");
+    }
 });
 
 sectionContainer.addEventListener("click", function (e) {
