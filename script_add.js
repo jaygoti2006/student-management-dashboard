@@ -162,18 +162,35 @@ function updateStates(el, c, ciso2, flag) {
 
 getCountries().then((data) => {
     sections[1].querySelectorAll(".country").forEach((el) => {
-        data.forEach((c) => {
+            data.forEach((c) => {
             const t = createOption(c.name, c.name);
             t.setAttribute("data-ciso2", c.iso2);
             el.append(t);
         });
     });
+    const addCountryCode=(el) => {
+        data.forEach((c)=>{
+            const t=createOption(c.phonecode,"+"+c.phonecode+` (${c.name})`);
+            el.append(t);
+        });
+        el.value="91";
+    };
+    document.querySelectorAll(".country-code").forEach(addCountryCode);
+    formTemps[3].querySelectorAll(".country-code").forEach(addCountryCode);
     if (session !== null) {
         currAddress[1].value = session.address.currentAddress.country;
         updateStates(currAddress[2], currAddress[1].value, currAddress[1].selectedOptions[0].getAttribute("data-ciso2"), true);
 
         permAddress[1].value = session.address.permanentAddress.country;
         updateStates(permAddress[2], permAddress[1].value, permAddress[1].selectedOptions[0].getAttribute("data-ciso2"), true);
+
+        sections[0].querySelectorAll(".country-code").forEach((el)=>{
+            el.value=session.personalInfo[el.name];
+        });
+
+        [...sections[3].querySelector(".form-container").children].forEach((el,idx)=>{
+            el.querySelector("[name='mobileCountryCode']").value=session.parents[idx].mobileCountryCode;
+        });
     }
 });
 
@@ -496,7 +513,11 @@ sectionContainer.addEventListener("click", function (e) {
                 }
             } else permAddress[i].value = currAddress[i].value;
         }
-    } else if (e.target.closest(".add-btn")) sections[curr.page - 1].querySelector(".form-container").append(formTemps[curr.page - 1].cloneNode(true));
+    } else if (e.target.closest(".add-btn")) {
+        const t=formTemps[curr.page - 1].cloneNode(true);
+        if(t.querySelector(".country-code")) t.querySelector(".country-code").value="91";
+        sections[curr.page - 1].querySelector(".form-container").append(t);
+    }
     else if (e.target.closest(".del-btn")) e.target.closest("form").remove();
     else if (e.target.closest("[name='admittedToAnother']")) {
         if (e.target.closest("[name='admittedToAnother']").checked) {
@@ -516,7 +537,7 @@ sectionContainer.addEventListener("click", function (e) {
 });
 
 sectionContainer.addEventListener("keydown", function (e) {
-    if (!("0".charCodeAt(0) <= e.key.charCodeAt(0) && e.key.charCodeAt(0) <= "9".charCodeAt(0)) && e.key!="Backspace") {
+    if (!("0".charCodeAt(0) <= e.key.charCodeAt(0) && e.key.charCodeAt(0) <= "9".charCodeAt(0)) && e.key!=="Backspace" && e.key!=="Tab") {
         if (e.target.getAttribute("data-validation-type")) {
             const types = e.target.getAttribute("data-validation-type").split(" ");
             if (types.includes("number") || types.includes("mobile")) e.preventDefault();

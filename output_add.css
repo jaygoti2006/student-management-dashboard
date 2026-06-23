@@ -286,6 +286,9 @@
   .w-full {
     width: 100%;
   }
+  .max-w-25 {
+    max-width: calc(var(--spacing) * 25);
+  }
   .min-w-0 {
     min-width: 0;
   }
@@ -381,6 +384,10 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .border-r-0 {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 0px;
+  }
   .border-l-0 {
     border-left-style: var(--tw-border-style);
     border-left-width: 0px;
@@ -411,6 +418,9 @@
   }
   .p-10 {
     padding: calc(var(--spacing) * 10);
+  }
+  .px-0 {
+    padding-inline: 0;
   }
   .px-1 {
     padding-inline: var(--spacing);
