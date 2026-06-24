@@ -5,8 +5,8 @@ const searchInput = document.querySelector(".search-input");
 const rowTemp = document.querySelector(".row-temp").content.firstElementChild.cloneNode(true);
 const rowContainer = document.querySelector("tbody");
 const menu = document.querySelector(".menu");
-const currMin = document.querySelector(".current-min"),currMax=document.querySelector(".current-max"),total=document.querySelector(".total");
-const modal=document.querySelector(".modal");
+const currMin = document.querySelector(".current-min"), currMax = document.querySelector(".current-max"), total = document.querySelector(".total");
+const modal = document.querySelector(".modal");
 
 const curr = {
     order: 0,
@@ -20,14 +20,14 @@ const curr = {
     delTarget: null
 }
 
-const keys = Object.keys(localStorage).filter((el)=>el.startsWith("addno"));
+const keys = Object.keys(localStorage).filter((el) => el.startsWith("addno"));
 const students = [];
 for (const key of keys) {
     const t = JSON.parse(localStorage[key]);
     students.push(
         {
             admissionNo: t.academicInfo.admissionNo,
-            name: t.personalInfo.firstName + " " + t.personalInfo.middleName + ((t.personalInfo.middleName)?" ":"") + t.personalInfo.lastName,
+            name: t.personalInfo.firstName + " " + t.personalInfo.middleName + ((t.personalInfo.middleName) ? " " : "") + t.personalInfo.lastName,
             class: t.academicInfo.class,
             division: t.academicInfo.division,
             rollNumber: t.academicInfo.rollNumber,
@@ -71,7 +71,7 @@ function updateData() {
 
     if (curr.order === 1) data.reverse();
 
-    total.textContent=data.length;
+    total.textContent = data.length;
     curr.page = 1;
 }
 updateData();
@@ -79,10 +79,17 @@ updateData();
 function createRow(s) {
     const row = rowTemp.cloneNode(true);
     for (let c of row.children) {
-        if (c.hasAttribute("data-name")) c.textContent = s[c.getAttribute("data-name")];
+        if (c.hasAttribute("data-name")) {
+            if (c.getAttribute("data-name") !== "feeStatus") c.textContent = s[c.getAttribute("data-name")];
+            else {
+                c.firstElementChild.textContent = s.feeStatus;
+                c.firstElementChild.classList.add(s.feeStatus);
+            }
+        }
     }
-    
-    row.querySelector(".edit-btn").closest("a").href+="&id="+s.admissionNo;
+
+    row.querySelector(".edit-btn").closest("a").href += "&id=" + s.admissionNo;
+    row.querySelector(".info-btn").closest("a").href += "id=" + s.admissionNo;
     return row;
 }
 
@@ -91,47 +98,47 @@ function loadData() {
     for (let i = (curr.page - 1) * curr.entries; i < Math.min(curr.page * curr.entries, data.length); i++) {
         rowContainer.append(createRow(data[i]));
     }
-    currMin.textContent=Math.min((curr.page-1)*curr.entries+1, data.length);
-    currMax.textContent=Math.min(curr.page * curr.entries, data.length);
+    currMin.textContent = Math.min((curr.page - 1) * curr.entries + 1, data.length);
+    currMax.textContent = Math.min(curr.page * curr.entries, data.length);
 }
 loadData();
 
-modal.addEventListener("click",function(e){
-    if(e.target.closest(".modal-cancel-btn")) {
-        curr.delTarget=null;
+modal.addEventListener("click", function (e) {
+    if (e.target.closest(".modal-cancel-btn")) {
+        curr.delTarget = null;
         modal.classList.add("hidden");
-    }else if(e.target.closest(".modal-del-btn")){
-        const t=curr.delTarget;
-        const id=t.querySelector("[data-name='admissionNo']").textContent;
-        localStorage.removeItem("addno"+id);
-        let i=0;
-        for(i=0;i<students.length;i++){
-            if(students[i].admissionNo===id) break;
+    } else if (e.target.closest(".modal-del-btn")) {
+        const t = curr.delTarget;
+        const id = t.querySelector("[data-name='admissionNo']").textContent;
+        localStorage.removeItem("addno" + id);
+        let i = 0;
+        for (i = 0; i < students.length; i++) {
+            if (students[i].admissionNo === id) break;
         }
-        students.splice(i,1);
-        for(i=0;i<keys.length;i++){
-            if(keys[i]==="addno"+id) break;
+        students.splice(i, 1);
+        for (i = 0; i < keys.length; i++) {
+            if (keys[i] === "addno" + id) break;
         }
-        keys.splice(i,1);
-        for(i=0;i<data.length;i++){
-            if(data[i].admissionNo===id) break;
+        keys.splice(i, 1);
+        for (i = 0; i < data.length; i++) {
+            if (data[i].admissionNo === id) break;
         }
-        data.splice(i,1);
+        data.splice(i, 1);
         t.remove();
-        if(curr.page*curr.entries-1<data.length) rowContainer.append(createRow(data[curr.page*curr.entries-1]));
-        else if((curr.page-1)*curr.entries<data.length) currMax.textContent=data.length;
-        else if((curr.page-1)*curr.entries>=data.length) {
-            if(curr.page!==1){
+        if (curr.page * curr.entries - 1 < data.length) rowContainer.append(createRow(data[curr.page * curr.entries - 1]));
+        else if ((curr.page - 1) * curr.entries < data.length) currMax.textContent = data.length;
+        else if ((curr.page - 1) * curr.entries >= data.length) {
+            if (curr.page !== 1) {
                 curr.page--;
                 loadData();
-            }else {
-                currMin.textContent=0;
-                currMax.textContent=0;
+            } else {
+                currMin.textContent = 0;
+                currMax.textContent = 0;
             }
         }
-        total.textContent=data.length; 
-        curr.delTarget=null;
-        modal.classList.add("hidden");  
+        total.textContent = data.length;
+        curr.delTarget = null;
+        modal.classList.add("hidden");
     }
 });
 
@@ -155,37 +162,37 @@ menu.addEventListener("click", function (e) {
         data.reverse();
         curr.page = 1;
         loadData();
-    }else if(e.target.closest(".search-btn")) {
-        curr.search=searchInput.value;
+    } else if (e.target.closest(".search-btn")) {
+        curr.search = searchInput.value;
         updateData();
         loadData();
-    }else if(e.target.closest(".previous")) {
-        if(curr.page===1) return;
+    } else if (e.target.closest(".previous")) {
+        if (curr.page === 1) return;
         curr.page--;
         loadData();
-    }else if(e.target.closest(".next")){
-        if(curr.page*curr.entries<data.length) {
+    } else if (e.target.closest(".next")) {
+        if (curr.page * curr.entries < data.length) {
             curr.page++;
             loadData();
         }
-    }else if(e.target.closest(".add-btn")){
+    } else if (e.target.closest(".add-btn")) {
         sessionStorage.clear();
     }
 });
 
-rowContainer.addEventListener("click",function(e){
-    if(e.target.closest(".del-btn")){
-        curr.delTarget=e.target.closest(".record");
+rowContainer.addEventListener("click", function (e) {
+    if (e.target.closest(".del-btn")) {
+        curr.delTarget = e.target.closest(".record");
         modal.classList.remove("hidden");
-    }else if(e.target.closest(".edit-btn")){
+    } else if (e.target.closest(".edit-btn")) {
         sessionStorage.clear();
-    }else if(e.target.closest(".info-btn")){
+    } else if (e.target.closest(".info-btn")) {
 
     }
 });
 
-searchInput.addEventListener("input",function(e){
-    curr.search=searchInput.value;
+searchInput.addEventListener("input", function (e) {
+    curr.search = searchInput.value;
     updateData();
     loadData();
 });

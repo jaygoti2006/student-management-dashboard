@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer components{
+    .label{
+        @apply text-neutral-800
+    }
+};

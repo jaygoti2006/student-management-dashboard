@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./output_info.css">
+    <script defer src="./script_info.js"></script>
+</head>
+
+<body class="p-10">
+    <div class="h-60 profile-photo-container flex justify-center mb-5">
+        <img class="profile-photo h-full" src="" alt="">
+    </div>
+    <h2 class="full-name text-center text-3xl font-semibold mb-5">Jay</h2>
+    <div>
+        <section class="grid grid-cols-4 gap-8 py-5">
+            <section data-type="personalInfo">
+                <h4 class="text-2xl font-semibold mb-3">Personal Information</h4>
+                <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
+                    <span class="label">First Name</span>
+                    <span data-type="firstName"></span>
+                    <span class="label">Middle Name</span>
+                    <span data-type="middleName"></span>
+                    <span class="label">Last Name</span>
+                    <span data-type="lastName"></span>
+                    <span class="label">Email</span>
+                    <span data-type="email"></span>
+                    <span class="label">Mobile</span>
+                    <span>
+                        <span data-type="mobileCountryCode"></span>
+                        <span data-type="mobile"></span>
+                    </span>
+                    <span class="label">Alternate Mobile</span>
+                    <span>
+                        <span data-type="alternateMobileCountryCode"></span>
+                        <span data-type="alternateMobile"></span>
+                    </span>
+                    <span class="label">Gender</span>
+                    <span data-type="gender"></span>
+                    <span class="label">DOB</span>
+                    <span data-type="dateOfBirth"></span>
+                    <span class="label">Blood Group</span>
+                    <span data-type="bloodGroup"></span>
+                </div>
+            </section>
+
+            <section data-type="currentAddress">
+                <h4 class="text-2xl font-semibold mb-3">Current Address</h4>
+                <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
+                    <span class="label">Address</span>
+                    <span data-type="address"></span>
+                    <span class="label">Country</span>
+                    <span data-type="country"></span>
+                    <span class="label">State</span>
+                    <span data-type="state"></span>
+                    <span class="label">City</span>
+                    <span data-type="" city></span>
+                    <span class="label">Pincode</span>
+                    <span data-type="pincode"></span>
+                </div>
+            </section>
+
+            <section data-type="permanentAddress">
+                <h4 class="text-2xl font-semibold mb-3">Permanent Address</h4>
+                <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
+                    <span class="label">Address</span>
+                    <span data-type="address"></span>
+                    <span class="label">Country</span>
+                    <span data-type="country"></span>
+                    <span class="label">State</span>
+                    <span data-type="state"></span>
+                    <span class="label">City</span>
+                    <span data-type="" city></span>
+                    <span class="label">Pincode</span>
+                    <span data-type="pincode"></span>
+                </div>
+            </section>
+
+            <section data-type="academicInfo">
+                <h4 class="text-2xl font-semibold mb-3">Academic Information</h4>
+                <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
+                    <span class="label">Admission No.</span>
+                    <span></span>
+                    <span class="label">Admission Date</span>
+                    <span></span>
+                    <span class="label">Academic Year</span>
+                    <span></span>
+                    <span class="label">Roll No.</span>
+                    <span></span>
+                    <span class="label">Class</span>
+                    <span></span>
+                    <span class="label">Division</span>
+                    <span></span>
+                    <span class="label">Fee Status</span>
+                    <span></span>
+                </div>
+            </section>
+        </section>
+
+        <section class="py-5" data-type="parents">
+            <h4 class="text-3xl font-semibold mb-3">Parents</h4>
+            <template id="parent-temp">
+                <section>
+                    <h4 class="text-2xl font-semibold mb-3">Parent1</h4>
+                    <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
+                        <span class="label">Relation</span>
+                        <span data-type="relation"></span>
+                        <span class="label">Name</span>
+                        <span data-type="name"></span>
+                        <span class="label">Mobile</span>
+                        <span data-type="mobile"></span>
+                        <span class="label">Email</span>
+                        <span data-type="email"></span>
+                        <span class="label">Occupation</span>
+                        <span data-type="occupation"></span>
+                        <span class="label">Annual Income</span>
+                        <span data-type="annualIncome"></span>
+                    </div>
+                </section>
+            </template>
+            <div class="grid grid-cols-4">
+
+            </div>
+        </section>
+
+        <section class="py-5" data-type="courses">
+            <h4 class="text-3xl font-semibold mb-3">Courses</h4>
+            <template id="course-temp">
+                <section>
+                    <h4 class="text-2xl font-semibold mb-3">Course1</h4>
+                    <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
+                        <span class="label">Course Name</span>
+                        <span data-type="courseName"></span>
+                        <span class="label">Faculty Name</span>
+                        <span data-type="faculty"></span>
+                        <span class="label">Course Fees</span>
+                        <span data-type="fees"></span>
+                        <span class="label">Duration</span>
+                        <span class="duration"></span>
+                    </div>
+                </section>
+            </template>
+            <div class="grid grid-cols-4">
+
+            </div>
+        </section>
+
+        <section class="py-5" data-type="documents">
+            <h4 class="text-3xl font-semibold mb-3">Documents</h4>
+            <template id="document-template">
+                <section>
+                    <h4 class="text-2xl font-semibold mb-3">Document1</h4>
+                    <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
+                        <span class="label">Document Type</span>
+                        <span data-type="documentName"></span>
+                        <span class="label">Document No.</span>
+                        <span data-type="documentNumber"></span>
+                    </div>
+                </section>
+            </template>
+            <div class="grid grid-cols-4">
+
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

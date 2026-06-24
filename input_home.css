@@ -17,4 +17,12 @@
     tbody tr:hover {
         @apply bg-zinc-50;
     }
+
+    .completed{
+        @apply bg-green-400;
+    }
+
+    .pending{
+        @apply bg-red-400;
+    }
 }

@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <h1 class="font-semibold text-3xl text-center my-3 text-zinc-700">Student Management System</h1>
+    <h1 class="font-semibold text-3xl text-center my-3 text-zinc-700">Student List</h1>
     <div class="px-7 py-3">
         <div class="menu flex justify-between items-center">
             <div class="flex items-center gap-5">
@@ -40,7 +40,7 @@
                     </button>
                 </div>
 
-                <a href="/form.html?mode=add" target="_blank">
+                <a href="/form.html?mode=add" target="_self">
                     <button class="add-btn btn flex items-center gap-1">
                         <span class="font-semibold">Add Student</span>
                         <span>
@@ -177,7 +177,10 @@
                             <td data-name="rollNumber"></td>
                             <td data-name="gender"></td>
                             <td data-name="mobile"></td>
-                            <td data-name="feeStatus"></td>
+                            <td data-name="feeStatus">
+                                <span class="rounded-full px-2.5 py-1 text-white">
+                                </span>
+                            </td>
                             <td class="action flex items-center gap-2">
                                 <a href="./form.html?mode=edit">
                                 <button
@@ -201,7 +204,7 @@
                                     </svg>
                                 </button>
 
-                                <a href="">
+                                <a href="./info.html?">
                                 <button
                                     class="info-btn w-6 h-6 cursor-pointer active:scale-93 flex items-center justify-center rounded-md transition-ease text-blue-600 hover:text-blue-700 hover:bg-blue-700/10 transform-gpu will-change-transform">
                                     <svg class="block fill-current" xmlns="http://www.w3.org/2000/svg" width="20"
