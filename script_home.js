@@ -6,6 +6,7 @@ const rowTemp = document.querySelector(".row-temp").content.firstElementChild.cl
 const rowContainer = document.querySelector("tbody");
 const menu = document.querySelector(".menu");
 const currMin = document.querySelector(".current-min"),currMax=document.querySelector(".current-max"),total=document.querySelector(".total");
+const modal=document.querySelector(".modal");
 
 const curr = {
     order: 0,
@@ -15,7 +16,8 @@ const curr = {
     feeStatus: "all",
     search: "",
     entries: 10,
-    page: 1
+    page: 1,
+    delTarget: null
 }
 
 const keys = Object.keys(localStorage).filter((el)=>el.startsWith("addno"));
@@ -79,6 +81,8 @@ function createRow(s) {
     for (let c of row.children) {
         if (c.hasAttribute("data-name")) c.textContent = s[c.getAttribute("data-name")];
     }
+    
+    row.querySelector(".edit-btn").closest("a").href+="&id="+s.admissionNo;
     return row;
 }
 
@@ -91,6 +95,45 @@ function loadData() {
     currMax.textContent=Math.min(curr.page * curr.entries, data.length);
 }
 loadData();
+
+modal.addEventListener("click",function(e){
+    if(e.target.closest(".modal-cancel-btn")) {
+        curr.delTarget=null;
+        modal.classList.add("hidden");
+    }else if(e.target.closest(".modal-del-btn")){
+        const t=curr.delTarget;
+        const id=t.querySelector("[data-name='admissionNo']").textContent;
+        localStorage.removeItem("addno"+id);
+        let i=0;
+        for(i=0;i<students.length;i++){
+            if(students[i].admissionNo===id) break;
+        }
+        students.splice(i,1);
+        for(i=0;i<keys.length;i++){
+            if(keys[i]==="addno"+id) break;
+        }
+        keys.splice(i,1);
+        for(i=0;i<data.length;i++){
+            if(data[i].admissionNo===id) break;
+        }
+        data.splice(i,1);
+        t.remove();
+        if(curr.page*curr.entries-1<data.length) rowContainer.append(createRow(data[curr.page*curr.entries-1]));
+        else if((curr.page-1)*curr.entries<data.length) currMax.textContent=data.length;
+        else if((curr.page-1)*curr.entries>=data.length) {
+            if(curr.page!==1){
+                curr.page--;
+                loadData();
+            }else {
+                currMin.textContent=0;
+                currMax.textContent=0;
+            }
+        }
+        total.textContent=data.length; 
+        curr.delTarget=null;
+        modal.classList.add("hidden");  
+    }
+});
 
 document.querySelector(".options").addEventListener("input", function (e) {
     curr[e.target.getAttribute("data-name")] = e.target.value;
@@ -125,40 +168,19 @@ menu.addEventListener("click", function (e) {
             curr.page++;
             loadData();
         }
+    }else if(e.target.closest(".add-btn")){
+        sessionStorage.clear();
     }
 });
 
 rowContainer.addEventListener("click",function(e){
     if(e.target.closest(".del-btn")){
-        const t=e.target.closest(".record");
-        const id=t.querySelector("[data-name='admissionNo']").textContent;
-        localStorage.removeItem("addno"+id);
-        let i=0;
-        for(i=0;i<students.length;i++){
-            if(students[i].admissionNo===id) break;
-        }
-        students.splice(i,1);
-        for(i=0;i<keys.length;i++){
-            if(keys[i]==="addno"+id) break;
-        }
-        keys.splice(i,1);
-        for(i=0;i<data.length;i++){
-            if(data[i].admissionNo===id) break;
-        }
-        data.splice(i,1);
-        t.remove();
-        if(curr.page*curr.entries-1<data.length) rowContainer.append(createRow(data[curr.page*curr.entries-1]));
-        else if((curr.page-1)*curr.entries<data.length) currMax.textContent=data.length;
-        else if((curr.page-1)*curr.entries>=data.length) {
-            if(curr.page!==1){
-                curr.page--;
-                loadData();
-            }else {
-                currMin.textContent=0;
-                currMax.textContent=0;
-            }
-        }
-        total.textContent=data.length;
+        curr.delTarget=e.target.closest(".record");
+        modal.classList.remove("hidden");
+    }else if(e.target.closest(".edit-btn")){
+        sessionStorage.clear();
+    }else if(e.target.closest(".info-btn")){
+
     }
 });
 

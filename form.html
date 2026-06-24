@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./output_add.css">
-    <script defer src="script_add.js"></script>
+    <script defer src="script_form.js"></script>
 </head>
 
 <body>
@@ -141,7 +141,7 @@
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 blood-group"><span>Blood Group</span><select name="bloodGroup"
                                 class="cursor-pointer">
-                                <option value="none">None</option>
+                                <option value="">None</option>
                                 <option value="A+">A+</option>
                                 <option value="A-">A-</option>
                                 <option value="AB+">AB+</option>
@@ -519,10 +519,7 @@
                             <label class="flex flex-col gap-1"><span>Name<span
                                         class="text-red-600">*</span></span><input name="name" placeholder="Enter Name"
                                     data-validation-type="required name" type="text" />
-
-
                             </label>
-
                         </div>
                     </div>
                     <div class="flex gap-5 mb-5">
@@ -535,15 +532,11 @@
                                         data-validation-type="required mobile" type="text" maxlength="10" />
                                 </section>
                             </label>
-
                         </div>
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1"><span>Email</span><input name="email"
                                     placeholder="Enter Email" type="email" data-validation-type="email" />
-
-
                             </label>
-
                         </div>
                     </div>
                     <div class="flex gap-5 mb-8">

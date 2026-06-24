@@ -7,11 +7,11 @@
     }
 
     th {
-        @apply font-medium text-zinc-500 uppercase tracking-wide text-xs px-4 py-3 text-left;
+        @apply font-medium text-zinc-500 uppercase tracking-wide text-[14px] px-4 py-3 text-left;
     }
 
     td {
-        @apply max-w-62 text-zinc-700 tracking-wide text-xs px-4 py-3 text-left truncate;
+        @apply max-w-62 text-zinc-700 tracking-wide text-[14px] px-4 py-3 text-left truncate;
     }
 
     tbody tr:hover {

@@ -2,7 +2,8 @@ const apiKey = "ec26da232a357c213c670da196f859837ef7401791ec1954544a75920744e93a
 const baseURL = "https://api.countrystatecity.in/v1";
 
 const curr = {
-    page: 1
+    page: 1,
+    s: null
 };
 
 const date = new Date();
@@ -40,6 +41,13 @@ sections.forEach((el) => {
 const errorContainerTemp = document.querySelector("#error-template").content.firstElementChild.cloneNode(true);
 
 const session = (sessionStorage.getItem("student") === null) ? null : JSON.parse(sessionStorage.getItem("student"));
+
+const params = new URLSearchParams(location.search);
+
+if(params.get("mode")==="edit" && params.get("id")) {
+    curr.s=JSON.parse(localStorage.getItem("addno" + params.get("id")));
+    sections[2].querySelector(".admission-number").setAttribute("disabled",true);
+}
 
 
 
@@ -113,7 +121,7 @@ async function getCities(ciso2, siso2) {
     }
 }
 
-function updateCities(el, s, ciso2, siso2, flag) {
+function updateCities(el, s, ciso2, siso2, flag1, flag2) {
     el.querySelectorAll("option[value]:not([value=''])").forEach((child) => { child.remove() });
     if (s === "") {
         el.value = "";
@@ -125,14 +133,18 @@ function updateCities(el, s, ciso2, siso2, flag) {
             const t = createOption(city.name, city.name);
             el.append(t);
         });
-        if (session !== null && flag) {
+        if (curr.s && flag1) {
+            if (el.closest(".curr")) currAddress[3].value = curr.s.address.currentAddress.city;
+            else permAddress[3].value = curr.s.address.permanentAddress.city;
+        }
+        if (session && flag2) {
             if (el.closest(".curr")) currAddress[3].value = session.address.currentAddress.city;
             else permAddress[3].value = session.address.permanentAddress.city;
         }
     });
 }
 
-function updateStates(el, c, ciso2, flag) {
+function updateStates(el, c, ciso2, flag1, flag2) {
     el.querySelectorAll("option[value]:not([value=''])").forEach((child) => { child.remove() });
     if (el.closest(".curr")) updateCities(currAddress[3], "", null, null);
     else updateCities(permAddress[3], "", null, null);
@@ -148,50 +160,62 @@ function updateStates(el, c, ciso2, flag) {
             t.setAttribute("data-siso2", state.iso2);
             el.append(t);
         });
-        if (session !== null && flag) {
+        if(curr.s && flag1) {
+            if (el.closest(".curr")) {
+                currAddress[2].value = curr.s.address.currentAddress.state;
+                updateCities(currAddress[3], currAddress[2].value, currAddress[2].selectedOptions[0].getAttribute("data-ciso2"), currAddress[2].selectedOptions[0].getAttribute("data-siso2"), flag1, flag2);
+            } else {
+                permAddress[2].value = curr.s.address.permanentAddress.state;
+                updateCities(permAddress[3], permAddress[2].value, permAddress[2].selectedOptions[0].getAttribute("data-ciso2"), permAddress[2].selectedOptions[0].getAttribute("data-siso2"), flag1, flag2);
+            }
+        }
+        if (session && flag2) {
             if (el.closest(".curr")) {
                 currAddress[2].value = session.address.currentAddress.state;
-                updateCities(currAddress[3], currAddress[2].value, currAddress[2].selectedOptions[0].getAttribute("data-ciso2"), currAddress[2].selectedOptions[0].getAttribute("data-siso2"), true);
+                updateCities(currAddress[3], currAddress[2].value, currAddress[2].selectedOptions[0].getAttribute("data-ciso2"), currAddress[2].selectedOptions[0].getAttribute("data-siso2"), flag1, flag2);
             } else {
                 permAddress[2].value = session.address.permanentAddress.state;
-                updateCities(permAddress[3], permAddress[2].value, permAddress[2].selectedOptions[0].getAttribute("data-ciso2"), permAddress[2].selectedOptions[0].getAttribute("data-siso2"), true);
+                updateCities(permAddress[3], permAddress[2].value, permAddress[2].selectedOptions[0].getAttribute("data-ciso2"), permAddress[2].selectedOptions[0].getAttribute("data-siso2"), flag1, flag2);
             }
         }
     });
 }
 
+function loadCountryStateCity(s,flag1,flag2) {
+    currAddress[1].value = s.address.currentAddress.country;
+    updateStates(currAddress[2], currAddress[1].value, currAddress[1].selectedOptions[0].getAttribute("data-ciso2"), flag1, flag2);
+
+    permAddress[1].value = s.address.permanentAddress.country;
+    updateStates(permAddress[2], permAddress[1].value, permAddress[1].selectedOptions[0].getAttribute("data-ciso2"), flag1, flag2);
+
+    sections[0].querySelectorAll(".country-code").forEach((el) => {
+        el.value = s.personalInfo[el.name];
+    });
+
+    [...sections[3].querySelector(".form-container").children].forEach((el, idx) => {
+        el.querySelector("[name='mobileCountryCode']").value = s.parents[idx].mobileCountryCode;
+    });
+}
+
 getCountries().then((data) => {
     sections[1].querySelectorAll(".country").forEach((el) => {
-            data.forEach((c) => {
+        data.forEach((c) => {
             const t = createOption(c.name, c.name);
             t.setAttribute("data-ciso2", c.iso2);
             el.append(t);
         });
     });
-    const addCountryCode=(el) => {
-        data.forEach((c)=>{
-            const t=createOption(c.phonecode,"+"+c.phonecode+` (${c.name})`);
+    const addCountryCode = (el) => {
+        data.forEach((c) => {
+            const t = createOption(c.phonecode, "+" + c.phonecode + ` (${c.name})`);
             el.append(t);
         });
-        el.value="91";
+        el.value = "91";
     };
     document.querySelectorAll(".country-code").forEach(addCountryCode);
     formTemps[3].querySelectorAll(".country-code").forEach(addCountryCode);
-    if (session !== null) {
-        currAddress[1].value = session.address.currentAddress.country;
-        updateStates(currAddress[2], currAddress[1].value, currAddress[1].selectedOptions[0].getAttribute("data-ciso2"), true);
-
-        permAddress[1].value = session.address.permanentAddress.country;
-        updateStates(permAddress[2], permAddress[1].value, permAddress[1].selectedOptions[0].getAttribute("data-ciso2"), true);
-
-        sections[0].querySelectorAll(".country-code").forEach((el)=>{
-            el.value=session.personalInfo[el.name];
-        });
-
-        [...sections[3].querySelector(".form-container").children].forEach((el,idx)=>{
-            el.querySelector("[name='mobileCountryCode']").value=session.parents[idx].mobileCountryCode;
-        });
-    }
+    if (curr.s) loadCountryStateCity(curr.s,true,false);
+    if (session) loadCountryStateCity(session,false,true);
 });
 
 function showError(el, message) {
@@ -264,8 +288,9 @@ const validators = {
         return true;
     },
     admissionNumber: (el) => {
-        if(localStorage.getItem("addno" + el.value)) {
-            showError(el,"Admission Number already exists!");
+        if(curr.s) return true;
+        if (localStorage.getItem("addno" + el.value)) {
+            showError(el, "Admission Number already exists!");
             return false;
         }
         return true;
@@ -390,73 +415,85 @@ function updateFromDOB() {
     }
 }
 
-function loadFromSession() {
-    if (session !== null) {
-        for (let el of sectionFields[0]) {
-            if (el.getAttribute("type") !== "file") el.value = session.personalInfo[el.getAttribute("name")];
-        }
-        updateFromDOB();
-        for (let el of currAddress) {
-            if (el.tagName !== "SELECT") el.value = session.address.currentAddress[el.getAttribute("name")];
-        }
-        for (let el of permAddress) {
-            if (el.tagName !== "SELECT") el.value = session.address.permanentAddress[el.getAttribute("name")];
-        }
-        for (let el of sectionFields[2]) {
-            el.value = session.academicInfo[el.getAttribute("name")];
-        }
-        session.parents.forEach((el, idx) => {
-            if (idx !== 0) {
-                const t = formTemps[3].cloneNode(true);
-                t.querySelectorAll("input,select").forEach((el1) => {
-                    el1.value = el[el1.getAttribute("name")];
-                });
+function loadFromStorage(s) {
+    for (let el of sectionFields[0]) {
+        if (el.getAttribute("type") !== "file") el.value = s.personalInfo[el.getAttribute("name")];
+    }
+    updateFromDOB();
+    for (let el of currAddress) {
+        if (el.tagName !== "SELECT") el.value = s.address.currentAddress[el.getAttribute("name")];
+    }
+    for (let el of permAddress) {
+        if (el.tagName !== "SELECT") el.value = s.address.permanentAddress[el.getAttribute("name")];
+    }
+    for (let el of sectionFields[2]) {
+        el.value = s.academicInfo[el.getAttribute("name")];
+    }
+    s.parents.forEach((el, idx) => {
+        if (idx !== 0) {
+            const t = formTemps[3].cloneNode(true);
+            t.querySelectorAll("input,select").forEach((el1) => {
+                el1.value = el[el1.getAttribute("name")];
+            });
 
-                sections[3].querySelector(".form-container").append(t);
-            } else {
-                sections[3].querySelector(".form-container").firstElementChild.querySelectorAll("input,select").forEach((el1) => {
-                    el1.value = el[el1.getAttribute("name")];
-                });
-            }
-        });
-        session.courses.forEach((el, idx) => {
-            if (idx !== 0) {
-                const t = formTemps[4].cloneNode(true);
-                t.querySelectorAll("input,select").forEach((el1) => {
-                    el1.value = el[el1.getAttribute("name")];
-                });
-                sections[4].querySelector(".form-container").append(t);
-            } else {
-                sections[4].querySelector(".form-container").firstElementChild.querySelectorAll("input,select").forEach((el1) => {
-                    el1.value = el[el1.getAttribute("name")];
-                });
-            }
-        });
-        session.documents.forEach((el, idx) => {
-            if (idx !== 0) {
-                const t = formTemps[5].cloneNode(true);
-                if (el.documentName === "leaving-certificate") {
-                    t.setAttribute("data-lc", "yes");
-                    t.querySelector("[name='documentName']").replaceChildren();
-                    t.querySelector("[name='documentName']").append(createOption("leaving-certificate", "Leaving Certificate"));
-                }
-                t.querySelectorAll("input,select").forEach((el1) => {
-                    el1.value = el[el1.getAttribute("name")];
-                });
-                sections[5].querySelector(".form-container").append(t);
-            } else {
-                sections[5].querySelector(".form-container").firstElementChild.querySelectorAll("input,select").forEach((el1) => {
-                    el1.value = el[el1.getAttribute("name")];
-                });
-            }
-        });
-        if (session.admittedToAnother) {
-            sections[5].querySelector("[name='admittedToAnother']").setAttribute("checked", "");
-            sections[5].querySelector("[data-lc]").querySelector(".del-btn").remove();
+            sections[3].querySelector(".form-container").append(t);
+        } else {
+            sections[3].querySelector(".form-container").firstElementChild.querySelectorAll("input,select").forEach((el1) => {
+                el1.value = el[el1.getAttribute("name")];
+            });
         }
+    });
+    s.courses.forEach((el, idx) => {
+        if (idx !== 0) {
+            const t = formTemps[4].cloneNode(true);
+            t.querySelectorAll("input,select").forEach((el1) => {
+                el1.value = el[el1.getAttribute("name")];
+            });
+            sections[4].querySelector(".form-container").append(t);
+        } else {
+            sections[4].querySelector(".form-container").firstElementChild.querySelectorAll("input,select").forEach((el1) => {
+                el1.value = el[el1.getAttribute("name")];
+            });
+        }
+    });
+    s.documents.forEach((el, idx) => {
+        if (idx !== 0) {
+            const t = formTemps[5].cloneNode(true);
+            if (el.documentName === "leaving-certificate") {
+                t.setAttribute("data-lc", "yes");
+                t.querySelector("[name='documentName']").replaceChildren();
+                t.querySelector("[name='documentName']").append(createOption("leaving-certificate", "Leaving Certificate"));
+            }
+            t.querySelectorAll("input,select").forEach((el1) => {
+                el1.value = el[el1.getAttribute("name")];
+            });
+            sections[5].querySelector(".form-container").append(t);
+        } else {
+            sections[5].querySelector(".form-container").firstElementChild.querySelectorAll("input,select").forEach((el1) => {
+                el1.value = el[el1.getAttribute("name")];
+            });
+        }
+    });
+    if (s.admittedToAnother) {
+        sections[5].querySelector("[name='admittedToAnother']").setAttribute("checked", "");
+        sections[5].querySelector("[data-lc]").querySelector(".del-btn").remove();
     }
 }
+
+function loadFromLocal() {
+    if (params.get("mode") === "edit") loadFromStorage(curr.s);
+}
+
+function loadFromSession() {
+    if (session !== null) loadFromStorage(session);
+}
+
+loadFromLocal();
 loadFromSession();
+
+if (params.get("mode") === "edit") {
+    sections[3].setAttribute("disabled", true);
+}
 
 
 
@@ -483,9 +520,9 @@ sectionContainer.addEventListener("input", function (e) {
             t.querySelector(".error-message").textContent = "File size should be less than 10KB!";
         }
     } else if (e.target.closest("[name='dateOfBirth']")) updateFromDOB();
-    else if(e.target.closest(".admission-number")) {
-        const t=e.target.closest(".admission-number");
-        if(localStorage.getItem("addno" + t.value)) showError(t,"Admission Number already exists!");
+    else if (e.target.closest(".admission-number")) {
+        const t = e.target.closest(".admission-number");
+        if (localStorage.getItem("addno" + t.value)) showError(t, "Admission Number already exists!");
     }
 });
 
@@ -521,8 +558,8 @@ sectionContainer.addEventListener("click", function (e) {
             } else permAddress[i].value = currAddress[i].value;
         }
     } else if (e.target.closest(".add-btn")) {
-        const t=formTemps[curr.page - 1].cloneNode(true);
-        if(t.querySelector(".country-code")) t.querySelector(".country-code").value="91";
+        const t = formTemps[curr.page - 1].cloneNode(true);
+        if (t.querySelector(".country-code")) t.querySelector(".country-code").value = "91";
         sections[curr.page - 1].querySelector(".form-container").append(t);
     }
     else if (e.target.closest(".del-btn")) e.target.closest("form").remove();
@@ -537,17 +574,16 @@ sectionContainer.addEventListener("click", function (e) {
         } else sections[5].querySelector("[data-lc]").remove();
     } else if (e.target.closest(".submit")) {
         if (validateAll()) {
-            if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null) {
+            if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null || curr.s) {
                 addRecordLocal(document.querySelector(".admission-number").value);
-                window.open("/index.html","_self");
-            }
-            else alert("admission number already exist");
+                window.open("/index.html", "_self");
+            }else alert("admission number already exist");
         }
     }
 });
 
 sectionContainer.addEventListener("keydown", function (e) {
-    if (!("0".charCodeAt(0) <= e.key.charCodeAt(0) && e.key.charCodeAt(0) <= "9".charCodeAt(0)) && e.key!=="Backspace" && e.key!=="Tab") {
+    if (!("0".charCodeAt(0) <= e.key.charCodeAt(0) && e.key.charCodeAt(0) <= "9".charCodeAt(0)) && e.key !== "Backspace" && e.key !== "Tab") {
         if (e.target.getAttribute("data-validation-type")) {
             const types = e.target.getAttribute("data-validation-type").split(" ");
             if (types.includes("number") || types.includes("mobile")) e.preventDefault();

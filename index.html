@@ -10,6 +10,18 @@
 </head>
 
 <body>
+    <div
+        class="fixed top-0 bottom-0 left-0 right-0 z-10 bg-neutral-500/40 flex justify-center items-center hidden modal">
+        <div class="p-10 rounded-lg bg-white font-semibold mb-50">
+            <h2 class="mb-8 text-stone-700 text-2xl">Do you want to delete this record?</h2>
+            <div class="flex justify-between">
+                <button
+                    class="modal-cancel-btn py-2 px-4 bg-neutral-200 rounded-md cursor-pointer hover:bg-neutral-300 active:bg-neutral-200 transition-all">Cancel</button>
+                <button
+                    class="modal-del-btn py-2 px-4 bg-red-500 rounded-md cursor-pointer text-white hover:bg-red-700 active:bg-red-500 transition-all">Delete</button>
+            </div>
+        </div>
+    </div>
     <h1 class="font-semibold text-3xl text-center my-3 text-zinc-700">Student Management System</h1>
     <div class="px-7 py-3">
         <div class="menu flex justify-between items-center">
@@ -28,23 +40,24 @@
                     </button>
                 </div>
 
-                <button class="add-btn btn">
-                    <a class="flex items-center gap-1" href="/add.html" target="_blank">
+                <a href="/form.html?mode=add" target="_blank">
+                    <button class="add-btn btn flex items-center gap-1">
                         <span class="font-semibold">Add Student</span>
                         <span>
-                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 16 16">
                                 <path
                                     d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                             </svg>
                         </span>
-                    </a>
-                </button>
+                    </button>
+                </a>
             </div>
 
             <div class="options flex items-center gap-4 px-5">
                 <div class="flex items-center gap-2">
-                    <span class="text-neutral-500"><span class="current-min">1</span>-<span class="current-max"></span> of <span
-                            class="total"></span></span>
+                    <span class="text-neutral-500"><span class="current-min">1</span>-<span class="current-max"></span>
+                        of <span class="total"></span></span>
                     <button class="previous cursor-pointer hover:text-neutral-600 active:text-black transition-all">
                         <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15"
                             viewBox="0 0 24 24">
@@ -71,8 +84,9 @@
                     </div>
                     <div class="flex gap-2">
                         <label class="" for="class">Class</label>
-                        <select data-name="class" class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
-                            name="class" id="class">
+                        <select data-name="class"
+                            class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md" name="class"
+                            id="class">
                             <option value="all">All</option>
                             <option value="1">Class 1</option>
                             <option value="2">Class 2</option>
@@ -90,8 +104,9 @@
                     </div>
                     <div class="flex gap-2">
                         <label class="" for="gender">Gender</label>
-                        <select data-name="gender" class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
-                            name="gender" id="gender">
+                        <select data-name="gender"
+                            class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md" name="gender"
+                            id="gender">
                             <option value="all">All</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -99,8 +114,9 @@
                     </div>
                     <div class="flex gap-2">
                         <label class="" for="feeStatus">Fee Status</label>
-                        <select data-name="feeStatus" class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md"
-                            name="fee" id="feeStatus">
+                        <select data-name="feeStatus"
+                            class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md" name="fee"
+                            id="feeStatus">
                             <option value="all">All</option>
                             <option value="pending">Pending</option>
                             <option value="completed">Completed</option>
@@ -124,7 +140,8 @@
                         </svg>
                     </button>
                     <label for="sort">Sort By</label>
-                    <select data-name="sortBy" class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md" name="sort"
+                    <select data-name="sortBy"
+                        class="focus:outline-none cursor-pointer border border-neutral-500 rounded-md" name="sort"
                         id="sort">
                         <option value="admission-number">Admission No</option>
                         <option value="name">Student Name</option>
@@ -162,8 +179,9 @@
                             <td data-name="mobile"></td>
                             <td data-name="feeStatus"></td>
                             <td class="action flex items-center gap-2">
+                                <a href="./form.html?mode=edit">
                                 <button
-                                    class="edit-btn w-6 h-6 cursor-pointer active:scale-93 flex items-center justify-center rounded-md transition-ease text-neutral-600 hover:text-neutral-700 hover:bg-neutral-200 transform-gpu will-change-transform">
+                                    class="edit-btn w-6 h-6 cursor-pointer active:scale-93 flex items-center justify-center rounded-md transition-ease text-green-400 hover:text-green -500 hover:bg-green-500/10 transform-gpu will-change-transform">
                                     <svg class="fill-current edit-svg block" xmlns="http://www.w3.org/2000/svg"
                                         width="20" height="20" viewBox="0 0 24 24">
                                         <path
@@ -172,6 +190,7 @@
                                             d="M5 21h14c1.103 0 2-.897 2-2v-8.668l-2 2V19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2z" />
                                     </svg>
                                 </button>
+                                </a>
 
                                 <button
                                     class="del-btn w-6 h-6 cursor-pointer active:scale-93 flex items-center justify-center rounded-md transition-ease text-red-400 hover:text-red-500 hover:bg-red-500/10 transform-gpu will-change-transform">
@@ -181,6 +200,19 @@
                                             d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6Zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853ZM2 6h20m-12 5v5m4-5v5" />
                                     </svg>
                                 </button>
+
+                                <a href="">
+                                <button
+                                    class="info-btn w-6 h-6 cursor-pointer active:scale-93 flex items-center justify-center rounded-md transition-ease text-blue-600 hover:text-blue-700 hover:bg-blue-700/10 transform-gpu will-change-transform">
+                                    <svg class="block fill-current" xmlns="http://www.w3.org/2000/svg" width="20"
+                                        height="20" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                        <path
+                                            d="m8.93 6.588l-2.29.287l-.082.38l.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319c.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246c-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0a1 1 0 0 1 2 0z" />
+                                    </svg>
+                                </button>
+                                </a>
                             </td>
                         </tr>
                     </template>
