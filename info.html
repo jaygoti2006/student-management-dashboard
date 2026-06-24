@@ -11,11 +11,11 @@
 
 <body class="p-10">
     <div class="h-60 profile-photo-container flex justify-center mb-5">
-        <img class="profile-photo h-full" src="" alt="">
+        <img class="profile-photo h-full" src="./default-avatar.jpg" alt="">
     </div>
-    <h2 class="full-name text-center text-3xl font-semibold mb-5">Jay</h2>
+    <h2 class="full-name text-center text-3xl font-semibold mb-5"></h2>
     <div>
-        <section class="grid grid-cols-4 gap-8 py-5">
+        <section class="grid grid-cols-4 gap-15 py-5">
             <section data-type="personalInfo">
                 <h4 class="text-2xl font-semibold mb-3">Personal Information</h4>
                 <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
@@ -56,7 +56,7 @@
                     <span class="label">State</span>
                     <span data-type="state"></span>
                     <span class="label">City</span>
-                    <span data-type="" city></span>
+                    <span data-type="city"></span>
                     <span class="label">Pincode</span>
                     <span data-type="pincode"></span>
                 </div>
@@ -72,7 +72,7 @@
                     <span class="label">State</span>
                     <span data-type="state"></span>
                     <span class="label">City</span>
-                    <span data-type="" city></span>
+                    <span data-type="city"></span>
                     <span class="label">Pincode</span>
                     <span data-type="pincode"></span>
                 </div>
@@ -82,28 +82,28 @@
                 <h4 class="text-2xl font-semibold mb-3">Academic Information</h4>
                 <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
                     <span class="label">Admission No.</span>
-                    <span></span>
+                    <span data-type="admissionNo"></span>
                     <span class="label">Admission Date</span>
-                    <span></span>
+                    <span data-type="admissionDate"></span>
                     <span class="label">Academic Year</span>
-                    <span></span>
+                    <span data-type="academicYear"></span>
                     <span class="label">Roll No.</span>
-                    <span></span>
+                    <span data-type="rollNumber"></span>
                     <span class="label">Class</span>
-                    <span></span>
+                    <span data-type="class"></span>
                     <span class="label">Division</span>
-                    <span></span>
+                    <span data-type="division"></span>
                     <span class="label">Fee Status</span>
-                    <span></span>
+                    <span data-type="feeStatus"></span>
                 </div>
             </section>
         </section>
 
         <section class="py-5" data-type="parents">
             <h4 class="text-3xl font-semibold mb-3">Parents</h4>
-            <template id="parent-temp">
+            <template id="parent-template">
                 <section>
-                    <h4 class="text-2xl font-semibold mb-3">Parent1</h4>
+                    <h4 class="text-2xl font-semibold mb-3 heading">Parent1</h4>
                     <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
                         <span class="label">Relation</span>
                         <span data-type="relation"></span>
@@ -120,16 +120,16 @@
                     </div>
                 </section>
             </template>
-            <div class="grid grid-cols-4">
+            <div class="grid grid-cols-4 parent-container">
 
             </div>
         </section>
 
         <section class="py-5" data-type="courses">
             <h4 class="text-3xl font-semibold mb-3">Courses</h4>
-            <template id="course-temp">
+            <template id="course-template">
                 <section>
-                    <h4 class="text-2xl font-semibold mb-3">Course1</h4>
+                    <h4 class="text-2xl font-semibold mb-3 heading">Course1</h4>
                     <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
                         <span class="label">Course Name</span>
                         <span data-type="courseName"></span>
@@ -142,7 +142,7 @@
                     </div>
                 </section>
             </template>
-            <div class="grid grid-cols-4">
+            <div class="grid grid-cols-4 course-container">
 
             </div>
         </section>
@@ -151,7 +151,7 @@
             <h4 class="text-3xl font-semibold mb-3">Documents</h4>
             <template id="document-template">
                 <section>
-                    <h4 class="text-2xl font-semibold mb-3">Document1</h4>
+                    <h4 class="text-2xl font-semibold mb-3 heading">Document1</h4>
                     <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
                         <span class="label">Document Type</span>
                         <span data-type="documentName"></span>
@@ -160,7 +160,7 @@
                     </div>
                 </section>
             </template>
-            <div class="grid grid-cols-4">
+            <div class="grid grid-cols-4 document-container">
 
             </div>
         </section>
