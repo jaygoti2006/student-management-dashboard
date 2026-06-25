@@ -45,8 +45,11 @@
         </div>
     </template>
 
-    <div class="w-[50%] mx-auto shadow-md bg-neutral-50 p-10 mb-8 rounded-lg section-container">
+    <div
+        class="w-full max-w-3xl mx-auto shadow-md bg-white border border-slate-100 p-10 mb-8 rounded-2xl transition-all duration-300 section-container">
         <div class="sec1 sec">
+            <h4 class="heading">Add Personal Information</h4>
+            <hr class="text-slate-200 mb-5">
             <form action="">
                 <div class="flex gap-5 mb-5">
                     <div class="flex-1 shrink min-w-0">
@@ -81,15 +84,6 @@
                         <span>Email<span class="text-red-600">*</span></span>
                         <input name="email" placeholder="Enter Email" type="email"
                             data-validation-type="required email" />
-                        <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
-                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
-                                viewBox="0 0 2048 2048">
-                                <path
-                                    d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
-                            </svg>
-                            <p class="error-message"></p>
-                        </div>
-
                     </label>
                 </div>
                 <div class="flex gap-5 mb-5">
@@ -110,8 +104,9 @@
                             <section class="flex">
                                 <select name="alternateMobileCountryCode"
                                     class="rounded-r-none border-r-0 cursor-pointer country-code shrink min-w-0 max-w-25 px-0"></select>
-                                <input class="rounded-l-none flex-1" inputmode="numeric" pattern="[0-9]*" placeholder="Enter Alternate Mobile"
-                                    type="text" data-validation-type="mobile" name="alternateMobile" maxlength="10" />
+                                <input class="rounded-l-none flex-1" inputmode="numeric" pattern="[0-9]*"
+                                    placeholder="Enter Alternate Mobile" type="text" data-validation-type="mobile"
+                                    name="alternateMobile" maxlength="10" />
                             </section>
                         </label>
 
@@ -157,10 +152,9 @@
                     </div>
                 </div>
                 <div class="mb-5">
-                    <label class="block mb-1 text-zinc-700 text-[14px]" for="profile-photo">Profile Photo</label>
-                    <input name="profilePhoto"
-                        class="profile-photo cursor-pointer profile-pic file:bg-neutral-200 file:rounded-l-md file:py-1 file:px-3 file:cursor-pointer file:border-r file:border-r-neutral-400"
-                        type="file" accept="image/*" id="profile-photo">
+                    <label class="block mb-1 text-slate-700 text-[14px]" for="profile-photo">Profile Photo</label>
+                    <input name="profilePhoto" class="profile-photo cursor-pointer profile-pic" type="file"
+                        accept="image/*" id="profile-photo">
                 </div>
             </form>
             <div class="flex justify-end">
@@ -177,9 +171,12 @@
         </div>
 
         <div class="sec2 sec hidden">
+            <h4 class="heading">Add Addresses</h4>
+            <hr class="text-slate-200 mb-5">
             <form action="">
-                <div class="mb-8 curr">
-                    <h4 class="font-semibold text-zinc-700 mb-5">Current Address<span class="text-red-600">*</span></h4>
+                <div class="mb-10 curr">
+                    <h4 class="font-semibold text-slate-700 mb-5">Current Address<span class="text-red-600">*</span>
+                    </h4>
                     <div class="mb-5">
                         <label class="flex flex-col gap-1">
                             <span>Address<span class="text-red-600">*</span></span>
@@ -223,22 +220,14 @@
                         </div>
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-1 text-zinc-700 text-[14px]">Pin code<span class="text-red-600">*</span>
+                        <label class="block mb-1 text-slate-700 text-[14px]">Pin code<span class="text-red-600">*</span>
                         </label>
                         <input name="pincode" class="mb-1 pincode" placeholder="Enter Pin code" type="text"
                             maxlength="6" data-validation-type="required pincode" />
-                        <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
-                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
-                                viewBox="0 0 2048 2048">
-                                <path
-                                    d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
-                            </svg>
-                            <p class="error-message"></p>
-                        </div>
                     </div>
                 </div>
                 <div class="mb-5 perm">
-                    <h4 class="font-semibold text-zinc-700 mb-5">Permanent Address</h4>
+                    <h4 class="font-semibold text-slate-700 mb-5">Permanent Address</h4>
                     <button class="btn mb-5 same-address-btn" type="button">Same as Above</button>
                     <div class="mb-5">
                         <label class="flex flex-col gap-1">
@@ -279,17 +268,9 @@
                         </div>
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-1 text-zinc-700 text-[14px]">Pin code</label>
+                        <label class="block mb-1 text-slate-700 text-[14px]">Pin code</label>
                         <input name="pincode" class="mb-1 pincode" placeholder="Enter Pin code" type="text"
                             maxlength="6" data-validation-type="pincode" />
-                        <div class="text-red-600 flex items-center gap-1 text-[13px] error hidden">
-                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
-                                viewBox="0 0 2048 2048">
-                                <path
-                                    d="M960 0q133 0 255 34t230 96t194 150t150 195t97 229t34 256q0 133-34 255t-96 230t-150 194t-195 150t-229 97t-256 34q-133 0-255-34t-230-96t-194-150t-150-195t-97-229T0 960q0-133 34-255t96-230t150-194t195-150t229-97T960 0zm0 1792q114 0 220-30t199-84t169-130t130-168t84-199t30-221q0-114-30-220t-84-199t-130-169t-168-130t-199-84t-221-30q-115 0-221 30t-198 84t-169 130t-130 168t-84 199t-30 221q0 114 30 220t84 199t130 169t168 130t199 84t221 30zM896 512h128v640H896V512zm0 768h128v128H896v-128z" />
-                            </svg>
-                            <p class="error-message"></p>
-                        </div>
                     </div>
                 </div>
             </form>
@@ -316,13 +297,15 @@
         </div>
 
         <div class="sec3 sec hidden">
+            <h4 class="heading">Add Academic Information</h4>
+            <hr class="text-slate-200 mb-5">
             <form action="">
                 <div class="flex gap-5 mb-5">
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1"><span>Admission Number<span
                                     class="text-red-600">*</span></span><input name="admissionNo"
                                 placeholder="Enter Admission Number" type="text" class="admission-number"
-                                data-validation-type="required number admissionNumber"/>
+                                data-validation-type="required number admissionNumber" />
                         </label>
                     </div>
                     <div class="flex-1 shrink min-w-0">
@@ -342,7 +325,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="flex gap-5 mb-8">
+                <div class="flex gap-5 mb-5">
                     <div class="flex-1 shrink min-w-0">
                         <label class="flex flex-col gap-1 class-field"><span>Class<span
                                     class="text-red-600">*</span></span><select name="class" class="cursor-pointer"
@@ -421,15 +404,16 @@
         </div>
 
         <div class="sec4 sec hidden">
-            <h4 class="font-semibold text-xl text-center text-zinc-700">Add Parent Information</h4>
+            <h4 class="heading">Add Parent Information</h4>
+            <hr class="text-slate-200 mb-5">
             <template class="form-template">
-                <form action="" class="py-4">
+                <form action="" class="subform">
                     <div class="flex justify-end">
                         <button
-                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-btn"
+                            class="btn del-btn"
                             type="button">
-                            <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="22"
-                                height="22" viewBox="0 0 24 24">
+                            <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="20"
+                                height="20" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6Zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853ZM2 6h20m-12 5v5m4-5v5">
                                 </path>
@@ -467,7 +451,8 @@
                                 <section class="flex">
                                     <select name="mobileCountryCode"
                                         class="rounded-r-none border-r-0 cursor-pointer country-code shrink min-w-0 max-w-25 px-0"></select>
-                                    <input class="rounded-l-none flex-1" name="mobile" inputmode="numeric" pattern="[0-9]*" placeholder="Enter Mobile"
+                                    <input class="rounded-l-none flex-1" name="mobile" inputmode="numeric"
+                                        pattern="[0-9]*" placeholder="Enter Mobile"
                                         data-validation-type="required mobile" type="text" maxlength="10" />
                                 </section>
                             </label>
@@ -480,7 +465,7 @@
 
                         </div>
                     </div>
-                    <div class="flex gap-5 mb-8">
+                    <div class="flex gap-5 mb-2">
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 occupation"><span>Occupation</span><input
                                     name="occupation" placeholder="Enter Occupation" type="text" />
@@ -494,12 +479,11 @@
                             </label>
                         </div>
                     </div>
-                    <hr class="text-neutral-500" />
                 </form>
             </template>
 
-            <div class="form-container">
-                <form action="" class="py-4">
+            <div class="form-container flex flex-col gap-6 mb-6">
+                <form action="" class="subform">
                     <div class="flex gap-5 mb-5">
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 relation"><span>Relation<span
@@ -528,7 +512,8 @@
                                 <section class="flex">
                                     <select name="mobileCountryCode"
                                         class="rounded-r-none border-r-0 cursor-pointer country-code shrink min-w-0 max-w-25 px-0"></select>
-                                    <input class="rounded-l-none flex-1" name="mobile" inputmode="numeric" pattern="[0-9]*" placeholder="Enter Mobile"
+                                    <input class="rounded-l-none flex-1" name="mobile" inputmode="numeric"
+                                        pattern="[0-9]*" placeholder="Enter Mobile"
                                         data-validation-type="required mobile" type="text" maxlength="10" />
                                 </section>
                             </label>
@@ -539,7 +524,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="flex gap-5 mb-8">
+                    <div class="flex gap-5 mb-2">
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 occupation"><span>Occupation</span><input
                                     name="occupation" placeholder="Enter Occupation" type="text" />
@@ -558,12 +543,11 @@
 
                         </div>
                     </div>
-                    <hr class="text-neutral-500" />
                 </form>
             </div>
 
             <div class="flex justify-end mb-5">
-                <button class="btn px-1 py-1 text-zinc-700 add-btn">
+                <button class="btn px-1 py-1 text-slate-700 add-btn">
                     <svg class="fill-current" height="24" viewbox="0 0 16 16" width="24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -596,18 +580,18 @@
         </div>
 
         <div class="sec5 sec hidden">
-            <h4 class="font-semibold text-xl text-center text-zinc-700">
+            <h4 class="heading">
                 Add Course Information
             </h4>
-
+            <hr class="text-slate-200 mb-5">
             <template class="form-template">
-                <form action="" class="py-4">
+                <form action="" class="subform">
                     <div class="flex justify-end">
                         <button
-                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-btn"
+                            class="btn del-btn"
                             type="button">
-                            <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="22"
-                                height="22" viewBox="0 0 24 24">
+                            <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="20"
+                                height="20" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6Zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853ZM2 6h20m-12 5v5m4-5v5">
                                 </path>
@@ -638,7 +622,7 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-5 mb-8">
+                    <div class="flex gap-5 mb-2">
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 course-fees">
                                 <span>Course Fees (₹)<span class="text-red-600">*</span></span>
@@ -663,13 +647,11 @@
                             </label>
                         </div>
                     </div>
-
-                    <hr class="text-neutral-500">
                 </form>
             </template>
 
-            <div class="form-container">
-                <form action="" class="py-4">
+            <div class="form-container flex flex-col gap-6 mb-6">
+                <form action="" class="subform">
                     <div class="flex gap-5 mb-5">
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 course-name">
@@ -691,7 +673,7 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-5 mb-8">
+                    <div class="flex gap-5 mb-2">
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 course-fees">
                                 <span>Course Fees (₹)<span class="text-red-600">*</span></span>
@@ -716,13 +698,11 @@
                             </label>
                         </div>
                     </div>
-
-                    <hr class="text-neutral-500">
                 </form>
             </div>
 
             <div class="flex justify-end mb-5">
-                <button class="btn px-1 py-1 text-zinc-700 add-btn">
+                <button class="btn px-1 py-1 text-slate-700 add-btn">
                     <svg class="fill-current" height="24" viewbox="0 0 16 16" width="24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -756,18 +736,18 @@
         </div>
 
         <div class="sec6 sec hidden">
-            <h4 class="font-semibold text-xl text-center text-zinc-700">
+            <h4 class="heading">
                 Add Documents
             </h4>
-
+            <hr class="text-slate-200 mb-5">
             <template class="form-template">
-                <form action="" class="py-4">
+                <form action="" class="subform">
                     <div class="flex justify-end">
                         <button
-                            class="btn hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 flex justify-center items-center text-zinc-700 del-btn"
+                            class="btn del-btn"
                             type="button">
-                            <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="22"
-                                height="22" viewBox="0 0 24 24">
+                            <svg class="block stroke-current fill-none" xmlns="http://www.w3.org/2000/svg" width="20"
+                                height="20" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78L4 6Zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6l1.345-2.853ZM2 6h20m-12 5v5m4-5v5">
                                 </path>
@@ -775,7 +755,7 @@
                         </button>
                     </div>
 
-                    <div class="flex gap-5 mb-5">
+                    <div class="flex gap-5 mb-2">
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 document-type">
                                 <span>Document Type<span class="text-red-600">*</span></span>
@@ -801,14 +781,12 @@
                             </label>
                         </div>
                     </div>
-
-                    <hr class="text-neutral-500">
                 </form>
             </template>
 
-            <div class="form-container">
-                <form action="" class="py-4">
-                    <div class="flex gap-5 mb-5">
+            <div class="form-container flex flex-col gap-6 mb-6">
+                <form action="" class="subform">
+                    <div class="flex gap-5 mb-2">
                         <div class="flex-1 shrink min-w-0">
                             <label class="flex flex-col gap-1 document-type">
                                 <span>Document Type<span class="text-red-600">*</span></span>
@@ -833,8 +811,6 @@
                             </label>
                         </div>
                     </div>
-
-                    <hr class="text-neutral-500">
                 </form>
             </div>
 
@@ -844,7 +820,7 @@
             </label>
 
             <div class="flex justify-end mb-5">
-                <button class="btn px-1 py-1 text-zinc-700 add-btn" type="button">
+                <button class="btn px-1 py-1 text-slate-700 add-btn" type="button">
                     <svg class="fill-current" width="24" height="24" viewBox="0 0 16 16"
                         xmlns="http://www.w3.org/2000/svg">
                         <path

@@ -1,28 +1,51 @@
 @import "tailwindcss";
 
+*:focus {
+    outline: none;
+}
+
+*:focus-visible {
+    @apply ring-2 ring-blue-100;
+}
 
 @layer components {
-    .btn {
-        @apply text-zinc-700 bg-neutral-100 hover:bg-neutral-200 active:bg-neutral-100 border border-neutral-400 py-1 px-2 rounded-md cursor-pointer transition-all;
+    select {
+        @apply bg-white border border-slate-300 text-slate-700 focus:border-blue-500 px-1 py-0.5 cursor-pointer rounded-md transition-all;
     }
-
     th {
-        @apply font-medium text-zinc-500 uppercase tracking-wide text-[14px] px-4 py-3 text-left;
+        @apply font-medium text-slate-500 uppercase tracking-wider text-[14px] px-4 py-3.5 text-left;
     }
 
     td {
-        @apply max-w-62 text-zinc-700 tracking-wide text-[14px] px-4 py-3 text-left truncate;
+        @apply max-w-62 text-slate-700 tracking-wide text-[14px] px-4 py-3.5 text-left truncate;
     }
 
     tbody tr:hover {
-        @apply bg-zinc-50;
+        @apply bg-[#f3f7fa];
     }
 
-    .completed{
-        @apply bg-green-400;
+    label {
+        @apply text-slate-700;
     }
 
-    .pending{
-        @apply bg-red-400;
+    .previous,
+    .next {
+        @apply text-slate-600 border border-slate-300 cursor-pointer hover:bg-slate-100 transition-all px-2 py-1 rounded-full w-28 flex items-center justify-center gap-2;
+    }
+
+    .disabled {
+        @apply text-slate-400 border-slate-200 cursor-not-allowed hover:bg-white;
+    }
+
+    .completed {
+        @apply bg-green-100 text-green-700;
+    }
+
+    .pending {
+        @apply bg-red-100 text-red-700;
+    }
+
+    .export{
+        @apply flex items-center justify-center cursor-pointer p-1 rounded-lg border border-slate-300 bg-white text-slate-600 hover:bg-slate-100 hover:border-slate-400 hover:text-slate-800 active:bg-white active:text-slate-600 active:border-slate-300 transition-all;
     }
 }

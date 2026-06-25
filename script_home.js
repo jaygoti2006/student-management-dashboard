@@ -1,12 +1,14 @@
-const classFilterInput = document.querySelector("#class");
-const genderFilterInput = document.querySelector("#gender");
-const feeStatusFilterInput = document.querySelector("#feeStatus");
-const searchInput = document.querySelector(".search-input");
+import * as XLSX from "./node_modules/xlsx/xlsx.mjs";
+
 const rowTemp = document.querySelector(".row-temp").content.firstElementChild.cloneNode(true);
 const rowContainer = document.querySelector("tbody");
 const menu = document.querySelector(".menu");
+const filters = document.querySelector(".filters").querySelectorAll("[data-name]");
 const currMin = document.querySelector(".current-min"), currMax = document.querySelector(".current-max"), total = document.querySelector(".total");
+const currPage = document.querySelector(".current-page"), totalPage = document.querySelector(".total-page");
 const modal = document.querySelector(".modal");
+const pageNav = document.querySelector(".page-navigation");
+const emptyInfo = document.querySelector(".empty-info");
 
 const curr = {
     order: 0,
@@ -15,7 +17,7 @@ const curr = {
     gender: "all",
     feeStatus: "all",
     search: "",
-    entries: 10,
+    entries: Number(document.querySelector("#rows-per-page").value),
     page: 1,
     delTarget: null
 }
@@ -33,14 +35,10 @@ for (const key of keys) {
             rollNumber: t.academicInfo.rollNumber,
             gender: t.personalInfo.gender,
             mobile: t.personalInfo.mobile,
-            feeStatus: t.academicInfo.feeStatus,
-            admissionDate: t.academicInfo.admissionDate
+            feeStatus: t.academicInfo.feeStatus
         }
     );
 }
-
-document.querySelector(".total").textContent = keys.length;
-document.querySelector(".current-max").textContent = Math.min(keys.length, curr.entries);
 
 const data = [];
 
@@ -72,6 +70,7 @@ function updateData() {
     if (curr.order === 1) data.reverse();
 
     total.textContent = data.length;
+    totalPage.textContent = Math.ceil(data.length / curr.entries);
     curr.page = 1;
 }
 updateData();
@@ -100,8 +99,46 @@ function loadData() {
     }
     currMin.textContent = Math.min((curr.page - 1) * curr.entries + 1, data.length);
     currMax.textContent = Math.min(curr.page * curr.entries, data.length);
+
+    if (data.length !== 0) currPage.textContent = curr.page;
+    else currPage.textContent = 0;
+
+    if (curr.page === 1) pageNav.querySelector(".previous").classList.add("disabled");
+    else pageNav.querySelector(".previous").classList.remove("disabled");
+    if (curr.page * curr.entries >= data.length) pageNav.querySelector(".next").classList.add("disabled");
+    else pageNav.querySelector(".next").classList.remove("disabled");
+
+    if(data.length===0) emptyInfo.classList.remove("hidden");
+    else emptyInfo.classList.add("hidden");
 }
 loadData();
+
+function exportAsExcel() {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(
+        workbook,
+        worksheet,
+        "Students"
+    );
+    XLSX.writeFile(
+        workbook,
+        "students.xlsx"
+    );
+}
+
+function exportAsCSV() {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    XLSX.writeFile(
+        {
+            SheetNames: ["Students"],
+            Sheets: {
+                Students: worksheet
+            }
+        },
+        "students.csv"
+    );
+}
 
 modal.addEventListener("click", function (e) {
     if (e.target.closest(".modal-cancel-btn")) {
@@ -142,7 +179,7 @@ modal.addEventListener("click", function (e) {
     }
 });
 
-document.querySelector(".options").addEventListener("input", function (e) {
+menu.addEventListener("input", function (e) {
     curr[e.target.getAttribute("data-name")] = e.target.value;
     updateData();
     loadData();
@@ -160,13 +197,22 @@ menu.addEventListener("click", function (e) {
             e.target.closest(".sort-toggle").querySelector(".asce").classList.remove("hidden");
         }
         data.reverse();
-        curr.page = 1;
         loadData();
-    } else if (e.target.closest(".search-btn")) {
-        curr.search = searchInput.value;
+    } else if (e.target.closest(".add-btn")) {
+        sessionStorage.clear();
+    } else if (e.target.closest(".reset-btn")) {
+        filters.forEach((el) => { el.value = "all"; });
+        curr.class = "all";
+        curr.feeStatus = "all";
+        curr.gender = "all";
         updateData();
         loadData();
-    } else if (e.target.closest(".previous")) {
+    } else if (e.target.closest(".export-excel")) exportAsExcel();
+    else if (e.target.closest(".export-csv")) exportAsCSV();
+});
+
+pageNav.addEventListener("click", function (e) {
+    if (e.target.closest(".previous")) {
         if (curr.page === 1) return;
         curr.page--;
         loadData();
@@ -175,8 +221,6 @@ menu.addEventListener("click", function (e) {
             curr.page++;
             loadData();
         }
-    } else if (e.target.closest(".add-btn")) {
-        sessionStorage.clear();
     }
 });
 
@@ -189,10 +233,4 @@ rowContainer.addEventListener("click", function (e) {
     } else if (e.target.closest(".info-btn")) {
 
     }
-});
-
-searchInput.addEventListener("input", function (e) {
-    curr.search = searchInput.value;
-    updateData();
-    loadData();
 });
