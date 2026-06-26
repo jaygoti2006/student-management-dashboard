@@ -18,7 +18,7 @@ body{
     }
 
     .container{
-        @apply bg-slate-50/50 shadow-md border border-slate-200/60 rounded-xl transition-all duration-200 p-8;
+        @apply bg-slate-50/50 shadow-lg border border-slate-200/60 rounded-xl transition-all duration-200 p-8;
     }
     .subcontainer{
         @apply bg-slate-100/70 shadow-md border border-slate-200/60 rounded-xl transition-all duration-200 p-8;
@@ -39,5 +39,9 @@ body{
 
     .subheading{
         @apply text-lg text-slate-700 mb-6;
+    }
+
+    .export{
+        @apply flex items-center h-fit justify-center cursor-pointer p-1 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:border-slate-400 hover:text-slate-800 active:bg-white active:text-slate-700 active:border-slate-300 transition-all;
     }
 }

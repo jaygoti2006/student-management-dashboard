@@ -1,4 +1,5 @@
 const params = new URLSearchParams(location.search);
+const API_KEY="sk_a38007d4da3d47b54ba044c425ccd74291d4ab7b";
 
 const student = JSON.parse(localStorage.getItem("addno" + params.get("id")));
 
@@ -24,6 +25,34 @@ function capitalize(str) {
 
 function getAddress(a){
     return ans=`${a.address}, <br> ${a.city}, <br> ${a.state}, <br> ${a.country}. <br> ${a.pincode}`;
+}
+
+async function generatePDF(html) {
+    const response = await fetch("https://api.pdfshift.io/v3/convert/pdf", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-API-Key": API_KEY
+        },
+        body: JSON.stringify({
+            source: html
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to generate PDF");
+    }
+
+    const blob = await response.blob();
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "student.pdf";
+    a.click();
+
+    URL.revokeObjectURL(url);
 }
 
 if (student.personalInfo.profilePhoto) document.querySelector(".profile-photo").src = student.personalInfo.profilePhoto;
@@ -81,4 +110,8 @@ student.documents.forEach((el, idx) => {
         el1.textContent = el[el1.getAttribute("data-type")];
     });
     documentContainer.append(t);
+});
+
+document.querySelector(".export-pdf").addEventListener("click",function(e){
+    generatePDF(`<html>${document.querySelector(".main").outerHTML}</html>`);
 });
