@@ -69,6 +69,8 @@ header.querySelector(".dob").textContent = (new Date(student.personalInfo.dateOf
     day: 'numeric'
 });
 
+document.querySelector(`.${student.personalInfo.gender}`).classList.remove("hidden");
+
 personalInfo.querySelectorAll("[data-type]").forEach((el) => {
     const d = el.getAttribute("data-type");
     if (d.endsWith("CountryCode") && student.personalInfo[d]!=="") student.personalInfo[d] = "+" + student.personalInfo[d];
