@@ -3,7 +3,8 @@ const baseURL = "https://api.countrystatecity.in/v1";
 
 const curr = {
     page: 1,
-    s: null
+    s: null,
+    isLoaded: [false, false]
 };
 
 const date = new Date();
@@ -29,9 +30,16 @@ addressFields.forEach((s) => {
 });
 
 const formTemps = [];
-sections.forEach((el) => {
+sections.forEach((el, idx) => {
     if (el.querySelector(".form-template")) {
         formTemps.push(el.querySelector(".form-template").content.firstElementChild.cloneNode(true));
+        const t = formTemps[idx].cloneNode(true);
+        t.querySelector(".del-btn").remove();
+        if (idx === 5) {
+            t.querySelector("[name='documentName']").replaceChildren();
+            t.querySelector("[name='documentName']").append(createOption("aadhar-card", "Aadhar Card"));
+        }
+        el.querySelector(".form-container").append(t);
     } else formTemps.push(null);
     const t = [];
     el.querySelectorAll("input,select").forEach((el1) => t.push(el1));
@@ -44,9 +52,9 @@ const session = (sessionStorage.getItem("student") === null) ? null : JSON.parse
 
 const params = new URLSearchParams(location.search);
 
-if(params.get("mode")==="edit" && params.get("id")) {
-    curr.s=JSON.parse(localStorage.getItem("addno" + params.get("id")));
-    sections[2].querySelector(".admission-number").setAttribute("disabled",true);
+if (params.get("mode") === "edit" && params.get("id")) {
+    curr.s = JSON.parse(localStorage.getItem("addno" + params.get("id")));
+    sections[2].querySelector(".admission-number").setAttribute("disabled", true);
 }
 
 
@@ -133,21 +141,33 @@ function updateCities(el, s, ciso2, siso2, flag1, flag2) {
             const t = createOption(city.name, city.name);
             el.append(t);
         });
-        if (curr.s && flag1) {
-            if (el.closest(".curr")) currAddress[3].value = curr.s.address.currentAddress.city;
-            else permAddress[3].value = curr.s.address.permanentAddress.city;
-        }
-        if (session && flag2) {
-            if (el.closest(".curr")) currAddress[3].value = session.address.currentAddress.city;
-            else permAddress[3].value = session.address.permanentAddress.city;
+
+        if (flag1) {
+            if (el.closest(".curr")) {
+                currAddress[3].value = session.address.currentAddress.city;
+                curr.isLoaded[0] = true;
+            }
+            else {
+                permAddress[3].value = session.address.permanentAddress.city;
+                curr.isLoaded[1] = true;
+            }
+        } else if (flag2) {
+            if (el.closest(".curr")) {
+                currAddress[3].value = curr.s.address.currentAddress.city;
+                curr.isLoaded[0] = true;
+            }
+            else {
+                permAddress[3].value = curr.s.address.permanentAddress.city;
+                curr.isLoaded[1] = true;
+            }
         }
     });
 }
 
 function updateStates(el, c, ciso2, flag1, flag2) {
     el.querySelectorAll("option[value]:not([value=''])").forEach((child) => { child.remove() });
-    if (el.closest(".curr")) updateCities(currAddress[3], "", null, null);
-    else updateCities(permAddress[3], "", null, null);
+    if (el.closest(".curr")) updateCities(currAddress[3], "", null, null, false, false);
+    else updateCities(permAddress[3], "", null, null, false, false);
     if (c === "") {
         el.value = "";
         return;
@@ -160,7 +180,16 @@ function updateStates(el, c, ciso2, flag1, flag2) {
             t.setAttribute("data-siso2", state.iso2);
             el.append(t);
         });
-        if(curr.s && flag1) {
+
+        if (flag1) {
+            if (el.closest(".curr")) {
+                currAddress[2].value = session.address.currentAddress.state;
+                updateCities(currAddress[3], currAddress[2].value, currAddress[2].selectedOptions[0].getAttribute("data-ciso2"), currAddress[2].selectedOptions[0].getAttribute("data-siso2"), flag1, flag2);
+            } else {
+                permAddress[2].value = session.address.permanentAddress.state;
+                updateCities(permAddress[3], permAddress[2].value, permAddress[2].selectedOptions[0].getAttribute("data-ciso2"), permAddress[2].selectedOptions[0].getAttribute("data-siso2"), flag1, flag2);
+            }
+        } else if (flag2) {
             if (el.closest(".curr")) {
                 currAddress[2].value = curr.s.address.currentAddress.state;
                 updateCities(currAddress[3], currAddress[2].value, currAddress[2].selectedOptions[0].getAttribute("data-ciso2"), currAddress[2].selectedOptions[0].getAttribute("data-siso2"), flag1, flag2);
@@ -169,19 +198,10 @@ function updateStates(el, c, ciso2, flag1, flag2) {
                 updateCities(permAddress[3], permAddress[2].value, permAddress[2].selectedOptions[0].getAttribute("data-ciso2"), permAddress[2].selectedOptions[0].getAttribute("data-siso2"), flag1, flag2);
             }
         }
-        if (session && flag2) {
-            if (el.closest(".curr")) {
-                currAddress[2].value = session.address.currentAddress.state;
-                updateCities(currAddress[3], currAddress[2].value, currAddress[2].selectedOptions[0].getAttribute("data-ciso2"), currAddress[2].selectedOptions[0].getAttribute("data-siso2"), flag1, flag2);
-            } else {
-                permAddress[2].value = session.address.permanentAddress.state;
-                updateCities(permAddress[3], permAddress[2].value, permAddress[2].selectedOptions[0].getAttribute("data-ciso2"), permAddress[2].selectedOptions[0].getAttribute("data-siso2"), flag1, flag2);
-            }
-        }
     });
 }
 
-function loadCountryStateCity(s,flag1,flag2) {
+function loadCountryStateCity(s, flag1, flag2) {
     currAddress[1].value = s.address.currentAddress.country;
     updateStates(currAddress[2], currAddress[1].value, currAddress[1].selectedOptions[0].getAttribute("data-ciso2"), flag1, flag2);
 
@@ -190,6 +210,7 @@ function loadCountryStateCity(s,flag1,flag2) {
 
     sections[0].querySelectorAll(".country-code").forEach((el) => {
         el.value = s.personalInfo[el.name];
+        if (el.name === "alternateMobileCountryCode" && el.value === "") el.value = "91";
     });
 
     [...sections[3].querySelector(".form-container").children].forEach((el, idx) => {
@@ -214,8 +235,8 @@ getCountries().then((data) => {
     };
     document.querySelectorAll(".country-code").forEach(addCountryCode);
     formTemps[3].querySelectorAll(".country-code").forEach(addCountryCode);
-    if (curr.s) loadCountryStateCity(curr.s,true,false);
-    if (session) loadCountryStateCity(session,false,true);
+    if (session) loadCountryStateCity(session, true, false);
+    else if (curr.s) loadCountryStateCity(curr.s, false, true);
 });
 
 function showError(el, message) {
@@ -237,14 +258,14 @@ const validators = {
         return true;
     },
     name: (el) => {
-        if (!/^[A-Za-z ]*$/.test(el.value)) {
+        if (!/^[A-Za-z .']*$/.test(el.value)) {
             showError(el, "Invalid Name!");
             return false;
         }
         return true;
     },
     email: (el) => {
-        if (!/^.+\@.+\..+$/.test(el.value) && el.value !== "") {
+        if (!el.checkValidity() && el.value !== "") {
             showError(el, "Invalid Email!");
             return false;
         }
@@ -288,7 +309,7 @@ const validators = {
         return true;
     },
     admissionNumber: (el) => {
-        if(curr.s) return true;
+        if (curr.s) return true;
         if (localStorage.getItem("addno" + el.value)) {
             showError(el, "Admission Number already exists!");
             return false;
@@ -385,6 +406,7 @@ function createStudent() {
 
 function addRecordLocal(addno) {
     const student = createStudent();
+    if (student.personalInfo.alternateMobile === "") student.personalInfo.alternateMobileCountryCode = "";
     if (sections[0].querySelector("input[name='profilePhoto']").files[0]) {
         const reader = new FileReader();
 
@@ -394,8 +416,7 @@ function addRecordLocal(addno) {
         });
 
         reader.readAsDataURL(sections[0].querySelector("input[name='profilePhoto']").files[0]);
-    }
-    else localStorage.setItem("addno" + addno, JSON.stringify(student));
+    } else localStorage.setItem("addno" + addno, JSON.stringify(student));
 }
 
 function addRecordSession() {
@@ -415,7 +436,12 @@ function updateFromDOB() {
     }
 }
 
-function loadFromStorage(s) {
+function loadFromStorage() {
+    let s;
+    if (session) s = session;
+    else if (curr.s) s = curr.s;
+    else return;
+
     for (let el of sectionFields[0]) {
         if (el.getAttribute("type") !== "file") el.value = s.personalInfo[el.getAttribute("name")];
     }
@@ -460,9 +486,11 @@ function loadFromStorage(s) {
         if (idx !== 0) {
             const t = formTemps[5].cloneNode(true);
             if (el.documentName === "leaving-certificate") {
-                t.setAttribute("data-lc", "yes");
+                t.setAttribute("data-lc", "");
                 t.querySelector("[name='documentName']").replaceChildren();
                 t.querySelector("[name='documentName']").append(createOption("leaving-certificate", "Leaving Certificate"));
+                t.querySelector(".del-btn").remove();
+                sections[5].querySelector("[name='admittedToAnother']").setAttribute("checked", "");
             }
             t.querySelectorAll("input,select").forEach((el1) => {
                 el1.value = el[el1.getAttribute("name")];
@@ -474,22 +502,8 @@ function loadFromStorage(s) {
             });
         }
     });
-    if (s.admittedToAnother) {
-        sections[5].querySelector("[name='admittedToAnother']").setAttribute("checked", "");
-        sections[5].querySelector("[data-lc]").querySelector(".del-btn").remove();
-    }
 }
-
-function loadFromLocal() {
-    if (params.get("mode") === "edit") loadFromStorage(curr.s);
-}
-
-function loadFromSession() {
-    if (session !== null) loadFromStorage(session);
-}
-
-loadFromLocal();
-loadFromSession();
+loadFromStorage();
 
 if (params.get("mode") === "edit") {
     sections[3].setAttribute("disabled", true);
@@ -505,12 +519,12 @@ sectionContainer.addEventListener("input", function (e) {
     if (e.target.closest("div").querySelector(".error")) e.target.closest("div").querySelector(".error").remove();
     if (e.target.closest(".country")) {
         const t = e.target.closest(".country");
-        if (e.target.closest(".curr")) updateStates(currAddress[2], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), false);
-        else updateStates(permAddress[2], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), false);
+        if (e.target.closest(".curr")) updateStates(currAddress[2], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), false, false);
+        else updateStates(permAddress[2], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), false, false);
     } else if (e.target.closest(".state")) {
         const t = e.target.closest(".state");
-        if (e.target.closest(".curr")) updateCities(currAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"), false);
-        else updateCities(permAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"), false);
+        if (e.target.closest(".curr")) updateCities(currAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"), false, false);
+        else updateCities(permAddress[3], t.value, t.selectedOptions[0].getAttribute("data-ciso2"), t.selectedOptions[0].getAttribute("data-siso2"), false, false);
     } else if (e.target.closest(".profile-photo")) {
         const file = e.target.closest(".profile-photo").files[0];
         if (file.size > 10 * 1024) {
@@ -532,11 +546,17 @@ sectionContainer.addEventListener("click", function (e) {
             sections[curr.page - 1].classList.add("hidden");
             badges[curr.page - 1].classList.remove("badge-current");
             badges[curr.page - 1].classList.add("badge-complete");
+            badges[curr.page - 1].querySelector("span").classList.add("hidden");
+            badges[curr.page - 1].querySelector("svg").classList.remove("hidden");
             curr.page++;
             sections[curr.page - 1].classList.remove("hidden");
             progressFill.style.width = (curr.page * 100 / 6) + "%";
             badges[curr.page - 1].classList.remove("badge-upcoming");
             badges[curr.page - 1].classList.add("badge-current");
+            scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         }
     } else if (e.target.closest(".previous")) {
         sections[curr.page - 1].classList.add("hidden");
@@ -547,6 +567,12 @@ sectionContainer.addEventListener("click", function (e) {
         progressFill.style.width = (curr.page * 100 / 6) + "%";
         badges[curr.page - 1].classList.remove("badge-complete");
         badges[curr.page - 1].classList.add("badge-current");
+        badges[curr.page - 1].querySelector("svg").classList.add("hidden");
+        badges[curr.page - 1].querySelector("span").classList.remove("hidden");
+        scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     } else if (e.target.closest(".same-address-btn")) {
         for (let i = 0; i < currAddress.length; i++) {
             if (permAddress[i].tagName === "SELECT") {
@@ -561,15 +587,14 @@ sectionContainer.addEventListener("click", function (e) {
         const t = formTemps[curr.page - 1].cloneNode(true);
         if (t.querySelector(".country-code")) t.querySelector(".country-code").value = "91";
         sections[curr.page - 1].querySelector(".form-container").append(t);
-    }
-    else if (e.target.closest(".del-btn")) e.target.closest("form").remove();
+    } else if (e.target.closest(".del-btn")) e.target.closest("form").remove();
     else if (e.target.closest("[name='admittedToAnother']")) {
         if (e.target.closest("[name='admittedToAnother']").checked) {
             const t = formTemps[5].cloneNode(true);
             t.querySelector(".del-btn").remove();
             t.querySelector("[name='documentName']").replaceChildren();
             t.querySelector("[name='documentName']").append(createOption("leaving-certificate", "Leaving Certificate"));
-            t.setAttribute("data-lc", "yes");
+            t.setAttribute("data-lc", "");
             sections[5].querySelector(".form-container").append(t);
         } else sections[5].querySelector("[data-lc]").remove();
     } else if (e.target.closest(".submit")) {
@@ -577,7 +602,7 @@ sectionContainer.addEventListener("click", function (e) {
             if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null || curr.s) {
                 addRecordLocal(document.querySelector(".admission-number").value);
                 window.open("/index.html", "_self");
-            }else alert("admission number already exist");
+            } else alert("admission number already exist");
         }
     }
 });
@@ -592,5 +617,5 @@ sectionContainer.addEventListener("keydown", function (e) {
 });
 
 window.addEventListener("beforeunload", function (e) {
-    addRecordSession();
+    if (curr.isLoaded[0] && curr.isLoaded[1]) addRecordSession();
 });
