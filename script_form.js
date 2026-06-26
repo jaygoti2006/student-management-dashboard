@@ -353,7 +353,7 @@ function validateAll() {
             permAddress.forEach((el) => {
                 if (el.value.trim() === "") {
                     ok2 = false;
-                    showError(el, "Feild can't be empty!");
+                    showError(el, "Field can't be empty!");
                 }
             });
             if (!ok2) ok = false;

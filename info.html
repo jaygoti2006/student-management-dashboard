@@ -10,103 +10,120 @@
 </head>
 
 <body class="p-10">
-    <div class="h-60 profile-photo-container flex justify-center mb-5">
-        <img class="profile-photo h-full" src="./default-avatar.jpg" alt="">
-    </div>
-    <h2 class="full-name text-center text-3xl font-semibold mb-5"></h2>
-    <div>
-        <section class="grid grid-cols-4 gap-15 py-5">
-            <section data-type="personalInfo">
-                <h4 class="text-2xl font-semibold mb-3">Personal Information</h4>
-                <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
-                    <span class="label">First Name</span>
-                    <span data-type="firstName"></span>
-                    <span class="label">Middle Name</span>
-                    <span data-type="middleName"></span>
-                    <span class="label">Last Name</span>
-                    <span data-type="lastName"></span>
-                    <span class="label">Email</span>
-                    <span data-type="email"></span>
-                    <span class="label">Mobile</span>
-                    <span>
-                        <span data-type="mobileCountryCode"></span>
-                        <span data-type="mobile"></span>
-                    </span>
-                    <span class="label">Alternate Mobile</span>
-                    <span>
-                        <span data-type="alternateMobileCountryCode"></span>
-                        <span data-type="alternateMobile"></span>
-                    </span>
-                    <span class="label">Gender</span>
-                    <span data-type="gender"></span>
-                    <span class="label">DOB</span>
-                    <span data-type="dateOfBirth"></span>
-                    <span class="label">Blood Group</span>
-                    <span data-type="bloodGroup"></span>
-                </div>
-            </section>
+    <header class="container profile-header flex items-center gap-10 mb-10">
+        <div class="profile-photo-container flex items-center min-h-60 shrink min-w-0">
+            <img class="profile-photo rounded-xl max-w-70 shrink min-w-0" src="./default-avatar.jpg" alt="">
+        </div>
+        <div class="flex flex-col gap-4 text-lg">
+            <div class="full-name text-xl font-bold"></div>
+            <div class="flex items-center gap-2 text-slate-800">
+                <span><svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 32 32">
+                        <path
+                            d="M28 6H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Zm-2.2 2L16 14.78L6.2 8ZM4 24V8.91l11.43 7.91a1 1 0 0 0 1.14 0L28 8.91V24Z" />
+                    </svg></span>
+                <span class="email">vihaan.reddy@example.com</span>
+            </div>
+            <div class="flex items-center gap-2 text-slate-800">
+                <span><svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 32 32">
+                        <path
+                            d="M26 29h-.17C6.18 27.87 3.39 11.29 3 6.23A3 3 0 0 1 5.76 3h5.51a2 2 0 0 1 1.86 1.26L14.65 8a2 2 0 0 1-.44 2.16l-2.13 2.15a9.37 9.37 0 0 0 7.58 7.6l2.17-2.15a2 2 0 0 1 2.17-.41l3.77 1.51A2 2 0 0 1 29 20.72V26a3 3 0 0 1-3 3ZM6 5a1 1 0 0 0-1 1v.08C5.46 12 8.41 26 25.94 27a1 1 0 0 0 1.06-.94v-5.34l-3.77-1.51l-2.87 2.85l-.48-.06c-8.7-1.09-9.88-9.79-9.88-9.88l-.06-.48l2.84-2.87L11.28 5Z" />
+                    </svg></span>
+                <span class="mobile">+91 9512877862</span>
+            </div>
+            <div>
+                Class <span class="class"></span>-<span class="division"></span>
+            </div>
+            <div class="gender">
+                Male
+            </div>
+            <div>
+                DOB - <span class="dob"></span>
+            </div>
+        </div>
+    </header>
 
-            <section data-type="currentAddress">
-                <h4 class="text-2xl font-semibold mb-3">Current Address</h4>
-                <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
-                    <span class="label">Address</span>
-                    <span data-type="address"></span>
-                    <span class="label">Country</span>
-                    <span data-type="country"></span>
-                    <span class="label">State</span>
-                    <span data-type="state"></span>
-                    <span class="label">City</span>
-                    <span data-type="city"></span>
-                    <span class="label">Pincode</span>
-                    <span data-type="pincode"></span>
-                </div>
-            </section>
-
-            <section data-type="permanentAddress">
-                <h4 class="text-2xl font-semibold mb-3">Permanent Address</h4>
-                <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
-                    <span class="label">Address</span>
-                    <span data-type="address"></span>
-                    <span class="label">Country</span>
-                    <span data-type="country"></span>
-                    <span class="label">State</span>
-                    <span data-type="state"></span>
-                    <span class="label">City</span>
-                    <span data-type="city"></span>
-                    <span class="label">Pincode</span>
-                    <span data-type="pincode"></span>
-                </div>
-            </section>
-
-            <section data-type="academicInfo">
-                <h4 class="text-2xl font-semibold mb-3">Academic Information</h4>
-                <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
-                    <span class="label">Admission No.</span>
-                    <span data-type="admissionNo"></span>
-                    <span class="label">Admission Date</span>
-                    <span data-type="admissionDate"></span>
-                    <span class="label">Academic Year</span>
-                    <span data-type="academicYear"></span>
-                    <span class="label">Roll No.</span>
-                    <span data-type="rollNumber"></span>
-                    <span class="label">Class</span>
-                    <span data-type="class"></span>
-                    <span class="label">Division</span>
-                    <span data-type="division"></span>
-                    <span class="label">Fee Status</span>
-                    <span data-type="feeStatus"></span>
-                </div>
-            </section>
+    <div class="flex flex-col gap-10">
+        <section class="container" data-type="personalInfo">
+            <h4 class="heading">Personal Information</h4>
+            <h6 class="subheading">Basic information about the student</h6>
+            <div class="grid grid-cols-[170px_1fr] gap-x-3 gap-y-1.5 w-fit">
+                <span class="label">First Name</span>
+                <span data-type="firstName"></span>
+                <span class="label">Middle Name</span>
+                <span data-type="middleName"></span>
+                <span class="label">Last Name</span>
+                <span data-type="lastName"></span>
+                <span class="label">Email</span>
+                <span data-type="email"></span>
+                <span class="label">Mobile</span>
+                <span>
+                    <span data-type="mobileCountryCode"></span>
+                    <span data-type="mobile"></span>
+                </span>
+                <span class="label">Alternate Mobile</span>
+                <span>
+                    <span data-type="alternateMobileCountryCode"></span>
+                    <span data-type="alternateMobile"></span>
+                </span>
+                <span class="label">Gender</span>
+                <span data-type="gender"></span>
+                <span class="label">DOB</span>
+                <span data-type="dateOfBirth"></span>
+                <span class="label">Blood Group</span>
+                <span data-type="bloodGroup"></span>
+            </div>
         </section>
 
-        <section class="py-5" data-type="parents">
-            <h4 class="text-3xl font-semibold mb-3">Parents</h4>
-            <template id="parent-template">
+        <section class="container" data-type="academicInfo">
+            <h4 class="heading">Academic Information</h4>
+            <h6 class="subheading">Admission and academic information</h6>
+            <div class="grid  grid-cols-[170px_1fr] gap-x-3 gap-y-1.5 w-fit">
+                <span class="label">Admission No.</span>
+                <span data-type="admissionNo"></span>
+                <span class="label">Admission Date</span>
+                <span data-type="admissionDate"></span>
+                <span class="label">Academic Year</span>
+                <span data-type="academicYear"></span>
+                <span class="label">Roll No.</span>
+                <span data-type="rollNumber"></span>
+                <span class="label">Class</span>
+                <span data-type="class"></span>
+                <span class="label">Division</span>
+                <span data-type="division"></span>
+                <span class="label">Fee Status</span>
+                <span data-type="feeStatus"></span>
+            </div>
+        </section>
+
+        <section class="container" data-type="address">
+            <h4 class="heading">Addresses</h4>
+            <h6 class="subheading">Residential and contact address details</h6>
+            <div class="flex flex-col gap-10">
                 <section>
-                    <h4 class="text-2xl font-semibold mb-3 heading">Parent1</h4>
-                    <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
-                        <span class="label">Relation</span>
-                        <span data-type="relation"></span>
+                    <h4 class="text-2xl font-semibold mb-3">Current Address</h4>
+                    <div class="" data-type="currentAddress">
+
+                    </div>
+                </section>
+
+                <section>
+                    <h4 class="text-2xl font-semibold mb-3">Permanent Address</h4>
+                    <div data-type="permanentAddress">
+
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="container" data-type="parents">
+            <h4 class="heading">Parents</h4>
+            <h6 class="subheading">Parent and guardian contact information</h6>
+            <template id="parent-template">
+                <section class="subcontainer">
+                    <h4 class="text-2xl font-semibold mb-3 heading"></h4>
+                    <div class="grid grid-cols-[170px_1fr] gap-x-3 gap-y-1.5 w-fit">
                         <span class="label">Name</span>
                         <span data-type="name"></span>
                         <span class="label">Mobile</span>
@@ -120,49 +137,61 @@
                     </div>
                 </section>
             </template>
-            <div class="grid grid-cols-4 parent-container">
+            <div class="grid grid-cols-3 gap-8 parent-container">
 
             </div>
         </section>
 
-        <section class="py-5" data-type="courses">
-            <h4 class="text-3xl font-semibold mb-3">Courses</h4>
+        <section class="container" data-type="courses">
+            <h4 class="heading">Courses</h4>
+            <h6 class="subheading">Courses enrolled by the student</h6>
             <template id="course-template">
-                <section>
-                    <h4 class="text-2xl font-semibold mb-3 heading">Course1</h4>
-                    <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
-                        <span class="label">Course Name</span>
-                        <span data-type="courseName"></span>
-                        <span class="label">Faculty Name</span>
-                        <span data-type="faculty"></span>
-                        <span class="label">Course Fees</span>
-                        <span data-type="fees"></span>
-                        <span class="label">Duration</span>
-                        <span data-type="duration"></span>
-                    </div>
-                </section>
+                <tr>
+                    <td>1</td>
+                    <td data-type="courseName"></td>
+                    <td data-type="faculty"></td>
+                    <td data-type="fees"></td>
+                    <td data-type="duration"></td>
+                </tr>
             </template>
-            <div class="grid grid-cols-4 course-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Course Name</th>
+                        <th>Faculty Name</th>
+                        <th>Fees</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody class="course-container divide-y divide-slate-200">
 
-            </div>
+                </tbody>
+            </table>
         </section>
 
-        <section class="py-5" data-type="documents">
-            <h4 class="text-3xl font-semibold mb-3">Documents</h4>
+        <section class="container" data-type="documents">
+            <h4 class="heading">Documents</h4>
+            <h6 class="subheading">Supporting documents and identification records</h6>
             <template id="document-template">
-                <section>
-                    <h4 class="text-2xl font-semibold mb-3 heading">Document1</h4>
-                    <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 w-fit">
-                        <span class="label">Document Type</span>
-                        <span data-type="documentName"></span>
-                        <span class="label">Document No.</span>
-                        <span data-type="documentNumber"></span>
-                    </div>
-                </section>
+                <tr>
+                    <td>1</td>
+                    <td data-type="documentName"></td>
+                    <td data-type="documentNumber"></td>
+                </tr>
             </template>
-            <div class="grid grid-cols-4 document-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Document Type</th>
+                        <th>Document No.</th>
+                    </tr>
+                </thead>
+                <tbody class="document-container divide-y divide-slate-200">
 
-            </div>
+                </tbody>
+            </table>
         </section>
     </div>
 </body>

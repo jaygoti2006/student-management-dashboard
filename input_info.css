@@ -1,13 +1,43 @@
 @import "tailwindcss";
 
+body{
+    @apply text-slate-900;
+}
+
 @layer components {
+    th {
+        @apply font-medium text-slate-900 uppercase tracking-wider text-[14px] px-4 py-3.5 text-left;
+    }
+
+    td {
+        @apply max-w-62 text-slate-700 tracking-wide text-[14px] px-4 py-3.5 text-left truncate;
+    }
+
+    thead{
+        @apply bg-slate-100;
+    }
+
+    .container{
+        @apply bg-slate-50/50 shadow-md border border-slate-200/60 rounded-xl transition-all duration-200 p-8;
+    }
+    .subcontainer{
+        @apply bg-slate-100/70 shadow-md border border-slate-200/60 rounded-xl transition-all duration-200 p-8;
+    }
     .label {
-        @apply text-neutral-600
+        @apply text-slate-600;
     }
 
     span[data-type] {
         white-space: wrap;
         word-break: break-word;
         font-weight: 600;
+    }
+
+    .heading{
+        @apply text-3xl font-bold mb-1;
+    }
+
+    .subheading{
+        @apply text-lg text-slate-700 mb-6;
     }
 }

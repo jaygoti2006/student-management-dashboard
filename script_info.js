@@ -2,7 +2,6 @@ const params = new URLSearchParams(location.search);
 
 const student = JSON.parse(localStorage.getItem("addno" + params.get("id")));
 
-
 const personalInfo = document.querySelector("[data-type='personalInfo']");
 const currentAddress = document.querySelector("[data-type='currentAddress']");
 const permanentAddress = document.querySelector("[data-type='permanentAddress']");
@@ -16,52 +15,68 @@ const documentTemp = document.querySelector("#document-template").content.firstE
 const parentContainer = document.querySelector(".parent-container");
 const courseContainer = document.querySelector(".course-container");
 const documentContainer = document.querySelector(".document-container");
+const header=document.querySelector(".profile-header");
 
-if(student.personalInfo.profilePhoto) document.querySelector(".profile-photo").src=student.personalInfo.profilePhoto;
+function capitalize(str) {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
-document.querySelector(".full-name").textContent=student.personalInfo.firstName + " " + student.personalInfo.middleName + ((student.personalInfo.middleName) ? " " : "") + student.personalInfo.lastName;
+function getAddress(a){
+    return ans=`${a.address}, <br> ${a.city}, <br> ${a.state}, <br> ${a.country}. <br> ${a.pincode}`;
+}
+
+if (student.personalInfo.profilePhoto) document.querySelector(".profile-photo").src = student.personalInfo.profilePhoto;
+
+header.querySelector(".full-name").textContent = student.personalInfo.firstName + " " + student.personalInfo.middleName + ((student.personalInfo.middleName) ? " " : "") + student.personalInfo.lastName;
+header.querySelector(".email") .textContent = student.personalInfo.email;
+header.querySelector(".mobile") .textContent = `+${student.personalInfo.mobileCountryCode} ${student.personalInfo.mobile}`;
+header.querySelector(".class").textContent = student.academicInfo.class;
+header.querySelector(".division").textContent = student.academicInfo.division;
+header.querySelector(".gender").textContent = capitalize(student.personalInfo.gender);
+header.querySelector(".dob").textContent = (new Date(student.personalInfo.dateOfBirth)).toLocaleDateString("en-US",{
+    month: 'long',
+    year: 'numeric',
+    day: 'numeric'
+});
 
 personalInfo.querySelectorAll("[data-type]").forEach((el) => {
-    const d=el.getAttribute("data-type");
-    if (d.endsWith("CountryCode")) student.personalInfo[d] = "+" + student.personalInfo[d];
+    const d = el.getAttribute("data-type");
+    if (d.endsWith("CountryCode") && student.personalInfo[d]!=="") student.personalInfo[d] = "+" + student.personalInfo[d];
     el.textContent = student.personalInfo[d];
 });
 
-currentAddress.querySelectorAll("[data-type]").forEach((el) => {
-    el.textContent = student.address.currentAddress[el.getAttribute("data-type")];
-});
+currentAddress.innerHTML=getAddress(student.address.currentAddress);
 
-permanentAddress.querySelectorAll("[data-type]").forEach((el) => {
-    el.textContent = student.address.permanentAddress[el.getAttribute("data-type")];
-});
+permanentAddress.innerHTML=getAddress(student.address.permanentAddress);
 
 academicInfo.querySelectorAll("[data-type]").forEach((el) => {
     el.textContent = student.academicInfo[el.getAttribute("data-type")];
 });
 
-student.parents.forEach((el,idx) => {
+student.parents.forEach((el, idx) => {
     const t = parentTemp.cloneNode(true);
-    t.querySelector(".heading").textContent="Parent"+(idx+1);
+    t.querySelector(".heading").textContent = capitalize(el.relation);
     t.querySelectorAll("[data-type]").forEach((el1) => {
         el1.textContent = el[el1.getAttribute("data-type")];
     });
     parentContainer.append(t);
 });
 
-student.courses.forEach((el,idx) => {
+student.courses.forEach((el, idx) => {
     const t = courseTemp.cloneNode(true);
-    t.querySelector(".heading").textContent="Course"+(idx+1);
+    t.firstElementChild.textContent=idx+1;
     t.querySelectorAll("[data-type]").forEach((el1) => {
-        const d=el1.getAttribute("data-type");
+        const d = el1.getAttribute("data-type");
         if (d.endsWith("CountryCode")) el[d] = "+" + el[d];
         el1.textContent = el[d];
     });
     courseContainer.append(t);
 });
 
-student.documents.forEach((el,idx) => {
+student.documents.forEach((el, idx) => {
     const t = documentTemp.cloneNode(true);
-    t.querySelector(".heading").textContent="Document"+(idx+1);
+    t.firstElementChild.textContent=idx+1;
     t.querySelectorAll("[data-type]").forEach((el1) => {
         el1.textContent = el[el1.getAttribute("data-type")];
     });
