@@ -24,7 +24,7 @@ function capitalize(str) {
 }
 
 function getAddress(a){
-    return ans=`${a.address}, <br> ${a.city}, <br> ${a.state}, <br> ${a.country}. <br> ${a.pincode}`;
+    return `${a.address}, <br> ${a.city}, <br> ${a.state}, <br> ${a.country}. <br> ${a.pincode}`;
 }
 
 async function generatePDF(html) {

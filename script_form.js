@@ -372,7 +372,10 @@ function createStudent() {
         permanentAddress: {}
     }, academicInfo = {}, parents = [], courses = [], documents = [];
     const student = {};
-    sectionFields[0].forEach((el) => personalInfo[el.name] = el.value);
+    sectionFields[0].forEach((el) => {
+        if(el.name!=="profilePhoto" || el.value!=="" || curr.s===null) personalInfo[el.name] = el.value;
+        else personalInfo[el.name] = curr.s.personalInfo.profilePhoto;
+    });
     currAddress.forEach((el) => address.currentAddress[el.name] = el.value);
     permAddress.forEach((el) => address.permanentAddress[el.name] = el.value);
     sectionFields[2].forEach((el) => academicInfo[el.name] = el.value);
@@ -413,10 +416,14 @@ function addRecordLocal(addno) {
         reader.addEventListener("load", function (e) {
             student.personalInfo.profilePhoto = reader.result;
             localStorage.setItem("addno" + addno, JSON.stringify(student));
+            window.open("/index.html", "_self");
         });
 
         reader.readAsDataURL(sections[0].querySelector("input[name='profilePhoto']").files[0]);
-    } else localStorage.setItem("addno" + addno, JSON.stringify(student));
+    } else {
+        localStorage.setItem("addno" + addno, JSON.stringify(student));
+        window.open("/index.html", "_self");
+    }
 }
 
 function addRecordSession() {
@@ -504,10 +511,6 @@ function loadFromStorage() {
     });
 }
 loadFromStorage();
-
-if (params.get("mode") === "edit") {
-    sections[3].setAttribute("disabled", true);
-}
 
 
 
@@ -599,16 +602,14 @@ sectionContainer.addEventListener("click", function (e) {
         } else sections[5].querySelector("[data-lc]").remove();
     } else if (e.target.closest(".submit")) {
         if (validateAll()) {
-            if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null || curr.s) {
-                addRecordLocal(document.querySelector(".admission-number").value);
-                window.open("/index.html", "_self");
-            } else alert("admission number already exist");
+            if (localStorage.getItem("addno" + document.querySelector(".admission-number").value) === null || curr.s) addRecordLocal(document.querySelector(".admission-number").value);
+            else alert("admission number already exist");
         }
     }
 });
 
 sectionContainer.addEventListener("keydown", function (e) {
-    if (!("0".charCodeAt(0) <= e.key.charCodeAt(0) && e.key.charCodeAt(0) <= "9".charCodeAt(0)) && e.key !== "Backspace" && e.key !== "Tab") {
+    if (!(e.key.length===1 && /^\d$/.test(e.key)) && e.key !== "Backspace" && e.key !== "Tab") {
         if (e.target.getAttribute("data-validation-type")) {
             const types = e.target.getAttribute("data-validation-type").split(" ");
             if (types.includes("number") || types.includes("mobile")) e.preventDefault();
