@@ -347,6 +347,12 @@
   .mb-16 {
     margin-bottom: calc(var(--spacing) * 16);
   }
+  .mb-20 {
+    margin-bottom: calc(var(--spacing) * 20);
+  }
+  .mb-40 {
+    margin-bottom: calc(var(--spacing) * 40);
+  }
   .mb-50 {
     margin-bottom: calc(var(--spacing) * 50);
   }
@@ -556,6 +562,9 @@
       border-color: var(--color-slate-200);
     }
   }
+  .self-end {
+    align-self: flex-end;
+  }
   .truncate {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -715,6 +724,12 @@
   }
   .stroke-current {
     stroke: currentcolor;
+  }
+  .stroke-2 {
+    stroke-width: 2;
+  }
+  .stroke-3 {
+    stroke-width: 3;
   }
   .p-1 {
     padding: var(--spacing);
@@ -982,6 +997,16 @@
       }
     }
   }
+  .hover\:scale-110 {
+    &:hover {
+      @media (hover: hover) {
+        --tw-scale-x: 110%;
+        --tw-scale-y: 110%;
+        --tw-scale-z: 110%;
+        scale: var(--tw-scale-x) var(--tw-scale-y);
+      }
+    }
+  }
   .hover\:border-red-400 {
     &:hover {
       @media (hover: hover) {
@@ -993,6 +1018,13 @@
     &:hover {
       @media (hover: hover) {
         border-color: var(--color-slate-400);
+      }
+    }
+  }
+  .hover\:bg-\[\#f3f7fa\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #f3f7fa;
       }
     }
   }
@@ -1210,6 +1242,11 @@
   .active\:text-slate-500 {
     &:active {
       color: var(--color-slate-500);
+    }
+  }
+  .active\:text-slate-600 {
+    &:active {
+      color: var(--color-slate-600);
     }
   }
   .active\:text-slate-700 {

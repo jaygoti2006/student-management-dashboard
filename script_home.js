@@ -6,7 +6,8 @@ const menu = document.querySelector(".menu");
 const filters = document.querySelector(".filters").querySelectorAll("[data-name]");
 const currMin = document.querySelector(".current-min"), currMax = document.querySelector(".current-max"), total = document.querySelector(".total");
 const currPage = document.querySelector(".current-page"), totalPage = document.querySelector(".total-page");
-const modal = document.querySelector(".modal");
+const modalDel = document.querySelector(".modal-del");
+const modalProfile = document.querySelector(".modal-profile");
 const pageNav = document.querySelector(".page-navigation");
 const emptyInfo = document.querySelector(".empty-info");
 
@@ -83,7 +84,10 @@ function createRow(s) {
             c.firstElementChild.textContent = s.feeStatus;
             c.firstElementChild.classList.add(s.feeStatus);
         } else if (c.getAttribute("data-name") === "profilePhoto") {
-            if (s.profilePhoto !== "") c.style.backgroundImage = `url(${s.profilePhoto})`;
+            if (s.profilePhoto !== "") {
+                c.style.backgroundImage = `url(${s.profilePhoto})`;
+                c.setAttribute("data-url",s.profilePhoto);
+            }
         } else c.textContent = s[c.getAttribute("data-name")];
     }
 
@@ -150,10 +154,10 @@ function exportAsCSV() {
     );
 }
 
-modal.addEventListener("click", function (e) {
+modalDel.addEventListener("click", function (e) {
     if (e.target.closest(".modal-cancel-btn")) {
         curr.delTarget = null;
-        modal.classList.add("hidden");
+        modalDel.classList.add("hidden");
     } else if (e.target.closest(".modal-del-btn")) {
         const t = curr.delTarget;
         const id = t.querySelector("[data-name='admissionNo']").textContent;
@@ -185,7 +189,13 @@ modal.addEventListener("click", function (e) {
         }
         total.textContent = data.length;
         curr.delTarget = null;
-        modal.classList.add("hidden");
+        modalDel.classList.add("hidden");
+    }
+});
+
+modalProfile.addEventListener("click", function (e) {
+    if(e.target.closest(".close-btn")) {
+        modalProfile.classList.add("hidden");
     }
 });
 
@@ -237,10 +247,13 @@ pageNav.addEventListener("click", function (e) {
 rowContainer.addEventListener("click", function (e) {
     if (e.target.closest(".del-btn")) {
         curr.delTarget = e.target.closest(".record");
-        modal.classList.remove("hidden");
+        modalDel.classList.remove("hidden");
     } else if (e.target.closest(".edit-btn")) {
         sessionStorage.clear();
     } else if (e.target.closest(".info-btn")) {
 
+    } else if (e.target.closest(".avatar")) {
+        modalProfile.querySelector("img").src=e.target.closest(".avatar").getAttribute("data-url");
+        modalProfile.classList.remove("hidden");
     }
 });

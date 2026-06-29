@@ -45,6 +45,10 @@
         @apply bg-red-100 text-red-700;
     }
 
+    .close-btn{
+        @apply flex items-center justify-center cursor-pointer p-1 rounded-lg border border-slate-300 bg-white text-slate-600 hover:bg-slate-100 hover:border-slate-400 hover:text-slate-800 active:bg-white active:text-slate-600 active:border-slate-300 transition-all duration-300 shadow-sm;
+    }
+
     .export{
         @apply flex items-center justify-center cursor-pointer p-1 rounded-lg border border-slate-300 bg-white text-slate-600 hover:bg-slate-100 hover:border-slate-400 hover:text-slate-800 active:bg-white active:text-slate-600 active:border-slate-300 transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 shadow-sm;
     }
