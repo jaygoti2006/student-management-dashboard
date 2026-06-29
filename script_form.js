@@ -533,8 +533,7 @@ sectionContainer.addEventListener("input", function (e) {
         if (file.size > 10 * 1024) {
             e.target.closest(".profile-photo").value = "";
             const t = e.target.closest(".profile-photo").closest("div");
-            t.querySelector(".error").classList.remove("hidden");
-            t.querySelector(".error-message").textContent = "File size should be less than 10KB!";
+            showError(t,"File size should be less than 10KB!");
         }
     } else if (e.target.closest("[name='dateOfBirth']")) updateFromDOB();
     else if (e.target.closest(".admission-number")) {

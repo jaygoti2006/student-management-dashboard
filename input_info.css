@@ -4,6 +4,20 @@ body{
     @apply text-slate-900;
 }
 
+@media print {
+    .export-pdf { display: none; }
+
+    .container { break-inside: avoid; }
+    
+    .container { box-shadow: none; border: 1px solid #ddd; }
+
+    .parent-container {
+        @apply grid-cols-1;
+    }
+
+    body { padding: 0; }
+}
+
 @layer components {
     th {
         @apply font-medium text-slate-900 uppercase tracking-wider text-[14px] px-4 py-3.5 text-left;

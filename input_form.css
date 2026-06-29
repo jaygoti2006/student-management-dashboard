@@ -66,7 +66,7 @@ body {
     }
 
     .heading {
-        @apply font-semibold text-xl text-center text-slate-900 mb-1;
+        @apply font-semibold text-2xl text-center text-slate-900 mb-1;
     }
 
     .subheading{

@@ -35,7 +35,8 @@ for (const key of keys) {
             rollNumber: t.academicInfo.rollNumber,
             gender: t.personalInfo.gender,
             mobile: t.personalInfo.mobile,
-            feeStatus: t.academicInfo.feeStatus
+            feeStatus: t.academicInfo.feeStatus,
+            profilePhoto: t.personalInfo.profilePhoto
         }
     );
 }
@@ -77,14 +78,13 @@ updateData();
 
 function createRow(s) {
     const row = rowTemp.cloneNode(true);
-    for (let c of row.children) {
-        if (c.hasAttribute("data-name")) {
-            if (c.getAttribute("data-name") !== "feeStatus") c.textContent = s[c.getAttribute("data-name")];
-            else {
-                c.firstElementChild.textContent = s.feeStatus;
-                c.firstElementChild.classList.add(s.feeStatus);
-            }
-        }
+    for (let c of row.querySelectorAll("[data-name]")) {
+        if (c.getAttribute("data-name") === "feeStatus") {
+            c.firstElementChild.textContent = s.feeStatus;
+            c.firstElementChild.classList.add(s.feeStatus);
+        } else if (c.getAttribute("data-name") === "profilePhoto") {
+            if (s.profilePhoto !== "") c.style.backgroundImage = `url(${s.profilePhoto})`;
+        } else c.textContent = s[c.getAttribute("data-name")];
     }
 
     row.querySelector(".edit-btn").closest("a").href += "&id=" + s.admissionNo;
@@ -108,13 +108,18 @@ function loadData() {
     if (curr.page * curr.entries >= data.length) pageNav.querySelector(".next").classList.add("disabled");
     else pageNav.querySelector(".next").classList.remove("disabled");
 
-    if(data.length===0) emptyInfo.classList.remove("hidden");
+    if (data.length === 0) emptyInfo.classList.remove("hidden");
     else emptyInfo.classList.add("hidden");
 }
 loadData();
 
 function exportAsExcel() {
-    const worksheet = XLSX.utils.json_to_sheet(data);
+    const t = [];
+    for (const s of data) {
+        const { profilePhoto, ...d } = structuredClone(s);
+        t.push(d);
+    }
+    const worksheet = XLSX.utils.json_to_sheet(t);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(
         workbook,
@@ -128,7 +133,12 @@ function exportAsExcel() {
 }
 
 function exportAsCSV() {
-    const worksheet = XLSX.utils.json_to_sheet(data);
+    const t = [];
+    for (const s of data) {
+        const { profilePhoto, ...d } = structuredClone(s);
+        t.push(d);
+    }
+    const worksheet = XLSX.utils.json_to_sheet(t);
     XLSX.writeFile(
         {
             SheetNames: ["Students"],
