@@ -10,7 +10,7 @@
 
 @layer components {
     select {
-        @apply bg-white border border-slate-300 text-slate-700 focus:border-blue-500 px-1 py-0.5 cursor-pointer rounded-md transition-all;
+        @apply bg-white border border-slate-300 text-slate-700 focus:border-blue-500 px-1 py-0.5 cursor-pointer rounded-md transition-all duration-300;
     }
     th {
         @apply font-medium text-slate-500 uppercase tracking-wider text-[14px] px-4 py-3.5 text-left;
@@ -20,8 +20,8 @@
         @apply max-w-62 text-slate-700 tracking-wide text-[14px] px-4 py-3.5 text-left truncate;
     }
 
-    tbody tr:hover {
-        @apply bg-[#f3f7fa];
+    tbody tr {
+        @apply hover:bg-[#f3f7fa] transition-all duration-300;
     }
 
     label {
@@ -30,7 +30,7 @@
 
     .previous,
     .next {
-        @apply text-slate-600 border border-slate-300 cursor-pointer hover:bg-slate-100 transition-all px-2 py-1 rounded-full w-28 flex items-center justify-center gap-2;
+        @apply text-slate-600 border border-slate-300 cursor-pointer hover:bg-slate-100 transition-all px-2 py-1 rounded-full w-28 flex items-center justify-center gap-1 duration-300;
     }
 
     .disabled {
@@ -46,6 +46,14 @@
     }
 
     .export{
-        @apply flex items-center justify-center cursor-pointer p-1 rounded-lg border border-slate-300 bg-white text-slate-600 hover:bg-slate-100 hover:border-slate-400 hover:text-slate-800 active:bg-white active:text-slate-600 active:border-slate-300 transition-all;
+        @apply flex items-center justify-center cursor-pointer p-1 rounded-lg border border-slate-300 bg-white text-slate-600 hover:bg-slate-100 hover:border-slate-400 hover:text-slate-800 active:bg-white active:text-slate-600 active:border-slate-300 transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 shadow-sm;
+    }
+
+    .export-excel{
+        @apply hover:text-green-600;
+    }
+
+    .export-csv{
+        @apply hover:text-blue-600;
     }
 }

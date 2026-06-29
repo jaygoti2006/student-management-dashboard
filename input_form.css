@@ -14,16 +14,16 @@ body {
 
 @layer components {
     .btn {
-        @apply text-slate-700 border border-slate-300 bg-white hover:bg-slate-100 active:bg-white py-1.5 px-2.5 rounded-md cursor-pointer transition-all;
+        @apply text-slate-700 border border-slate-300 bg-white hover:bg-slate-100 active:bg-white py-2 px-4 rounded-md cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-slate-400;
     }
 
     .del-btn{
-        @apply hover:text-red-500 hover:bg-red-200 hover:border-red-500 transition-all h-8.25 w-8.25 p-1 flex justify-center items-center text-slate-500;
+        @apply hover:text-red-500 hover:bg-red-100 hover:border-red-500 transition-all h-8.25 w-8.25 p-1 flex justify-center items-center text-slate-500;
     }
 
     .next,
     .submit {
-        @apply bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 active:bg-blue-600;
+        @apply bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 active:bg-blue-600 hover:border-blue-600;
     }
 
     .same-address-btn {
@@ -35,7 +35,7 @@ body {
     }
 
     .progress-fill {
-        @apply inset-0 rounded-full bg-blue-600 transition-all duration-500 w-[calc((100%)/6)];
+        @apply inset-0 rounded-full bg-blue-600 transition-all duration-500 w-[calc((100%)/6)] shadow-[0_0_8px_rgba(37,99,235,0.4)];
     }
 
     .badge {
@@ -53,7 +53,7 @@ body {
     .badge-current {
         background: #2563EB;
         color: white;
-        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+        box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
         @apply border-2 border-[#2563EB];
     }
 
@@ -77,15 +77,15 @@ body {
     input[type="email"],
     select,
     input[type="date"] {
-        @apply px-3 py-2 transition-all rounded-md border bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 shadow-sm;
+        @apply px-4 py-2.5 transition-all rounded-md border bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 hover:border-slate-400 shadow-sm focus:shadow-md duration-300;
     }
 
     input[type="file"] {
-        @apply transition-all rounded-md border bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 shadow-sm;
-        @apply file:bg-slate-200 file:rounded-l-md file:py-2 file:px-3 file:cursor-pointer file:border-r file:border-r-slate-300;
+        @apply transition-all rounded-md border bg-white border-slate-300 text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 shadow-sm hover:border-slate-400 focus:shadow-md duration-300;
+        @apply file:bg-slate-100 file:rounded-l-md file:py-2.5 file:px-4 file:cursor-pointer file:border-r file:border-r-slate-300;
     }
 
     .subform {
-        @apply p-5 bg-slate-50/50 border border-slate-200/60 rounded-xl transition-all duration-200 hover:shadow-sm;
+        @apply p-5 bg-slate-50/50 border border-slate-200/60 rounded-xl transition-all duration-200 hover:shadow-md;
     }
 }
